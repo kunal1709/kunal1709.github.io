@@ -361,14 +361,14 @@
     (function(){
       var t = document.getElementById('track-edu');
       var edu = [
-        { school:'Kent State University', deg:'M.S., Business Analytics', year:'May 2022' },
-        { school:'APJ Abdul Kalam Technical University', deg:'B.Tech, Computer Science & Engineering', year:'May 2018' }
+        { school:'Kent State University', deg:'M.S., Business Analytics', year:'May 2022', url:'https://www.kent.edu/' },
+        { school:'APJ Abdul Kalam Technical University', deg:'B.Tech, Computer Science & Engineering', year:'May 2018', url:'https://aktu.ac.in/' }
       ];
       edu.forEach(function(e,i){
         var c = el('div','card');
         c.style.background = grad(i+3);
         c.innerHTML = '<span class="cyear">'+e.year+'</span>'+
-                      '<div class="ctitle">'+e.school+'</div>'+
+                      '<div class="ctitle"><a href="'+e.url+'" target="_blank" style="color:inherit;text-decoration:none;">'+e.school+'</a></div>'+
                       '<div class="csub">'+e.deg+'</div>';
         t.appendChild(c);
       });
