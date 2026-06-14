@@ -87,6 +87,13 @@
     }
     nav .right { gap: 8px; }
   }
+  /* modal */
+  #modal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding:24px;background:rgba(0,0,0,.5);}
+  #modal.open{display:flex;}
+  .sheet{background:#fff;color:var(--ink);width:min(720px,100%);border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.12);}
+  .sheet .top{padding:22px;position:relative;}
+  .close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:none;background:#f2f2f4;cursor:pointer;font-size:18px;}
+  @media(max-width:520px){.sheet{width:calc(100% - 32px);}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
 </style>
 </head>
@@ -101,6 +108,39 @@
 </nav>
 
 <section>
+
+<!-- MODAL -->
+<div id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <div class="top">
+      <button class="close" onclick="closeModal()">✕</button>
+      <div class="mcontent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var modal = document.getElementById('modal');
+    function showModal(){ modal.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+    window.closeModal = closeModal;
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+    function elText(el, sel){ var s = el.querySelector(sel); return s ? s.innerText.trim() : ''; }
+    document.querySelectorAll('.exp .row').forEach(function(card){
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function(){
+        var title = elText(card,'h3') || elText(card,'.tt');
+        var co = elText(card,'.co') || elText(card,'.ts');
+        var when = elText(card,'.dt') || elText(card,'.corner');
+        var desc = card.querySelector('p') ? card.querySelector('p').outerHTML : '';
+        modal.querySelector('.mcontent').innerHTML = '<h3>'+title+'</h3>'+(co?'<div class="co">'+co+'</div>':'')+(when?'<div class="dt">'+when+'</div>':'')+desc;
+        showModal();
+      });
+    });
+  })();
+</script>
   <div class="panel">
     <h1>Kunal Sharma</h1>
     <p class="sub">Senior Data Engineer. Engineered to scale.</p>
