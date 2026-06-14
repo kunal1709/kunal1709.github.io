@@ -176,24 +176,75 @@
 
 <script>
   (function(){
+    var experiences = [
+      { title:'Senior Software Engineer II', company:'S&P Global', loc:'Dallas, TX', dates:'Jul 2023 — Now', summary:'Lead cloud-native Big Data pipelines across AWS, GCP, and Azure and built AI-assisted observability.',
+        bullets:[
+          'Optimized Spark workloads and built Snowflake warehousing for faster analytics.',
+          'Integrated AWS Bedrock with Airflow to detect and resolve pipeline issues.',
+          'Delivered scalable infrastructure for mission-critical data processing.'
+        ]},
+      { title:'Senior Associate — Data Science Engineer', company:'Cognizant', loc:'Dallas, TX', dates:'Aug 2022 — Jul 2023', summary:'Designed AWS + Snowflake warehouse architectures and real-time Kafka/Spark streaming.',
+        bullets:[
+          'Built data warehouse solutions for financial reporting and analytics.',
+          'Developed Kafka and Spark streaming pipelines for low-latency data flows.',
+          'Reduced report generation times by improving data orchestration.'
+        ]},
+      { title:'Data Analyst', company:'Kent State University', loc:'Kent, OH', dates:'Jan 2022 — Aug 2022', summary:'Built Tableau and Power BI dashboards and ML models for real-time ROI insights.',
+        bullets:[
+          'Created dashboards to visualize event ROI and team performance.',
+          'Built ML models in Python to predict fundraising outcomes.'
+        ]},
+      { title:'Project Data Engineer', company:'Wipro Technologies', loc:'India', dates:'Aug 2018 — Dec 2020', summary:'Built telecom ETL pipelines and churn models to improve customer satisfaction.',
+        bullets:[
+          'Designed ETL pipelines for telecom billing and churn analytics.',
+          'Developed Random Forest models for customer retention strategies.',
+          'Increased customer satisfaction and improved SLA compliance.'
+        ]}
+    ];
+
+    var projects = [
+      { title:'AI-Augmented Pipeline Observability', ctx:'S&P Global · 2023–present', summary:'AWS Bedrock + Airflow DAGs detecting anomalies and surfacing AI-generated fixes.',
+        bullets:[ 'Built intelligent pipeline observability using AWS Bedrock.', 'Reduced incident response time with automated analysis and alerts.' ] },
+      { title:'Legacy → Modern DataLake', ctx:'S&P Global · 2023–present', summary:'Migrated legacy ETL to DBT, Spark, and Airflow for faster terabyte processing.',
+        bullets:[ 'Modernized legacy ETL into a DBT + Spark architecture.', 'Improved refresh speed and reliability across huge datasets.' ] },
+      { title:'Real-Time Streaming Analytics', ctx:'Cognizant · 2022–2023', summary:'Built low-latency Kafka + Spark streaming for high-volume reporting.',
+        bullets:[ 'Created real-time analytics pipelines with Kafka and Spark.', 'Delivered high-volume reporting to business users.' ] },
+      { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020', summary:'Built Random Forest churn models for targeted retention campaigns.',
+        bullets:[ 'Created predictive churn models using Python and ML.', 'Enabled targeted retention through data-driven scoring.' ] }
+    ];
+
     var modal = document.getElementById('modal');
     function showModal(){ modal.classList.add('open'); document.body.style.overflow='hidden'; }
     function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
     window.closeModal = closeModal;
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 
-    function elText(el, sel){ var s = el.querySelector(sel); return s ? s.innerText.trim() : ''; }
-    function collectContent(card){ var parts=[]; card.querySelectorAll('p, ul').forEach(function(n){ parts.push(n.outerHTML); }); return parts.join(''); }
+    function renderBody(item){
+      var html = '<p class="desc">'+item.summary+'</p>';
+      if(item.bullets && item.bullets.length){
+        html += '<ul>' + item.bullets.map(function(b){ return '<li>'+b+'</li>'; }).join('') + '</ul>';
+      }
+      return html;
+    }
 
-    document.querySelectorAll('.mcard').forEach(function(card){
+    document.querySelectorAll('.mcard').forEach(function(card, i){
       card.style.cursor = 'pointer';
       card.addEventListener('click', function(){
-        var title = elText(card,'h3');
-        var co = elText(card,'.co') || '';
-        var when = elText(card,'.dt') || '';
-        document.getElementById('m-title').textContent = title;
-        document.getElementById('m-meta').innerHTML = (co?'<div class="co">'+co+'</div>':'')+(when?'<div class="dt">'+when+'</div>':'');
-        document.getElementById('m-body').innerHTML = collectContent(card) || '<p>No details available.</p>';
+        var item = experiences[i];
+        document.getElementById('m-title').textContent = item.title;
+        document.getElementById('m-meta').innerHTML = '<div class="co">'+item.company+' · '+item.loc+'</div><div class="dt">'+item.dates+'</div>';
+        document.getElementById('m-body').innerHTML = renderBody(item);
+        showModal();
+      });
+    });
+
+    document.querySelectorAll('.pcard').forEach(function(card, i){
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function(){
+        var item = projects[i];
+        document.getElementById('m-title').textContent = item.title;
+        document.getElementById('m-meta').innerHTML = '<div class="co">'+item.ctx+'</div>';
+        document.getElementById('m-body').innerHTML = renderBody(item);
         showModal();
       });
     });
