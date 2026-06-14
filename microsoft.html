@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kunal Sharma — Senior Data Engineer</title>
+<meta name="description" content="Kunal Sharma — Senior Data Engineer. A Fluent/Metro-inspired portfolio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{ --blue:#0078D4; --bg:#1f1f1f; --panel:#2b2b2b; --text:#fff; --dim:#c8c8c8;
+    --o:#D83B01; --g:#107C10; --p:#5C2D91; --t:#008575; --y:#FFB900;
+    --sans:"Segoe UI","Inter",system-ui,sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--text);background:var(--bg);font-weight:300;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+
+  .topbar{position:fixed;top:0;left:0;right:0;height:48px;background:var(--blue);z-index:50;display:flex;
+    align-items:center;justify-content:space-between;padding:0 20px;font-size:14px;}
+  .topbar .logo{display:flex;align-items:center;gap:10px;font-weight:600;}
+  .topbar .squares{display:grid;grid-template-columns:9px 9px;grid-gap:2px;}
+  .topbar .squares i{width:9px;height:9px;display:block;}
+  .topbar .squares i:nth-child(1){background:#F25022;}.topbar .squares i:nth-child(2){background:#7FBA00;}
+  .topbar .squares i:nth-child(3){background:#00A4EF;}.topbar .squares i:nth-child(4){background:#FFB900;}
+  .topbar .right{display:flex;gap:18px;}.topbar .right a:hover{text-decoration:underline;}
+
+  .hero{padding:96px 28px 30px;}
+  .hero .greet{font-size:15px;color:var(--dim);font-weight:400;}
+  .hero h1{font-size:clamp(40px,8vw,76px);font-weight:200;letter-spacing:-1px;margin:6px 0;}
+  .hero .role{font-size:clamp(16px,2.5vw,22px);color:var(--dim);font-weight:400;}
+  .hero .badge{display:inline-block;margin-top:16px;border:1px solid var(--blue);color:#4cc2ff;padding:6px 14px;font-size:13px;}
+
+  .start{padding:24px 28px 70px;}
+  .group{margin-bottom:38px;}
+  .group .gh{font-size:18px;font-weight:600;margin-bottom:14px;color:#fff;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));grid-auto-rows:150px;gap:10px;}
+  .tile{padding:18px;display:flex;flex-direction:column;justify-content:space-between;cursor:default;
+    transition:transform .12s ease;position:relative;overflow:hidden;}
+  .tile:hover{transform:scale(.97);}
+  .tile.wide{grid-column:span 2;}
+  @media(max-width:520px){.tile.wide{grid-column:span 1;}}
+  .tile .tt{font-size:17px;font-weight:600;line-height:1.2;}
+  .tile .ts{font-size:12px;opacity:.9;font-weight:400;margin-top:4px;}
+  .tile .td{font-size:13px;font-weight:300;line-height:1.45;opacity:.95;}
+  .tile .corner{font-size:11px;opacity:.8;}
+  .b-blue{background:var(--blue);}.b-o{background:var(--o);}.b-g{background:var(--g);}
+  .b-p{background:var(--p);}.b-t{background:var(--t);}.b-y{background:var(--y);color:#1f1f1f;}
+  .b-dark{background:var(--panel);}
+
+  .skilltiles{display:flex;flex-wrap:wrap;gap:8px;}
+  .stile{background:var(--panel);padding:9px 14px;font-size:13px;font-weight:400;border-left:3px solid var(--blue);}
+
+  footer{background:#171717;color:var(--dim);font-size:13px;padding:30px 28px;font-weight:400;}
+  footer .l{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:10px;}footer a:hover{color:#fff;text-decoration:underline;}
+  footer .fine{font-size:11px;color:#888;margin-top:14px;}
+  .themeback{position:fixed;bottom:18px;left:18px;z-index:60;background:var(--panel);
+    padding:9px 18px;font-size:13px;border-left:3px solid var(--blue);}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><span class="squares"><i></i><i></i><i></i><i></i></span> Kunal Sharma</div>
+  <div class="right"><a href="#start">Start</a><a href="resume.pdf" target="_blank">Résumé</a></div>
+</div>
+
+<div class="hero">
+  <div class="greet">Welcome back —</div>
+  <h1>Kunal Sharma</h1>
+  <div class="role">Senior Data Engineer · Dallas, TX</div>
+  <div class="badge">AWS Certified Solutions Architect — Associate</div>
+</div>
+
+<div class="start" id="start">
+
+  <div class="group">
+    <div class="gh">Experience</div>
+    <div class="tiles">
+      <div class="tile wide b-blue">
+        <div><div class="tt">S&amp;P Global</div><div class="ts">Senior Software Engineer II</div></div>
+        <div class="td">Lead cloud-native pipelines on AWS/GCP/Azure; 60% faster Spark, AI-assisted Airflow observability.</div>
+        <div class="corner">Jul 2023 — Now</div>
+      </div>
+      <div class="tile b-o">
+        <div><div class="tt">Cognizant</div><div class="ts">Sr. Associate, Data Science Eng.</div></div>
+        <div class="corner">Aug 2022 — Jul 2023</div>
+      </div>
+      <div class="tile b-g">
+        <div><div class="tt">Kent State</div><div class="ts">Data Analyst</div></div>
+        <div class="corner">Jan — Aug 2022</div>
+      </div>
+      <div class="tile b-p">
+        <div><div class="tt">Wipro</div><div class="ts">Project Data Engineer</div></div>
+        <div class="corner">2018 — 2020</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="gh">Projects</div>
+    <div class="tiles">
+      <div class="tile wide b-t">
+        <div class="tt">AI-Augmented Pipeline Observability</div>
+        <div class="td">AWS Bedrock + Airflow DAGs detecting anomalies and surfacing AI-generated fixes — 40% faster incident response.</div>
+        <div class="corner">Bedrock · MWAA · LLM</div>
+      </div>
+      <div class="tile b-blue">
+        <div class="tt">Legacy → DataLake</div>
+        <div class="td">DBT, Spark, Airflow — 60% faster.</div>
+        <div class="corner">DBT · Spark</div>
+      </div>
+      <div class="tile b-o">
+        <div class="tt">Real-Time Streaming</div>
+        <div class="td">Kafka + Spark, low latency.</div>
+        <div class="corner">Kafka · Spark</div>
+      </div>
+      <div class="tile b-g">
+        <div class="tt">Churn Prediction</div>
+        <div class="td">Random Forest + association rules.</div>
+        <div class="corner">Python · ML</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="gh">Skills &amp; technologies</div>
+    <div class="skilltiles">
+      <span class="stile">Python</span><span class="stile">SQL</span><span class="stile">PySpark</span><span class="stile">Scala</span>
+      <span class="stile">Apache Spark</span><span class="stile">Kafka</span><span class="stile">Airflow</span><span class="stile">DBT</span>
+      <span class="stile">AWS</span><span class="stile">GCP</span><span class="stile">Azure</span><span class="stile">Snowflake</span>
+      <span class="stile">Terraform</span><span class="stile">Docker</span><span class="stile">GitHub Actions</span>
+      <span class="stile">TensorFlow</span><span class="stile">PyTorch</span><span class="stile">SageMaker</span><span class="stile">Bedrock</span><span class="stile">LLMs</span>
+      <span class="stile">Tableau</span><span class="stile">Power BI</span>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="gh">Education</div>
+    <div class="tiles">
+      <div class="tile b-dark"><div class="tt">M.S. Business Analytics</div><div class="ts">Kent State University</div><div class="corner">May 2022</div></div>
+      <div class="tile b-dark"><div class="tt">B.Tech, CSE</div><div class="ts">APJ Abdul Kalam Tech. University</div><div class="corner">May 2018</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="l">
+    <a href="mailto:kunalsharma11stu@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/kunal1709" target="_blank">GitHub</a>
+  </div>
+  <div>Based in Dallas · Open to roles wherever the right team is</div>
+  <div class="fine">A Fluent/Metro-inspired design, built for fun. Not affiliated with Microsoft Corporation. © 2026 Kunal Sharma.</div>
+</footer>
+
+<a class="themeback" href="index.html">↩ Themes</a>
+</body>
+</html>

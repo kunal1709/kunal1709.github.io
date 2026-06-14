@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kunal Sharma — Senior Data Engineer</title>
+  <meta name="description" content="Kunal Sharma — Senior Data Engineer & AWS Certified Solutions Architect. 6+ years building cloud-native Big Data platforms on AWS, GCP, and Azure with Spark, Airflow, and Snowflake." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --paper:  #F4F3EE;
+      --ink:    #1B1B1B;
+      --deep:   #13293D;
+      --accent: #0E6E5C;
+      --muted:  #6B6B63;
+      --line:   #D8D6CC;
+      --card:   #FBFAF6;
+      --display: "Space Grotesk", system-ui, sans-serif;
+      --body:    "Inter", system-ui, sans-serif;
+      --mono:    "JetBrains Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .shell { display: flex; min-height: 100vh; }
+    .rail { position: sticky; top: 0; height: 100vh; width: 220px; flex-shrink: 0; border-right: 1px solid var(--line); padding: 40px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+    .rail .mark { font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--deep); letter-spacing: -0.5px; }
+    .rail nav { display: flex; flex-direction: column; gap: 14px; }
+    .rail nav a { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+    .rail nav a .n { color: var(--accent); }
+    .rail nav a:hover { color: var(--deep); text-decoration: none; }
+    .rail .foot { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+    .content { flex: 1; max-width: 820px; padding: 0 48px; }
+    section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+    section:last-of-type { border-bottom: none; }
+
+    .eyebrow { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+    .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+    h1 { font-family: var(--display); font-weight: 700; color: var(--deep); font-size: clamp(40px, 7vw, 72px); line-height: 1.02; letter-spacing: -2px; margin-bottom: 18px; }
+    h2 { font-family: var(--display); font-weight: 600; color: var(--deep); font-size: clamp(26px, 4vw, 36px); letter-spacing: -1px; margin-bottom: 24px; }
+    h3 { font-family: var(--display); font-weight: 600; color: var(--deep); font-size: 19px; }
+
+    .lead { font-size: 19px; color: var(--ink); max-width: 62ch; }
+    p + p { margin-top: 16px; }
+
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero .role { font-family: var(--mono); color: var(--muted); font-size: 15px; margin-bottom: 28px; }
+    .hero .cta { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn { font-family: var(--mono); font-size: 14px; padding: 13px 22px; border: 1px solid var(--deep); color: var(--deep); border-radius: 2px; transition: background .15s, color .15s; }
+    .btn:hover { background: var(--deep); color: var(--paper); text-decoration: none; }
+    .btn.solid { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.solid:hover { background: var(--deep); border-color: var(--deep); }
+    .badge { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--accent); border: 1px solid var(--accent); padding: 5px 12px; border-radius: 999px; margin-top: 6px; }
+
+    .item { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 26px 0; border-top: 1px solid var(--line); }
+    .item:first-of-type { border-top: none; }
+    .item .when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+    .item .where { color: var(--muted); font-size: 15px; margin: 4px 0 12px; }
+    .item ul { margin: 0; padding-left: 18px; }
+    .item li { font-size: 15px; margin-bottom: 6px; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .proj { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 26px; transition: transform .15s, box-shadow .15s; }
+    .proj:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(19,41,61,.08); }
+    .proj h3 { margin-bottom: 6px; }
+    .proj .ctx { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+    .proj p { font-size: 15px; color: var(--ink); }
+    .proj .tags { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { font-family: var(--mono); font-size: 11px; color: var(--accent); border: 1px solid var(--line); padding: 3px 9px; border-radius: 2px; }
+
+    .skillgroup { margin-bottom: 26px; }
+    .skillgroup .glabel { font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { font-family: var(--mono); font-size: 13px; background: var(--card); border: 1px solid var(--line); padding: 7px 13px; border-radius: 2px; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; font-family: var(--mono); font-size: 16px; }
+
+    @media (max-width: 760px) {
+      .shell { flex-direction: column; }
+      .rail { position: static; height: auto; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; padding: 18px 22px; border-right: none; border-bottom: 1px solid var(--line); }
+      .rail nav { flex-direction: row; gap: 16px; flex-wrap: wrap; }
+      .rail nav a .label { display: none; }
+      .rail .foot { display: none; }
+      .content { padding: 0 22px; max-width: 100%; }
+      .hero { min-height: 80vh; }
+      .item { grid-template-columns: 1fr; gap: 6px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <div class="mark">KS</div>
+      <nav>
+        <a href="#home"><span class="n">00</span><span class="label">Home</span></a>
+        <a href="#about"><span class="n">01</span><span class="label">About</span></a>
+        <a href="#experience"><span class="n">02</span><span class="label">Experience</span></a>
+        <a href="#education"><span class="n">03</span><span class="label">Education</span></a>
+        <a href="#projects"><span class="n">04</span><span class="label">Projects</span></a>
+        <a href="#skills"><span class="n">05</span><span class="label">Skills</span></a>
+        <a href="#contact"><span class="n">06</span><span class="label">Contact</span></a>
+      </nav>
+      <div class="foot"><a href="index.html" style="color:var(--accent);">↩ Switch theme</a><br>© 2026 Kunal Sharma</div>
+    </aside>
+
+    <main class="content">
+
+      <section id="home" class="hero">
+        <div class="role">Senior Data Engineer · Dallas, TX</div>
+        <h1>Kunal Sharma</h1>
+        <p class="lead">Senior data engineer with 6+ years building cloud-native Big Data platforms, pipelines, and analytics at enterprise scale across AWS, GCP, and Azure. I specialize in Apache Spark, Airflow, and Snowflake, with a track record of migrating legacy systems to modern, reliable architectures.</p>
+        <span class="badge">AWS Certified Solutions Architect — Associate</span>
+        <div class="cta">
+          <a class="btn solid" href="#projects">View work</a>
+          <!-- To enable this button: upload your resume PDF to the repo, named resume.pdf -->
+          <a class="btn" href="resume.pdf" target="_blank">Download résumé</a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="eyebrow">01 — About</div>
+        <h2>Who I am</h2>
+        <p class="lead">I'm a senior data engineer based in Dallas with deep expertise in the modern cloud data stack — Apache Spark, Airflow, Snowflake, and DBT across AWS, GCP, and Azure.</p>
+        <p>I work across global, cross-functional teams to deliver commercial impact through real-time analytics and scalable data infrastructure. Lately I've been bringing AI into the pipeline itself — integrating AWS Bedrock with Airflow to surface anomalies and AI-generated fixes, and deploying GitHub Copilot agents for automated code validation. My focus is always the same: pipelines that are fast, reliable, and built to scale.</p>
+      </section>
+
+      <section id="experience">
+        <div class="eyebrow">02 — Experience</div>
+        <h2>Where I've worked</h2>
+
+        <div class="item">
+          <div class="when">Jul 2023 — Now</div>
+          <div>
+            <h3>Senior Software Engineer II — Data Engineering</h3>
+            <div class="where">S&amp;P Global · Dallas, TX</div>
+            <ul>
+              <li>Led the design and delivery of cloud-native Big Data pipelines across AWS, GCP, and Azure, processing terabytes of financial and ownership data for Sales, Marketing, and BI.</li>
+              <li>Architected and optimized Apache Spark workloads (DataFrames, Spark SQL, Structured Streaming), cutting pipeline runtimes by 60% and enabling near-real-time data access.</li>
+              <li>Built end-to-end Snowflake warehousing — schema design, Tasks, Streams, RBAC, and micro-partitioning — to reduce cost and improve P99 query latency.</li>
+              <li>Migrated legacy ETL from traditional warehouses and AWS DMS to a modern DataLake on DBT, Spark, and Airflow (MWAA).</li>
+              <li>Integrated MWAA with AWS Bedrock to build intelligent DAGs that surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.</li>
+              <li>Built REST APIs exposing analytical datasets to Sales and Marketing tools, reducing ad hoc requests by 50%.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="when">Aug 2022 — Jul 2023</div>
+          <div>
+            <h3>Senior Associate — Data Science Engineer</h3>
+            <div class="where">Cognizant · Dallas, TX</div>
+            <ul>
+              <li>Designed cloud data warehouse architectures on AWS (S3, DynamoDB, EC2, Glue) and Snowflake for financial clients, reducing report generation time by 35%.</li>
+              <li>Built Apache Spark applications in Python for large-scale transformation and validation; developed ingestion pipelines with Hadoop, Hive, Sqoop, and MapReduce.</li>
+              <li>Implemented real-time streaming with Apache Kafka and Spark for low-latency analytics on high-volume event data.</li>
+              <li>Automated infrastructure with Jenkins CI/CD and GitHub, and delivered Tableau reporting for stakeholders.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="when">Jan 2022 — Aug 2022</div>
+          <div>
+            <h3>Data Analyst</h3>
+            <div class="where">Kent State University · Kent, OH</div>
+            <ul>
+              <li>Designed financial dashboards in Tableau and Power BI giving real-time ROI visibility across fundraising events.</li>
+              <li>Built ML classification and regression models (SVM, Random Forest, Decision Tree) in Python to predict event ROI.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="when">Aug 2018 — Dec 2020</div>
+          <div>
+            <h3>Project Data Engineer</h3>
+            <div class="where">Wipro Technologies · India</div>
+            <ul>
+              <li>Built and maintained ETL pipelines (SQL/PLSQL, Python, Shell) for a large telecom client, supporting billing, MNP processing, and churn analytics at scale.</li>
+              <li>Developed a Random Forest churn prediction model with association rules, enabling targeted retention campaigns.</li>
+              <li>Increased customer satisfaction by 32% and improved SLA/OLA compliance by 50% within two quarters.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="eyebrow">03 — Education</div>
+        <h2>Education</h2>
+        <div class="item">
+          <div class="when">May 2022</div>
+          <div>
+            <h3>M.S. in Business Analytics</h3>
+            <div class="where">Kent State University</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="when">May 2018</div>
+          <div>
+            <h3>B.Tech in Computer Science &amp; Engineering</h3>
+            <div class="where">APJ Abdul Kalam Technical University</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="eyebrow">04 — Projects</div>
+        <h2>Selected work</h2>
+        <!-- Drawn from your roles. Swap any for personal GitHub projects and add
+             "Code" links if you have public repos at github.com/kunal1709 -->
+        <div class="grid">
+
+          <div class="proj">
+            <h3>AI-Augmented Pipeline Observability</h3>
+            <div class="ctx">S&amp;P Global · 2023–present</div>
+            <p>Integrated AWS Bedrock with Airflow (MWAA) to build DAGs that detect pipeline anomalies and surface AI-generated resolutions to engineers — cutting incident response time by 40%.</p>
+            <div class="tags"><span class="tag">AWS Bedrock</span><span class="tag">MWAA</span><span class="tag">Airflow</span><span class="tag">LLM</span></div>
+          </div>
+
+          <div class="proj">
+            <h3>Legacy → Modern DataLake Migration</h3>
+            <div class="ctx">S&amp;P Global · 2023–present</div>
+            <p>Migrated legacy ETL and AWS DMS loads to a DBT, Spark, and Airflow DataLake architecture, refreshing terabytes of data and cutting runtimes by 60%.</p>
+            <div class="tags"><span class="tag">DBT</span><span class="tag">Spark</span><span class="tag">Snowflake</span><span class="tag">Terraform</span></div>
+          </div>
+
+          <div class="proj">
+            <h3>Real-Time Streaming Analytics</h3>
+            <div class="ctx">Cognizant · 2022–2023</div>
+            <p>Built low-latency streaming on Apache Kafka and Spark for high-volume event data, with ingestion across Hadoop, Hive, and Sqoop feeding client-facing reporting.</p>
+            <div class="tags"><span class="tag">Kafka</span><span class="tag">Spark</span><span class="tag">Hadoop</span><span class="tag">AWS</span></div>
+          </div>
+
+          <div class="proj">
+            <h3>Telecom Churn Prediction</h3>
+            <div class="ctx">Wipro · 2018–2020</div>
+            <p>Developed a Random Forest churn model in Python with association rules explaining why customers left, powering targeted retention campaigns.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">ML</span></div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="eyebrow">05 — Skills</div>
+        <h2>What I work with</h2>
+
+        <div class="skillgroup">
+          <div class="glabel">Certifications</div>
+          <div class="skills">
+            <span class="skill">AWS Certified Solutions Architect — Associate</span>
+          </div>
+        </div>
+
+        <div class="skillgroup">
+          <div class="glabel">Languages &amp; APIs</div>
+          <div class="skills">
+            <span class="skill">Python</span><span class="skill">SQL</span><span class="skill">PySpark</span><span class="skill">Scala</span><span class="skill">REST APIs</span><span class="skill">GraphQL</span><span class="skill">Shell</span>
+          </div>
+        </div>
+
+        <div class="skillgroup">
+          <div class="glabel">Big Data &amp; Processing</div>
+          <div class="skills">
+            <span class="skill">Apache Spark (Spark SQL, Structured Streaming)</span><span class="skill">Kafka</span><span class="skill">Hadoop</span><span class="skill">Hive</span><span class="skill">Airflow (MWAA)</span><span class="skill">AWS Glue</span><span class="skill">DBT</span><span class="skill">Flink</span>
+          </div>
+        </div>
+
+        <div class="skillgroup">
+          <div class="glabel">Cloud &amp; Infrastructure</div>
+          <div class="skills">
+            <span class="skill">AWS (EC2, S3, Lambda, ECS/EKS, EMR, Step Functions, Bedrock, SageMaker)</span><span class="skill">GCP (BigQuery, Dataproc, Dataflow)</span><span class="skill">Azure (DevOps, Data Factory)</span><span class="skill">Terraform</span><span class="skill">Docker</span>
+          </div>
+        </div>
+
+        <div class="skillgroup">
+          <div class="glabel">Databases</div>
+          <div class="skills">
+            <span class="skill">Snowflake</span><span class="skill">PostgreSQL</span><span class="skill">SQL Server</span><span class="skill">Oracle DB2</span><span class="skill">MongoDB</span><span class="skill">DynamoDB</span><span class="skill">Redshift</span><span class="skill">Athena</span><span class="skill">Neo4j</span>
+          </div>
+        </div>
+
+        <div class="skillgroup">
+          <div class="glabel">ML &amp; AI</div>
+          <div class="skills">
+            <span class="skill">Scikit-learn</span><span class="skill">TensorFlow</span><span class="skill">PyTorch</span><span class="skill">Keras</span><span class="skill">NLP</span><span class="skill">CNN</span><span class="skill">LLMs</span><span class="skill">SageMaker</span><span class="skill">Bedrock</span><span class="skill">GitHub Copilot</span>
+          </div>
+        </div>
+
+        <div class="skillgroup">
+          <div class="glabel">DevOps &amp; Observability</div>
+          <div class="skills">
+            <span class="skill">GitHub Actions</span><span class="skill">GitLab CI/CD</span><span class="skill">Jenkins</span><span class="skill">Grafana</span><span class="skill">Prometheus</span><span class="skill">OpenTelemetry</span><span class="skill">Liquibase</span><span class="skill">Tableau</span><span class="skill">Power BI</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="eyebrow">06 — Contact</div>
+        <h2>Let's talk</h2>
+        <p class="lead">Based in Dallas and open to senior data engineering roles wherever the right team is. The fastest way to reach me is email — or connect on LinkedIn and GitHub.</p>
+        <div class="contact-links">
+          <a href="mailto:kunalsharma11stu@gmail.com">→ kunalsharma11stu@gmail.com</a>
+          <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank">→ linkedin.com/in/kunalsharma2512</a>
+          <a href="https://github.com/kunal1709" target="_blank">→ github.com/kunal1709</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

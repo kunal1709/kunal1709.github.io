@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KUNALFLIX — Kunal Sharma, Senior Data Engineer</title>
+  <meta name="description" content="Kunal Sharma — Senior Data Engineer & AWS Certified Solutions Architect. A Netflix-inspired portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #E50914;
+      --bg: #141414;
+      --panel: #181818;
+      --card: #2b2b2b;
+      --text: #ffffff;
+      --dim: #b3b3b3;
+      --display: "Bebas Neue", Impact, sans-serif;
+      --body: "Inter", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--body); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ---------- Brand wordmark ---------- */
+    .brand { font-family: var(--display); color: var(--red); letter-spacing: 1px; line-height: 1;
+      text-shadow: 0 0 18px rgba(229,9,20,.35); user-select: none; }
+
+    /* ================= PROFILE GATE ================= */
+    #gate { position: fixed; inset: 0; z-index: 100; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 40px; transition: opacity .5s ease, visibility .5s; padding: 24px; text-align: center; }
+    #gate.hide { opacity: 0; visibility: hidden; }
+    #gate .gbrand { font-size: clamp(40px, 9vw, 88px); margin-bottom: 8px; }
+    #gate h1 { font-weight: 400; font-size: clamp(26px, 5vw, 46px); color: #fff; }
+    .profiles { display: flex; gap: clamp(18px, 4vw, 44px); flex-wrap: wrap; justify-content: center; }
+    .profile { background: none; border: none; cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; gap: 14px; color: var(--dim); transition: color .2s; font-family: var(--body); }
+    .profile .av { width: clamp(96px, 18vw, 150px); height: clamp(96px, 18vw, 150px); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: clamp(40px, 8vw, 64px);
+      font-weight: 800; color: #fff; border: 3px solid transparent; transition: border-color .2s, transform .2s; }
+    .profile:hover { color: #fff; }
+    .profile:hover .av { border-color: #fff; transform: scale(1.04); }
+    .profile span { font-size: 16px; }
+
+    /* ================= APP ================= */
+    #app { opacity: 0; transition: opacity .6s ease; }
+    #app.show { opacity: 1; }
+
+    /* nav */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center;
+      justify-content: space-between; padding: 16px clamp(16px, 4vw, 48px);
+      transition: background .3s; }
+    nav.scrolled { background: var(--bg); box-shadow: 0 2px 12px rgba(0,0,0,.6); }
+    nav .left { display: flex; align-items: center; gap: 28px; }
+    nav .brand { font-size: 30px; }
+    nav .links { display: flex; gap: 20px; font-size: 14px; color: var(--dim); }
+    nav .links a:hover { color: #fff; }
+    nav .resume { background: var(--red); color: #fff; padding: 8px 18px; border-radius: 4px; font-weight: 600; font-size: 14px; }
+    nav .resume:hover { background: #f6121d; }
+    @media (max-width: 640px){ nav .links { display: none; } }
+
+    /* billboard */
+    .billboard { position: relative; min-height: 88vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 0 clamp(16px, 4vw, 48px); background:
+        radial-gradient(120% 100% at 80% 20%, rgba(229,9,20,.22), transparent 55%),
+        linear-gradient(0deg, var(--bg) 6%, transparent 40%),
+        linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%),
+        #1c1c1c; }
+    .billboard .kicker { color: var(--dim); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 13px; margin-bottom: 14px; }
+    .billboard h2 { font-family: var(--display); font-size: clamp(52px, 11vw, 132px); line-height: .92; letter-spacing: 1px; max-width: 14ch; }
+    .billboard .meta { display: flex; align-items: center; gap: 14px; margin: 18px 0; flex-wrap: wrap; font-size: 15px; color: var(--dim); }
+    .billboard .match { color: #46d369; font-weight: 700; }
+    .billboard .pill { border: 1px solid rgba(255,255,255,.4); padding: 1px 8px; font-size: 12px; border-radius: 3px; }
+    .billboard p.syn { max-width: 56ch; color: #e5e5e5; font-size: clamp(15px, 2vw, 18px); line-height: 1.5; }
+    .billboard .actions { display: flex; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 26px; border-radius: 5px;
+      font-weight: 700; font-size: 16px; cursor: pointer; border: none; font-family: var(--body); transition: opacity .15s; }
+    .btn:hover { opacity: .82; }
+    .btn.play { background: #fff; color: #000; }
+    .btn.info { background: rgba(109,109,110,.7); color: #fff; }
+
+    /* rows */
+    .rows { position: relative; z-index: 2; margin-top: -60px; padding-bottom: 60px; }
+    .row { margin: 36px 0; }
+    .row h3 { font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; margin: 0 0 14px clamp(16px, 4vw, 48px); }
+    .track { display: flex; gap: 10px; overflow-x: auto; padding: 6px clamp(16px, 4vw, 48px) 20px;
+      scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: #555 transparent; }
+    .track::-webkit-scrollbar { height: 8px; }
+    .track::-webkit-scrollbar-thumb { background: #555; border-radius: 8px; }
+    .card { flex: 0 0 auto; width: 280px; height: 158px; border-radius: 6px; cursor: pointer; position: relative;
+      overflow: hidden; scroll-snap-align: start; transition: transform .25s ease, box-shadow .25s ease;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; color: #fff; }
+    .card:hover { transform: scale(1.07); box-shadow: 0 12px 32px rgba(0,0,0,.7); z-index: 3; }
+    .card .num { position: absolute; top: 10px; right: 14px; font-family: var(--display); font-size: 30px; opacity: .85; }
+    .card .ctitle { font-weight: 700; font-size: 17px; line-height: 1.15; }
+    .card .csub { font-size: 12px; color: rgba(255,255,255,.85); margin-top: 3px; }
+    .card .cyear { position: absolute; top: 12px; left: 14px; font-size: 11px; font-weight: 600; background: rgba(0,0,0,.45); padding: 2px 7px; border-radius: 3px; }
+    .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.75), rgba(0,0,0,.05) 60%); }
+    .card > * { position: relative; z-index: 1; }
+    .skill-card { width: 200px; height: 110px; }
+
+    /* modal */
+    #modal { position: fixed; inset: 0; z-index: 90; display: none; align-items: flex-start; justify-content: center;
+      background: rgba(0,0,0,.78); padding: 40px 16px; overflow-y: auto; }
+    #modal.open { display: flex; }
+    .sheet { background: var(--panel); width: min(720px, 100%); border-radius: 8px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.8); animation: pop .25s ease; }
+    @keyframes pop { from { transform: translateY(20px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+    .sheet .top { padding: 40px; position: relative;
+      background: linear-gradient(0deg, var(--panel), transparent 70%), #232323; }
+    .sheet .close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+      background: #181818; color: #fff; border: none; font-size: 20px; cursor: pointer; line-height: 1; }
+    .sheet h4 { font-size: clamp(26px, 4vw, 38px); font-family: var(--display); letter-spacing: 1px; }
+    .sheet .mmeta { display: flex; gap: 12px; align-items: center; margin-top: 12px; color: var(--dim); font-size: 14px; flex-wrap: wrap; }
+    .sheet .mmatch { color: #46d369; font-weight: 700; }
+    .sheet .body { padding: 0 40px 40px; }
+    .sheet ul { margin: 10px 0 0; padding-left: 20px; }
+    .sheet li { margin-bottom: 10px; color: #d2d2d2; font-size: 15px; line-height: 1.5; }
+    .sheet .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .sheet .tag { font-size: 12px; color: var(--dim); border: 1px solid #444; padding: 4px 10px; border-radius: 3px; }
+    .sheet p.desc { color: #d2d2d2; font-size: 15px; line-height: 1.6; }
+
+    /* footer */
+    footer { padding: 50px clamp(16px, 4vw, 48px); border-top: 1px solid #222; color: var(--dim); font-size: 14px; }
+    footer .flinks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+    footer .flinks a:hover { color: #fff; text-decoration: underline; }
+    footer .fine { font-size: 12px; color: #6d6d6d; max-width: 60ch; }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== PROFILE GATE ===================== -->
+  <div id="gate">
+    <div class="gbrand brand">KUNALFLIX</div>
+    <h1>Who's watching?</h1>
+    <div class="profiles" id="profiles"></div>
+  </div>
+
+  <!-- ===================== APP ===================== -->
+  <div id="app">
+    <nav id="nav">
+      <div class="left">
+        <span class="brand">KUNALFLIX</span>
+        <div class="links">
+          <a href="#exp">Experience</a>
+          <a href="#proj">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+          <a href="index.html">↩ Themes</a>
+        </div>
+      </div>
+      <a class="resume" href="resume.pdf" target="_blank">Résumé</a>
+    </nav>
+
+    <header class="billboard">
+      <div class="kicker">KUNALFLIX Original</div>
+      <h2>Kunal Sharma</h2>
+      <div class="meta">
+        <span class="match">98% Match</span>
+        <span class="pill">EXP 6+ YRS</span>
+        <span class="pill">AWS · GCP · Azure</span>
+        <span>Senior Data Engineer · Dallas, TX</span>
+      </div>
+      <p class="syn">Senior data engineer building cloud-native Big Data platforms and real-time pipelines at enterprise scale. Specializing in Apache Spark, Airflow, and Snowflake — with a knack for turning legacy systems into modern, reliable architectures. AWS Certified Solutions Architect.</p>
+      <div class="actions">
+        <a class="btn play" href="resume.pdf" target="_blank">▶&nbsp; Play Résumé</a>
+        <button class="btn info" onclick="openAbout()">ⓘ&nbsp; More Info</button>
+      </div>
+    </header>
+
+    <main class="rows">
+      <section class="row" id="exp">
+        <h3>Experience</h3>
+        <div class="track" id="track-exp"></div>
+      </section>
+
+      <section class="row" id="proj">
+        <h3>Top Picks: Projects</h3>
+        <div class="track" id="track-proj"></div>
+      </section>
+
+      <section class="row" id="skills">
+        <h3>Skills &amp; Technologies</h3>
+        <div class="track" id="track-skills"></div>
+      </section>
+
+      <section class="row" id="edu">
+        <h3>Education</h3>
+        <div class="track" id="track-edu"></div>
+      </section>
+    </main>
+
+    <footer id="contact">
+      <div class="brand" style="font-size:24px; margin-bottom:18px;">KUNALFLIX</div>
+      <div class="flinks">
+        <a href="mailto:kunalsharma11stu@gmail.com">Email — kunalsharma11stu@gmail.com</a>
+        <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank">LinkedIn — /in/kunalsharma2512</a>
+        <a href="https://github.com/kunal1709" target="_blank">GitHub — /kunal1709</a>
+      </div>
+      <p style="margin-bottom:14px;">Based in Dallas and open to senior data engineering roles wherever the right team is.</p>
+      <p style="margin-bottom:14px;"><a href="index.html" style="color:var(--red);font-weight:600;">↩ Browse other themes</a></p>
+      <p class="fine">A Netflix-inspired portfolio, built for fun. Not affiliated with, endorsed by, or sponsored by Netflix. © 2026 Kunal Sharma.</p>
+    </footer>
+  </div>
+
+  <!-- ===================== MODAL ===================== -->
+  <div id="modal" onclick="if(event.target===this)closeModal()">
+    <div class="sheet">
+      <div class="top">
+        <button class="close" onclick="closeModal()">✕</button>
+        <h4 id="m-title"></h4>
+        <div class="mmeta" id="m-meta"></div>
+      </div>
+      <div class="body" id="m-body"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ---------------- DATA ---------------- */
+    var GRADS = [
+      'linear-gradient(135deg,#5b1a1a,#b81d24)',
+      'linear-gradient(135deg,#16324f,#0e6e5c)',
+      'linear-gradient(135deg,#3b2a5a,#7a3fa0)',
+      'linear-gradient(135deg,#1f3d2b,#3a8f5a)',
+      'linear-gradient(135deg,#4a3210,#c08a2d)',
+      'linear-gradient(135deg,#2b2b2b,#555)'
+    ];
+
+    var experiences = [
+      { title:'Senior Software Engineer II', company:'S&P Global', loc:'Dallas, TX', dates:'Jul 2023 — Present', match:'98% Match',
+        bullets:[
+          'Led design and delivery of cloud-native Big Data pipelines across AWS, GCP, and Azure, processing terabytes of financial and ownership data for Sales, Marketing, and BI.',
+          'Architected and optimized Apache Spark workloads (DataFrames, Spark SQL, Structured Streaming), cutting pipeline runtimes by 60%.',
+          'Built end-to-end Snowflake warehousing — schema design, Tasks, Streams, RBAC, micro-partitioning — to reduce cost and improve P99 latency.',
+          'Migrated legacy ETL and AWS DMS loads to a modern DataLake on DBT, Spark, and Airflow (MWAA).',
+          'Integrated MWAA with AWS Bedrock for intelligent DAGs surfacing anomalies and AI-generated fixes — cutting incident response time by 40%.',
+          'Built REST APIs exposing analytical datasets to Sales and Marketing tools, reducing ad hoc requests by 50%.'
+        ]},
+      { title:'Senior Associate — Data Science Engineer', company:'Cognizant', loc:'Dallas, TX', dates:'Aug 2022 — Jul 2023', match:'95% Match',
+        bullets:[
+          'Designed cloud data warehouse architectures on AWS (S3, DynamoDB, EC2, Glue) and Snowflake for financial clients, reducing report generation time by 35%.',
+          'Built Apache Spark applications in Python for large-scale transformation and validation; ingestion via Hadoop, Hive, Sqoop, MapReduce.',
+          'Implemented real-time streaming with Apache Kafka and Spark for low-latency analytics on high-volume event data.',
+          'Automated infrastructure with Jenkins CI/CD and GitHub; delivered Tableau reporting for stakeholders.'
+        ]},
+      { title:'Data Analyst', company:'Kent State University', loc:'Kent, OH', dates:'Jan 2022 — Aug 2022', match:'91% Match',
+        bullets:[
+          'Designed financial dashboards in Tableau and Power BI giving real-time ROI visibility across fundraising events.',
+          'Built ML classification and regression models (SVM, Random Forest, Decision Tree) in Python to predict event ROI.'
+        ]},
+      { title:'Project Data Engineer', company:'Wipro Technologies', loc:'India', dates:'Aug 2018 — Dec 2020', match:'90% Match',
+        bullets:[
+          'Built and maintained ETL pipelines (SQL/PLSQL, Python, Shell) for a large telecom client — billing, MNP processing, churn analytics at scale.',
+          'Developed a Random Forest churn prediction model with association rules, powering targeted retention campaigns.',
+          'Increased customer satisfaction by 32% and improved SLA/OLA compliance by 50% within two quarters.'
+        ]}
+    ];
+
+    var projects = [
+      { title:'AI-Augmented Pipeline Observability', ctx:'S&P Global · 2023–present',
+        desc:'Integrated AWS Bedrock with Airflow (MWAA) to build DAGs that detect pipeline anomalies and surface AI-generated resolutions to engineers — cutting incident response time by 40%.',
+        tags:['AWS Bedrock','MWAA','Airflow','LLM'] },
+      { title:'Legacy → Modern DataLake Migration', ctx:'S&P Global · 2023–present',
+        desc:'Migrated legacy ETL and AWS DMS loads to a DBT, Spark, and Airflow DataLake architecture, refreshing terabytes of data and cutting runtimes by 60%.',
+        tags:['DBT','Spark','Snowflake','Terraform'] },
+      { title:'Real-Time Streaming Analytics', ctx:'Cognizant · 2022–2023',
+        desc:'Built low-latency streaming on Apache Kafka and Spark for high-volume event data, with ingestion across Hadoop, Hive, and Sqoop feeding client-facing reporting.',
+        tags:['Kafka','Spark','Hadoop','AWS'] },
+      { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020',
+        desc:'Developed a Random Forest churn model in Python with association rules explaining why customers left, powering targeted retention campaigns.',
+        tags:['Python','Random Forest','ML'] }
+    ];
+
+    var skillGroups = [
+      { name:'Languages & APIs', items:['Python','SQL','PySpark','Scala','REST APIs','GraphQL','Shell'] },
+      { name:'Big Data & Processing', items:['Apache Spark','Kafka','Hadoop','Hive','Airflow (MWAA)','AWS Glue','DBT','Flink'] },
+      { name:'Cloud & Infrastructure', items:['AWS','GCP (BigQuery, Dataproc)','Azure (DevOps, Data Factory)','Terraform','Docker','Step Functions','EMR'] },
+      { name:'Databases', items:['Snowflake','PostgreSQL','SQL Server','Oracle DB2','MongoDB','DynamoDB','Redshift','Athena','Neo4j'] },
+      { name:'ML & AI', items:['Scikit-learn','TensorFlow','PyTorch','Keras','NLP','CNN','LLMs','SageMaker','Bedrock','Copilot'] },
+      { name:'DevOps & Observability', items:['GitHub Actions','GitLab CI/CD','Jenkins','Grafana','Prometheus','OpenTelemetry','Tableau','Power BI'] }
+    ];
+
+    var profilesData = [
+      { name:'Recruiters', color:'#E50914' },
+      { name:'Engineers', color:'#0e6e5c' },
+      { name:'Friends', color:'#7a3fa0' },
+      { name:'Everyone', color:'#c08a2d' }
+    ];
+
+    /* ---------------- RENDER ---------------- */
+    function el(tag, cls, html){ var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+    function grad(i){ return GRADS[i % GRADS.length]; }
+
+    // profile gate
+    (function(){
+      var wrap = document.getElementById('profiles');
+      profilesData.forEach(function(p){
+        var b = el('button','profile');
+        var av = el('div','av', p.name.charAt(0));
+        av.style.background = p.color;
+        b.appendChild(av);
+        b.appendChild(el('span',null,p.name));
+        b.onclick = enter;
+        wrap.appendChild(b);
+      });
+    })();
+
+    function enter(){
+      document.getElementById('gate').classList.add('hide');
+      var app = document.getElementById('app');
+      app.classList.add('show');
+      setTimeout(function(){ document.getElementById('gate').style.display='none'; }, 520);
+    }
+
+    // experience cards
+    (function(){
+      var t = document.getElementById('track-exp');
+      experiences.forEach(function(x,i){
+        var c = el('div','card');
+        c.style.background = grad(i);
+        c.innerHTML = '<span class="cyear">'+x.dates.split(' — ')[0]+'</span>'+
+                      '<div class="ctitle">'+x.company+'</div>'+
+                      '<div class="csub">'+x.title+'</div>';
+        c.onclick = function(){ openExp(i); };
+        t.appendChild(c);
+      });
+    })();
+
+    // project cards
+    (function(){
+      var t = document.getElementById('track-proj');
+      projects.forEach(function(p,i){
+        var c = el('div','card');
+        c.style.background = grad(i+1);
+        c.innerHTML = '<span class="num">'+(i+1)+'</span>'+
+                      '<div class="ctitle">'+p.title+'</div>'+
+                      '<div class="csub">'+p.ctx+'</div>';
+        c.onclick = function(){ openProj(i); };
+        t.appendChild(c);
+      });
+    })();
+
+    // skill cards (one per group)
+    (function(){
+      var t = document.getElementById('track-skills');
+      skillGroups.forEach(function(g,i){
+        var c = el('div','card skill-card');
+        c.style.background = grad(i+2);
+        c.innerHTML = '<div class="ctitle">'+g.name+'</div>'+
+                      '<div class="csub">'+g.items.length+' technologies</div>';
+        c.onclick = function(){ openSkill(i); };
+        t.appendChild(c);
+      });
+    })();
+
+    // education cards
+    (function(){
+      var t = document.getElementById('track-edu');
+      var edu = [
+        { school:'Kent State University', deg:'M.S., Business Analytics', year:'May 2022' },
+        { school:'APJ Abdul Kalam Technical University', deg:'B.Tech, Computer Science & Engineering', year:'May 2018' }
+      ];
+      edu.forEach(function(e,i){
+        var c = el('div','card');
+        c.style.background = grad(i+3);
+        c.innerHTML = '<span class="cyear">'+e.year+'</span>'+
+                      '<div class="ctitle">'+e.school+'</div>'+
+                      '<div class="csub">'+e.deg+'</div>';
+        t.appendChild(c);
+      });
+    })();
+
+    /* ---------------- MODAL ---------------- */
+    var modal = document.getElementById('modal');
+    function showModal(){ modal.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+    function openExp(i){
+      var x = experiences[i];
+      document.getElementById('m-title').textContent = x.company;
+      document.getElementById('m-meta').innerHTML =
+        '<span class="mmatch">'+x.match+'</span><span>'+x.dates+'</span><span>'+x.loc+'</span>';
+      var ul = '<p class="desc" style="font-weight:600;color:#fff;margin-bottom:6px;">'+x.title+'</p><ul>';
+      x.bullets.forEach(function(b){ ul += '<li>'+b+'</li>'; });
+      ul += '</ul>';
+      document.getElementById('m-body').innerHTML = ul;
+      showModal();
+    }
+    function openProj(i){
+      var p = projects[i];
+      document.getElementById('m-title').textContent = p.title;
+      document.getElementById('m-meta').innerHTML = '<span class="mmatch">Featured</span><span>'+p.ctx+'</span>';
+      var tags = '<div class="tags">'; p.tags.forEach(function(t){ tags += '<span class="tag">'+t+'</span>'; }); tags += '</div>';
+      document.getElementById('m-body').innerHTML = '<p class="desc">'+p.desc+'</p>'+tags;
+      showModal();
+    }
+    function openSkill(i){
+      var g = skillGroups[i];
+      document.getElementById('m-title').textContent = g.name;
+      document.getElementById('m-meta').innerHTML = '<span class="mmatch">'+g.items.length+' technologies</span>';
+      var tags = '<div class="tags">'; g.items.forEach(function(t){ tags += '<span class="tag">'+t+'</span>'; }); tags += '</div>';
+      document.getElementById('m-body').innerHTML = tags;
+      showModal();
+    }
+    function openAbout(){
+      document.getElementById('m-title').textContent = 'About Kunal';
+      document.getElementById('m-meta').innerHTML = '<span class="mmatch">98% Match</span><span>Senior Data Engineer</span><span>Dallas, TX</span>';
+      document.getElementById('m-body').innerHTML =
+        '<p class="desc">Senior data engineer with 6+ years building cloud-native Big Data platforms across AWS, GCP, and Azure. Deep expertise in Apache Spark, Airflow, Snowflake, and the modern cloud data stack, with a strong record of migrating legacy systems to modern architectures. Experienced collaborating across global, cross-functional teams to deliver commercial impact through real-time analytics and scalable infrastructure.</p>'+
+        '<div class="tags"><span class="tag">AWS Certified Solutions Architect</span><span class="tag">6+ years</span><span class="tag">Open to relocation</span></div>';
+      showModal();
+    }
+
+    /* nav background on scroll */
+    window.addEventListener('scroll', function(){
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+</body>
+</html>

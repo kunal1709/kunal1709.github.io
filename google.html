@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kunal Sharma — Senior Data Engineer</title>
+<meta name="description" content="Kunal Sharma — Senior Data Engineer. A Material-inspired portfolio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{ --blue:#4285F4; --red:#EA4335; --yellow:#FBBC05; --green:#34A853;
+    --ink:#202124; --gray:#5f6368; --line:#dadce0; --bg:#fff;
+    --sans:"Inter","Google Sans",Roboto,Arial,sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;}
+  a{color:var(--blue);text-decoration:none;}
+
+  .appbar{position:fixed;top:0;left:0;right:0;height:64px;z-index:50;display:flex;align-items:center;
+    justify-content:space-between;padding:0 24px;background:#fff;border-bottom:1px solid var(--line);}
+  .appbar .logo{font-size:22px;font-weight:500;}
+  .appbar .logo .b{color:var(--blue);}.appbar .logo .r{color:var(--red);}.appbar .logo .y{color:var(--yellow);}
+  .appbar .logo .bl{color:var(--blue);}.appbar .logo .g{color:var(--green);}.appbar .logo .r2{color:var(--red);}
+  .appbar .right{display:flex;gap:18px;align-items:center;font-size:14px;}
+  .appbar .right a{color:var(--gray);}
+  .appbar .right .signin{background:var(--blue);color:#fff;padding:9px 22px;border-radius:4px;font-weight:500;}
+
+  .hero{padding:130px 24px 70px;text-align:center;}
+  .word{font-size:clamp(46px,10vw,92px);font-weight:500;letter-spacing:-1px;}
+  .word .b{color:var(--blue);}.word .r{color:var(--red);}.word .y{color:var(--yellow);}
+  .word .bl{color:var(--blue);}.word .g{color:var(--green);}.word .r2{color:var(--red);}
+  .hero .role{color:var(--gray);font-size:clamp(16px,2.5vw,20px);margin-top:10px;}
+  .search{max-width:580px;margin:34px auto 0;display:flex;align-items:center;gap:12px;border:1px solid var(--line);
+    border-radius:980px;padding:13px 22px;box-shadow:0 1px 6px rgba(32,33,36,.18);}
+  .search:hover{box-shadow:0 1px 10px rgba(32,33,36,.28);}
+  .search svg{flex-shrink:0;}
+  .search input{border:none;outline:none;flex:1;font-size:16px;color:var(--ink);font-family:var(--sans);background:none;}
+  .btns{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .gbtn{background:#f8f9fa;border:1px solid #f8f9fa;color:#3c4043;font-size:14px;padding:11px 20px;border-radius:4px;font-weight:500;cursor:pointer;}
+  .gbtn:hover{border-color:#dadce0;box-shadow:0 1px 1px rgba(0,0,0,.1);}
+  .gbtn.primary{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .chip-badge{display:inline-block;margin-top:24px;font-size:13px;color:var(--green);border:1px solid var(--green);border-radius:980px;padding:6px 14px;}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:30px 24px 60px;}
+  h2{font-size:26px;font-weight:500;margin:46px 0 20px;display:flex;align-items:center;gap:10px;}
+  h2 .dot{width:12px;height:12px;border-radius:50%;}
+
+  .mcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin-bottom:14px;
+    transition:box-shadow .2s;}
+  .mcard:hover{box-shadow:0 1px 12px rgba(32,33,36,.18);}
+  .mcard h3{font-size:19px;font-weight:500;}
+  .mcard .co{color:var(--gray);font-size:14px;margin:3px 0 10px;}
+  .mcard .dt{float:right;color:var(--gray);font-size:13px;}
+  .mcard p{color:#3c4043;font-size:15px;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){.grid{grid-template-columns:1fr;}}
+  .pcard{border-radius:12px;padding:24px;color:#fff;}
+  .pcard h3{font-size:18px;font-weight:600;}
+  .pcard .ctx{font-size:12px;opacity:.85;margin:4px 0 10px;}
+  .pcard p{font-size:14px;line-height:1.5;opacity:.95;}
+  .pcard .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;}
+  .pcard .tag{font-size:11px;background:rgba(255,255,255,.22);padding:3px 9px;border-radius:980px;}
+
+  .chips{display:flex;flex-wrap:wrap;gap:9px;}
+  .chip{font-size:14px;border:1px solid var(--line);border-radius:980px;padding:8px 15px;color:#3c4043;background:#fff;}
+  .chip:nth-child(4n+1){border-color:var(--blue);color:var(--blue);}
+  .chip:nth-child(4n+2){border-color:var(--red);color:var(--red);}
+  .chip:nth-child(4n+3){border-color:var(--yellow);color:#b8860b;}
+  .chip:nth-child(4n){border-color:var(--green);color:var(--green);}
+  .sg{margin-bottom:22px;}.sg .gl{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+
+  footer{border-top:1px solid var(--line);background:#f2f2f2;color:var(--gray);font-size:14px;padding:28px 24px;}
+  footer .l{display:flex;gap:18px;flex-wrap:wrap;}footer a{color:var(--gray);}footer a:hover{color:var(--blue);}
+  footer .fine{font-size:11px;color:#9aa0a6;margin-top:16px;}
+  .themeback{position:fixed;bottom:18px;left:18px;z-index:60;background:#fff;border:1px solid var(--line);
+    border-radius:980px;padding:9px 18px;font-size:13px;color:#3c4043;box-shadow:0 1px 6px rgba(0,0,0,.12);}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <span class="logo"><span class="b">K</span><span class="r">u</span><span class="y">n</span><span class="bl">a</span><span class="g">l</span></span>
+  <div class="right">
+    <a href="#exp">Experience</a><a href="#proj">Projects</a><a href="#skills">Skills</a>
+    <a class="signin" href="resume.pdf" target="_blank">Résumé</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="word"><span class="b">K</span><span class="r">u</span><span class="y">n</span><span class="bl">a</span><span class="g">l</span> <span class="r2">Sharma</span></div>
+  <div class="role">Senior Data Engineer · Dallas, TX</div>
+  <div class="search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round"/></svg>
+    <input value="senior data engineer · spark · airflow · snowflake · aws" readonly />
+  </div>
+  <div class="btns">
+    <a class="gbtn primary" href="resume.pdf" target="_blank">Download résumé</a>
+    <a class="gbtn" href="#exp">I'm feeling lucky</a>
+  </div>
+  <div><span class="chip-badge">AWS Certified Solutions Architect — Associate</span></div>
+</div>
+
+<div class="wrap">
+  <h2 id="exp"><span class="dot" style="background:var(--blue)"></span>Experience</h2>
+
+  <div class="mcard"><span class="dt">Jul 2023 — Now</span><h3>Senior Software Engineer II</h3><div class="co">S&amp;P Global · Dallas, TX</div>
+    <p>Lead cloud-native Big Data pipelines across AWS, GCP, and Azure. Optimized Spark for 60% faster runtimes, built Snowflake warehousing, and integrated AWS Bedrock with Airflow for AI-assisted observability (40% faster incident response).</p></div>
+  <div class="mcard"><span class="dt">Aug 2022 — Jul 2023</span><h3>Senior Associate — Data Science Engineer</h3><div class="co">Cognizant · Dallas, TX</div>
+    <p>Designed AWS + Snowflake warehouse architectures and real-time Kafka/Spark streaming, cutting report generation time by 35%.</p></div>
+  <div class="mcard"><span class="dt">Jan 2022 — Aug 2022</span><h3>Data Analyst</h3><div class="co">Kent State University · Kent, OH</div>
+    <p>Built Tableau and Power BI dashboards for real-time ROI and ML models predicting event returns.</p></div>
+  <div class="mcard"><span class="dt">Aug 2018 — Dec 2020</span><h3>Project Data Engineer</h3><div class="co">Wipro Technologies · India</div>
+    <p>Built telecom ETL pipelines and a Random Forest churn model — +32% customer satisfaction, +50% SLA/OLA.</p></div>
+
+  <h2 id="proj"><span class="dot" style="background:var(--red)"></span>Projects</h2>
+  <div class="grid">
+    <div class="pcard" style="background:var(--blue)"><h3>AI-Augmented Pipeline Observability</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>AWS Bedrock + Airflow DAGs detecting anomalies and surfacing AI-generated fixes — 40% faster incident response.</p><div class="tags"><span class="tag">Bedrock</span><span class="tag">MWAA</span><span class="tag">LLM</span></div></div>
+    <div class="pcard" style="background:var(--green)"><h3>Legacy → Modern DataLake</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>Migrated legacy ETL to DBT, Spark, and Airflow — terabyte refreshes, 60% faster.</p><div class="tags"><span class="tag">DBT</span><span class="tag">Spark</span><span class="tag">Snowflake</span></div></div>
+    <div class="pcard" style="background:var(--yellow);color:#3c4043"><h3>Real-Time Streaming Analytics</h3><div class="ctx">Cognizant · 2022–2023</div><p>Low-latency Kafka + Spark streaming on high-volume event data feeding client reporting.</p><div class="tags" style="color:#3c4043"><span class="tag" style="background:rgba(0,0,0,.12)">Kafka</span><span class="tag" style="background:rgba(0,0,0,.12)">Spark</span></div></div>
+    <div class="pcard" style="background:var(--red)"><h3>Telecom Churn Prediction</h3><div class="ctx">Wipro · 2018–2020</div><p>Random Forest churn model with association rules powering targeted retention.</p><div class="tags"><span class="tag">Python</span><span class="tag">ML</span></div></div>
+  </div>
+
+  <h2 id="skills"><span class="dot" style="background:var(--yellow)"></span>Skills</h2>
+  <div class="sg"><div class="gl">Languages &amp; APIs</div><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">PySpark</span><span class="chip">Scala</span><span class="chip">REST</span><span class="chip">GraphQL</span></div></div>
+  <div class="sg"><div class="gl">Big Data &amp; Cloud</div><div class="chips"><span class="chip">Apache Spark</span><span class="chip">Kafka</span><span class="chip">Airflow</span><span class="chip">DBT</span><span class="chip">AWS</span><span class="chip">GCP</span><span class="chip">Azure</span><span class="chip">Snowflake</span></div></div>
+  <div class="sg"><div class="gl">ML &amp; AI</div><div class="chips"><span class="chip">TensorFlow</span><span class="chip">PyTorch</span><span class="chip">Scikit-learn</span><span class="chip">SageMaker</span><span class="chip">Bedrock</span><span class="chip">LLMs</span></div></div>
+  <div class="sg"><div class="gl">DevOps &amp; BI</div><div class="chips"><span class="chip">GitHub Actions</span><span class="chip">Terraform</span><span class="chip">Docker</span><span class="chip">Grafana</span><span class="chip">Tableau</span><span class="chip">Power BI</span></div></div>
+</div>
+
+<footer>
+  <div class="l">
+    <a href="mailto:kunalsharma11stu@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/kunal1709" target="_blank">GitHub</a>
+  </div>
+  <div style="margin-top:8px;">Based in Dallas · Open to roles wherever the right team is</div>
+  <div class="fine">A Material-inspired design, built for fun. Not affiliated with Google LLC. © 2026 Kunal Sharma.</div>
+</footer>
+
+<a class="themeback" href="index.html">↩ Themes</a>
+</body>
+</html>
