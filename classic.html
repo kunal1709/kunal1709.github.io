@@ -38,6 +38,12 @@
     .rail nav a:hover { color: var(--deep); text-decoration: none; }
     .rail .foot { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 
+    .theme-menu{position:fixed;top:20px;right:20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:0 18px 40px rgba(19,41,61,.12);z-index:20;}
+    .theme-menu .label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);white-space:nowrap;}
+    .theme-menu a{font-family:var(--mono);color:var(--ink);padding:8px 12px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s;white-space:nowrap;}
+    .theme-menu a:hover{background:rgba(14,110,92,.08);border-color:rgba(14,110,92,.14);}
+    .theme-menu a.current{background:var(--accent);color:#fff;border-color:var(--accent);}
+
     .content { flex: 1; max-width: 820px; padding: 0 48px; }
     section { padding: 96px 0; border-bottom: 1px solid var(--line); }
     section:last-of-type { border-bottom: none; }
@@ -100,7 +106,7 @@
 </head>
 
 <body>
-  <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
+  <div class="theme-menu"><span class="label">Themes</span><a href="classic.html" class="current">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
   <div class="shell">
     <aside class="rail">
       <div class="mark">KS</div>

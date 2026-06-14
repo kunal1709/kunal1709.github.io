@@ -22,13 +22,14 @@
   .appbar .logo{font-size:22px;font-weight:500;}
   .appbar .logo .b{color:var(--blue);}.appbar .logo .r{color:var(--red);}.appbar .logo .y{color:var(--yellow);}
   .appbar .logo .bl{color:var(--blue);}.appbar .logo .g{color:var(--green);}.appbar .logo .r2{color:var(--red);}
-  .appbar .right{display:flex;gap:18px;align-items:center;font-size:14px;}
+  .appbar .right{display:flex;gap:18px;align-items:center;font-size:14px;flex-wrap:wrap;justify-content:flex-end;}
   .appbar .right a{color:var(--gray);}
   .appbar .right .signin{background:var(--blue);color:#fff;padding:9px 22px;border-radius:4px;font-weight:500;}
-  .theme-menu{display:flex;align-items:center;gap:8px;}
-  .theme-menu .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);}
-  .theme-menu a{color:var(--gray);padding:6px 10px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s;}
-  .theme-menu a:hover{background:rgba(66,133,244,.08);color:#202124;border-color:rgba(66,133,244,.16);}
+  .theme-menu{display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:100%;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:999px;padding:8px 12px;box-shadow:0 6px 20px rgba(32,33,36,.08);}
+  .theme-menu .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);white-space:nowrap;}
+  .theme-menu a{color:var(--gray);padding:7px 12px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s;white-space:nowrap;}
+  .theme-menu a:hover{background:rgba(66,133,244,.1);color:#202124;border-color:rgba(66,133,244,.2);}
+  .theme-menu a.current{background:rgba(66,133,244,.12);color:var(--blue);border-color:rgba(66,133,244,.2);}
 
   .hero{padding:130px 24px 70px;text-align:center;}
   .word{font-size:clamp(46px,10vw,92px);font-weight:500;letter-spacing:-1px;}
@@ -89,7 +90,11 @@
   <div class="right">
     <a href="#exp">Experience</a><a href="#proj">Projects</a><a href="#skills">Skills</a>
     <a class="signin" href="resume.pdf" target="_blank">Résumé</a>
-    <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
+    <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a class="current" href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
+  </div>
+</div>
+
+<div class="hero">
   <div class="role">Senior Data Engineer · Dallas, TX</div>
   <div class="search">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round"/></svg>
