@@ -61,6 +61,10 @@
     nav .links a:hover { color: #fff; }
     nav .resume { background: var(--red); color: #fff; padding: 8px 18px; border-radius: 4px; font-weight: 600; font-size: 14px; }
     nav .resume:hover { background: #f6121d; }
+    .theme-menu{display:flex;align-items:center;gap:8px;font-size:12px;}
+    .theme-menu .label{font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);}
+    .theme-menu a{color:var(--dim);padding:6px 10px;border-radius:999px;border:1px solid transparent;transition:color .15s,background .15s;}
+    .theme-menu a:hover{color:#fff;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);}
     @media (max-width: 640px){ nav .links { display: none; } }
 
     /* billboard */
@@ -152,10 +156,10 @@
           <a href="#proj">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#contact">Contact</a>
-          <a href="index.html">↩ Themes</a>
         </div>
       </div>
       <a class="resume" href="resume.pdf" target="_blank">Résumé</a>
+      <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
     </nav>
 
     <header class="billboard">
@@ -204,7 +208,6 @@
         <a href="https://github.com/kunal1709" target="_blank">GitHub — /kunal1709</a>
       </div>
       <p style="margin-bottom:14px;">Based in Dallas and open to senior data engineering roles wherever the right team is.</p>
-      <p style="margin-bottom:14px;"><a href="index.html" style="color:var(--red);font-weight:600;">↩ Browse other themes</a></p>
       <p class="fine">A Netflix-inspired portfolio, built for fun. Not affiliated with, endorsed by, or sponsored by Netflix. © 2026 Kunal Sharma.</p>
     </footer>
   </div>

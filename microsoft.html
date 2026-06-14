@@ -24,7 +24,11 @@
   .topbar .squares i{width:9px;height:9px;display:block;}
   .topbar .squares i:nth-child(1){background:#F25022;}.topbar .squares i:nth-child(2){background:#7FBA00;}
   .topbar .squares i:nth-child(3){background:#00A4EF;}.topbar .squares i:nth-child(4){background:#FFB900;}
-  .topbar .right{display:flex;gap:18px;}.topbar .right a:hover{text-decoration:underline;}
+  .topbar .right{display:flex;gap:18px;align-items:center;}.topbar .right a:hover{text-decoration:underline;}
+  .theme-menu{display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(255,255,255,.16);padding:6px 10px;border-radius:999px;color:#fff;}
+  .theme-menu .label{font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.75);}
+  .theme-menu a{color:#fff;padding:6px 10px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s;}
+  .theme-menu a:hover{background:rgba(255,255,255,.14);}
 
   .hero{padding:96px 28px 30px;}
   .hero .greet{font-size:15px;color:var(--dim);font-weight:400;}
@@ -63,7 +67,7 @@
 <body>
 <div class="topbar">
   <div class="logo"><span class="squares"><i></i><i></i><i></i><i></i></span> Kunal Sharma</div>
-  <div class="right"><a href="#start">Start</a><a href="resume.pdf" target="_blank">Résumé</a></div>
+  <div class="right"><a href="#start">Start</a><a href="resume.pdf" target="_blank">Résumé</a><div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div></div>
 </div>
 
 <div class="hero">
@@ -155,7 +159,5 @@
   <div>Based in Dallas · Open to roles wherever the right team is</div>
   <div class="fine">A Fluent/Metro-inspired design, built for fun. Not affiliated with Microsoft Corporation. © 2026 Kunal Sharma.</div>
 </footer>
-
-<a class="themeback" href="index.html">↩ Themes</a>
 </body>
 </html>

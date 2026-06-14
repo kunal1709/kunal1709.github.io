@@ -26,6 +26,10 @@
   .console-nav .r{display:flex;gap:16px;align-items:center;color:#cfd6dd;}
   .console-nav .r a{color:#cfd6dd;}
   .console-nav .region{font-family:var(--mono);font-size:12px;}
+  .theme-menu{display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:999px;color:#fff;}
+  .theme-menu .label{font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8a99a8;}
+  .theme-menu a{color:#fff;padding:6px 10px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s;}
+  .theme-menu a:hover{background:rgba(255,255,255,.12);}
 
   .banner{background:linear-gradient(120deg,var(--squid),#2c3e50);padding:80px 22px 44px;border-bottom:1px solid var(--line);}
   .banner .wrap{max-width:1080px;margin:0 auto;}
@@ -84,7 +88,7 @@
 <body>
 <div class="console-nav">
   <div class="l"><span class="cube">a</span><span class="crumbs">Services &nbsp;›&nbsp; <b>Kunal Sharma</b></span></div>
-  <div class="r"><span class="region">us-east-1 ▾</span><a href="resume.pdf" target="_blank">Résumé</a></div>
+  <div class="r"><span class="region">us-east-1 ▾</span><a href="resume.pdf" target="_blank">Résumé</a><div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div></div>
 </div>
 
 <div class="banner">
@@ -158,7 +162,5 @@
   <div>Based in Dallas · Open to roles wherever the right team is</div>
   <div class="fine">An AWS Console-inspired design, built for fun. Not affiliated with Amazon Web Services. © 2026 Kunal Sharma.</div>
 </footer>
-
-<a class="themeback" href="index.html">↩ Themes</a>
 </body>
 </html>

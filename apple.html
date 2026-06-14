@@ -23,9 +23,14 @@
     justify-content:space-between;padding:0 22px;background:rgba(251,251,253,.8);
     backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.06);font-size:13px;}
   nav .name{font-weight:600;}
-  nav .right{display:flex;gap:20px;color:var(--ink);}
+  nav .right{display:flex;gap:20px;color:var(--ink);align-items:center;}
   nav .right a{color:var(--ink);}
   nav .right a:hover{color:var(--blue);text-decoration:none;}
+  .theme-menu{display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(255,255,255,.92);
+    padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.08);}
+  .theme-menu .label{font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);}
+  .theme-menu a{color:var(--ink);padding:6px 10px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s;}
+  .theme-menu a:hover{background:rgba(0,0,0,.04);}
 
   section{padding:clamp(70px,12vh,130px) 22px;text-align:center;}
   .panel{max-width:980px;margin:0 auto;}
@@ -80,6 +85,7 @@
   <div class="right">
     <a href="#work">Work</a><a href="#projects">Projects</a><a href="#skills">Skills</a>
     <a href="resume.pdf" target="_blank">Résumé</a>
+    <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
   </div>
 </nav>
 
@@ -187,7 +193,5 @@
   </div>
   <div style="margin-top:18px;font-size:11px;color:#aaa;">An Apple-inspired design, built for fun. Not affiliated with Apple Inc. © 2026 Kunal Sharma.</div>
 </footer>
-
-<a class="themeback" href="index.html">↩ Themes</a>
 </body>
 </html>

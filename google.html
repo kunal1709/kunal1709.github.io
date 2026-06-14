@@ -25,6 +25,10 @@
   .appbar .right{display:flex;gap:18px;align-items:center;font-size:14px;}
   .appbar .right a{color:var(--gray);}
   .appbar .right .signin{background:var(--blue);color:#fff;padding:9px 22px;border-radius:4px;font-weight:500;}
+  .theme-menu{display:flex;align-items:center;gap:8px;}
+  .theme-menu .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);}
+  .theme-menu a{color:var(--gray);padding:6px 10px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s;}
+  .theme-menu a:hover{background:rgba(66,133,244,.08);color:#202124;border-color:rgba(66,133,244,.16);}
 
   .hero{padding:130px 24px 70px;text-align:center;}
   .word{font-size:clamp(46px,10vw,92px);font-weight:500;letter-spacing:-1px;}
@@ -85,11 +89,7 @@
   <div class="right">
     <a href="#exp">Experience</a><a href="#proj">Projects</a><a href="#skills">Skills</a>
     <a class="signin" href="resume.pdf" target="_blank">Résumé</a>
-  </div>
-</div>
-
-<div class="hero">
-  <div class="word"><span class="b">K</span><span class="r">u</span><span class="y">n</span><span class="bl">a</span><span class="g">l</span> <span class="r2">Sharma</span></div>
+    <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
   <div class="role">Senior Data Engineer · Dallas, TX</div>
   <div class="search">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round"/></svg>
@@ -138,7 +138,5 @@
   <div style="margin-top:8px;">Based in Dallas · Open to roles wherever the right team is</div>
   <div class="fine">A Material-inspired design, built for fun. Not affiliated with Google LLC. © 2026 Kunal Sharma.</div>
 </footer>
-
-<a class="themeback" href="index.html">↩ Themes</a>
 </body>
 </html>
