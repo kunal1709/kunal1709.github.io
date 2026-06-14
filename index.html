@@ -35,6 +35,14 @@
     .info .enter{display:inline-flex;gap:8px;margin-top:12px;font-family:var(--mono);font-size:12px;color:#58c79f;}
     .theme:hover .info .enter{gap:12px;}
 
+    .theme-switcher{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:0 auto 28px;max-width:960px;}
+    .theme-switcher a{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.15);color:var(--text);background:rgba(255,255,255,.04);font-family:var(--mono);font-size:13px;transition:transform .15s,border-color .15s,background .15s;}
+    .theme-switcher a:hover{transform:translateY(-1px);border-color:#58c79f;background:rgba(88,199,159,.12);}
+    .default-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:28px;text-align:center;}
+    .default-cta a{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border-radius:999px;background:#58c79f;color:#0e0e10;font-weight:700;font-family:var(--mono);text-decoration:none;transition:opacity .2s;}
+    .default-cta a:hover{opacity:.88;}
+    .default-cta .note{color:var(--dim);font-size:13px;max-width:640px;}
+
     /* preview minis */
     .pv-ed{background:#F4F3EE;}
     .pv-ed .nm{font-family:var(--display);font-weight:700;color:#13293D;font-size:26px;letter-spacing:-1px;line-height:.95;text-align:center;}
@@ -74,6 +82,20 @@
     </header>
 
     <div class="prompt">Pick a theme to explore →</div>
+
+    <div class="default-cta">
+      <a href="classic.html#contact">Open default theme</a>
+      <div class="note">The default theme opens the Classic portfolio at the contact section. Use the buttons below to switch to a different theme.</div>
+    </div>
+
+    <div class="theme-switcher">
+      <a href="classic.html#contact">Classic</a>
+      <a href="netflix.html">Netflix</a>
+      <a href="apple.html">Apple</a>
+      <a href="google.html">Google</a>
+      <a href="microsoft.html">Microsoft</a>
+      <a href="aws.html">AWS</a>
+    </div>
 
     <div class="themes">
 
