@@ -82,6 +82,17 @@
   footer .fine{font-size:11px;color:#5f6b7a;margin-top:14px;}
   .themeback{position:fixed;bottom:16px;left:16px;z-index:60;background:var(--squid);border:1px solid var(--line);
     border-radius:8px;padding:8px 16px;font-size:13px;color:#fff;}
+  @media (max-width:760px) {
+    .theme-menu {
+      position: static !important;
+      margin: 8px 12px;
+      max-width: calc(100% - 100px);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    .console-nav .r { gap: 8px; }
+  }
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
 </style>
 </head>

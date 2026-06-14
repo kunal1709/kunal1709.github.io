@@ -81,6 +81,17 @@
   footer .fine{font-size:11px;color:#9aa0a6;margin-top:16px;}
   .themeback{position:fixed;bottom:18px;left:18px;z-index:60;background:#fff;border:1px solid var(--line);
     border-radius:980px;padding:9px 18px;font-size:13px;color:#3c4043;box-shadow:0 1px 6px rgba(0,0,0,.12);}
+  @media (max-width:760px) {
+    .theme-menu {
+      position: static !important;
+      margin: 8px 12px;
+      max-width: calc(100% - 100px);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    .appbar .right { gap: 8px; }
+  }
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
 </style>
 </head>

@@ -61,6 +61,17 @@
   footer .fine{font-size:11px;color:#888;margin-top:14px;}
   .themeback{position:fixed;bottom:18px;left:18px;z-index:60;background:var(--panel);
     padding:9px 18px;font-size:13px;border-left:3px solid var(--blue);}
+  @media (max-width:760px) {
+    .theme-menu {
+      position: static !important;
+      margin: 8px 12px;
+      max-width: calc(100% - 100px);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    .topbar .right { gap: 8px; }
+  }
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
 </style>
 </head>
