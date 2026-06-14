@@ -78,6 +78,7 @@
   .sheet{background:var(--panel);color:var(--text);width:min(720px,100%);border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);}
   .sheet .top{padding:22px;position:relative;}
   .close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:none;background:#222;cursor:pointer;font-size:18px;color:#fff;}
+  .body{max-height:calc(100vh - 220px);overflow:auto;padding:18px 22px;border-top:1px solid rgba(255,255,255,.04);background:var(--panel);color:var(--text);}
   @media(max-width:520px){.sheet{width:calc(100% - 32px);}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
 </style>
@@ -182,8 +183,10 @@
   <div class="sheet">
     <div class="top">
       <button class="close" onclick="closeModal()">✕</button>
-      <div class="mcontent"></div>
+      <h4 id="m-title"></h4>
+      <div class="mmeta" id="m-meta"></div>
     </div>
+    <div class="body" id="m-body"></div>
   </div>
 </div>
 
@@ -196,14 +199,17 @@
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 
     function elText(el, sel){ var s = el.querySelector(sel); return s ? s.innerText.trim() : ''; }
+    function collectContent(card){ var parts=[]; card.querySelectorAll('p, ul').forEach(function(n){ parts.push(n.outerHTML); }); return parts.join(''); }
+
     document.querySelectorAll('.tiles .tile').forEach(function(card){
       card.style.cursor = 'pointer';
       card.addEventListener('click', function(){
         var title = elText(card,'.tt') || elText(card,'h3');
         var co = elText(card,'.ts') || '';
         var when = elText(card,'.corner') || '';
-        var desc = card.querySelector('.td') ? '<p>'+card.querySelector('.td').innerText+'</p>' : '';
-        modal.querySelector('.mcontent').innerHTML = '<h3>'+title+'</h3>'+(co?'<div class="co">'+co+'</div>':'')+(when?'<div class="dt">'+when+'</div>':'')+desc;
+        document.getElementById('m-title').textContent = title;
+        document.getElementById('m-meta').innerHTML = (co?'<div class="co">'+co+'</div>':'')+(when?'<div class="dt">'+when+'</div>':'');
+        document.getElementById('m-body').innerHTML = collectContent(card) || (card.querySelector('.td')?'<p>'+card.querySelector('.td').innerText+'</p>':'<p>No details available.</p>');
         showModal();
       });
     });
