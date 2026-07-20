@@ -25,22 +25,19 @@
   .appbar .right{display:flex;gap:18px;align-items:center;font-size:14px;flex-wrap:wrap;justify-content:flex-end;}
   .appbar .right a{color:var(--gray);}
   .appbar .right .signin{background:var(--blue);color:#fff;padding:9px 22px;border-radius:4px;font-weight:500;}
-  .theme-menu{display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:100%;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:999px;padding:8px 12px;box-shadow:0 6px 20px rgba(32,33,36,.08);}
-  .theme-menu .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);white-space:nowrap;}
-  .theme-menu a{color:var(--gray);padding:7px 12px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s;white-space:nowrap;}
-  .theme-menu a:hover{background:rgba(66,133,244,.1);color:#202124;border-color:rgba(66,133,244,.2);}
-  .theme-menu a.current{background:rgba(66,133,244,.12);color:var(--blue);border-color:rgba(66,133,244,.2);}
 
   .hero{padding:130px 24px 70px;text-align:center;}
   .word{font-size:clamp(46px,10vw,92px);font-weight:500;letter-spacing:-1px;}
   .word .b{color:var(--blue);}.word .r{color:var(--red);}.word .y{color:var(--yellow);}
   .word .bl{color:var(--blue);}.word .g{color:var(--green);}.word .r2{color:var(--red);}
   .hero .role{color:var(--gray);font-size:clamp(16px,2.5vw,20px);margin-top:10px;}
+  .hero .syn{max-width:640px;margin:16px auto 0;color:#3c4043;font-size:15px;line-height:1.6;}
   .search{max-width:580px;margin:34px auto 0;display:flex;align-items:center;gap:12px;border:1px solid var(--line);
     border-radius:980px;padding:13px 22px;box-shadow:0 1px 6px rgba(32,33,36,.18);}
-  .search:hover{box-shadow:0 1px 10px rgba(32,33,36,.28);}
+  .search:hover,.search:focus-within{box-shadow:0 1px 10px rgba(32,33,36,.28);}
   .search svg{flex-shrink:0;}
   .search input{border:none;outline:none;flex:1;font-size:16px;color:var(--ink);font-family:var(--sans);background:none;}
+  .search input:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px;}
   .btns{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
   .gbtn{background:#f8f9fa;border:1px solid #f8f9fa;color:#3c4043;font-size:14px;padding:11px 20px;border-radius:4px;font-weight:500;cursor:pointer;}
   .gbtn:hover{border-color:#dadce0;box-shadow:0 1px 1px rgba(0,0,0,.1);}
@@ -90,17 +87,32 @@
   .body{max-height:calc(100vh - 220px);overflow:auto;padding:18px 22px;border-top:1px solid #f1f1f1;background:#fff;color:var(--ink);}
   @media(max-width:520px){.sheet{width:calc(100% - 32px);}}
   @media (max-width:760px) {
-    .theme-menu {
-      position: static !important;
-      margin: 8px 12px;
-      max-width: calc(100% - 100px);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      white-space: nowrap;
-    }
     .appbar .right { gap: 8px; }
   }
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  /* chat widget */
+  .chat-widget{position:fixed;bottom:24px;right:24px;z-index:65;display:flex;flex-direction:column;align-items:flex-end;font-family:var(--sans);}
+  .chat-fab{position:relative;width:68px;height:68px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--blue);cursor:pointer;box-shadow:0 12px 34px rgba(66,133,244,.45);transition:transform .2s ease,box-shadow .2s ease,background .2s;animation:chat-hover 2.4s ease-in-out infinite;}
+  .chat-fab:hover{transform:translateY(-4px) scale(1.06);animation-play-state:paused;}
+  .chat-fab::before,.chat-fab::after{content:"";position:absolute;border-radius:50%;border:2px solid var(--blue);opacity:0;animation:chat-ping 2.2s ease-out infinite;}
+  .chat-fab::before{inset:-8px;}
+  .chat-fab::after{inset:-16px;border-color:var(--red);animation-delay:.6s;}
+  .chat-fab.open::before,.chat-fab.open::after{display:none;}
+  @keyframes chat-hover{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+  @keyframes chat-ping{0%{transform:scale(.82);opacity:.6;}80%{transform:scale(1.45);opacity:0;}100%{opacity:0;}}
+  .chat-hint{position:absolute;bottom:82px;right:2px;display:flex;align-items:center;gap:10px;max-width:230px;padding:13px 14px;border-radius:16px 16px 4px 16px;font-size:12.5px;line-height:1.5;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 16px 40px rgba(32,33,36,.16);opacity:0;transform:translateY(10px) scale(.95);transition:opacity .35s ease,transform .35s ease;pointer-events:none;}
+  .chat-hint.show{opacity:1;transform:none;pointer-events:auto;}
+  .chat-hint-close{flex:0 0 auto;width:18px;height:18px;border-radius:50%;border:none;background:#f2f2f4;color:var(--gray);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;}
+  .chat-panel{position:absolute;bottom:82px;right:0;width:min(380px,90vw);height:min(560px,70vh);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);opacity:0;pointer-events:none;transform:translateY(16px) scale(.97);transition:opacity .22s ease,transform .22s ease;box-shadow:0 30px 70px rgba(32,33,36,.22);}
+  .chat-panel.open{opacity:1;pointer-events:auto;transform:none;}
+  .chat-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;font-size:13px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--line);flex:0 0 auto;}
+  .chat-close{width:26px;height:26px;border-radius:50%;border:none;background:#f2f2f4;color:var(--gray);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .chat-body{position:relative;flex:1;background:#fff;}
+  .chat-body iframe{width:100%;height:100%;border:0;position:relative;z-index:1;}
+  .chat-fallback{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;padding:26px;text-align:center;font-size:12.5px;line-height:1.7;color:var(--gray);background:#fff;transition:opacity .3s;}
+  .chat-fallback.hide{opacity:0;pointer-events:none;}
+  @media (max-width:520px){ .chat-panel{width:calc(100vw - 32px);} }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.chat-fab,.chat-fab::before,.chat-fab::after{animation:none !important;}}
 </style>
 </head>
 <body>
@@ -108,76 +120,81 @@
     <span class="logo"><span class="b">K</span><span class="r">u</span><span class="y">n</span><span class="bl">a</span><span class="g">l</span></span>
     <div class="right">
       <a href="#exp">Experience</a><a href="#proj">Projects</a><a href="#certifications">Certifications</a><a href="#skills">Skills</a>
-      <a class="signin" href="resume.pdf" target="_blank">Résumé</a>
-      <div class="theme-menu"><span class="label">Themes</span><a href="classic.html">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a class="current" href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
+      <a class="signin" href="resume.pdf" target="_blank" rel="noopener">Résumé</a>
     </div>
   </div>
 
 <div class="hero">
+  <div class="word"><span class="b">K</span><span class="r">u</span><span class="y">n</span><span class="bl">a</span><span class="g">l</span></div>
   <div class="role">Senior Data Engineer · Dallas, TX</div>
+  <p class="syn">Senior Data Engineer with nearly 7 years designing, building, and operating large-scale data platforms and production AI systems — across financial services, banking, higher education, and telecom. Deep in Python, Spark, Snowflake, Databricks, dbt, Airflow, Kafka, Kubernetes, and AWS, with production LLM/RAG systems on Bedrock and technical leadership as one of a few senior engineers. AWS Certified Solutions Architect.</p>
   <div class="search">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round"/></svg>
     <input value="senior data engineer · spark · airflow · snowflake · aws" readonly />
   </div>
   <div class="btns">
-    <a class="gbtn primary" href="resume.pdf" target="_blank">Download résumé</a>
+    <a class="gbtn primary" href="resume.pdf" target="_blank" rel="noopener">Download résumé</a>
     <a class="gbtn" href="#exp">I'm feeling lucky</a>
+    <button class="gbtn" onclick="openAbout()">About</button>
   </div>
   <div>
-    <a class="chip-badge" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank">AWS Certified Solutions Architect — Associate</a>
-  <h2 id="certifications"><span class="dot" style="background:var(--green)"></span>Certifications</h2>
-  <div class="sg"><div class="chips">
-      <a class="chip" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank">AWS Certified Solutions Architect — Associate</a>
-      <a class="chip" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank">Udemy AWS Certified Solutions Architect — Associate</a>
-      <a class="chip" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank">Academy Accreditation - Generative AI Fundamentals</a>
-      <a class="chip" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank">Coursera MLOps</a>
-      <a class="chip" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank">HackerRank Certification</a>
-    </div></div>
-
-    <a class="chip-badge" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank">Udemy AWS Certified Solutions Architect — Associate</a>
-    <a class="chip-badge" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank">Academy Accreditation - Generative AI Fundamentals</a>
-    <a class="chip-badge" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank">Coursera MLOps</a>
-    <a class="chip-badge" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank">HackerRank Certification</a>
+    <a class="chip-badge" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank" rel="noopener">AWS Certified Solutions Architect — Associate</a>
+    <a class="chip-badge" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank" rel="noopener">Udemy AWS Certified Solutions Architect — Associate</a>
+    <a class="chip-badge" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank" rel="noopener">Academy Accreditation - Generative AI Fundamentals</a>
+    <a class="chip-badge" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank" rel="noopener">Coursera MLOps</a>
+    <a class="chip-badge" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank" rel="noopener">HackerRank Certification</a>
   </div>
 </div>
 
 <div class="wrap">
   <h2 id="exp"><span class="dot" style="background:var(--blue)"></span>Experience</h2>
 
-  <div class="mcard"><span class="dt">Jul 2023 — Now</span><h3>Senior Software Engineer II</h3><div class="co">S&amp;P Global · Dallas, TX</div>
-    <p>Lead cloud-native Big Data pipelines across AWS, GCP, and Azure. Optimized Spark for 60% faster runtimes, built Snowflake warehousing, and integrated AWS Bedrock with Airflow for AI-assisted observability (40% faster incident response).</p></div>
+  <div class="mcard"><span class="dt">Jul 2023 — Present</span><h3>Senior Software Engineer II</h3><div class="co">S&amp;P Global · Dallas, TX</div>
+    <p>Architected and owned lakehouse and warehouse infrastructure end-to-end — Databricks, Snowflake, and AWS — cutting pipeline runtimes 60% at TB-to-petabyte scale, while shipping production LLM/RAG and anomaly-detection systems on Bedrock that cut incident response 40%.</p></div>
   <div class="mcard"><span class="dt">Aug 2022 — Jul 2023</span><h3>Senior Associate — Data Science Engineer</h3><div class="co">Cognizant · Dallas, TX</div>
-    <p>Designed AWS + Snowflake warehouse architectures and real-time Kafka/Spark streaming, cutting report generation time by 35%.</p></div>
+    <p>Built churn-prediction models for credit card customers (XGBoost, scikit-learn) for banking client Capital One, and owned the data engineering behind them — Databricks/PySpark, Snowflake, and AWS — cutting report time 35%.</p></div>
   <div class="mcard"><span class="dt">Jan 2022 — Aug 2022</span><h3>Data Analyst</h3><div class="co">Kent State University · Kent, OH</div>
-    <p>Built Tableau and Power BI dashboards for real-time ROI and ML models predicting event returns.</p></div>
-  <div class="mcard"><span class="dt">Aug 2018 — Dec 2020</span><h3>Project Data Engineer</h3><div class="co">Wipro Technologies · India</div>
-    <p>Built telecom ETL pipelines and a Random Forest churn model — +32% customer satisfaction, +50% SLA/OLA.</p></div>
+    <p>Built and operationalized a churn-risk model driving outreach targeting decisions, and ran marketing analytics, FP&amp;A, and BI end-to-end for senior stakeholders.</p></div>
+  <div class="mcard"><span class="dt">Aug 2018 — Dec 2020</span><h3>Project Data Engineer</h3><div class="co">Wipro Technologies · Bangalore, India</div>
+    <p>Built churn-prediction models for telecom customers and owned production on-prem pipelines end-to-end, improving SLA/OLA compliance 50% and customer satisfaction 32%.</p></div>
 
   <h2 id="proj"><span class="dot" style="background:var(--red)"></span>Projects</h2>
   <div class="grid">
-    <div class="pcard" style="background:var(--blue)"><h3>AI-Augmented Pipeline Observability</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>AWS Bedrock + Airflow DAGs detecting anomalies and surfacing AI-generated fixes — 40% faster incident response.</p><div class="tags"><span class="tag">Bedrock</span><span class="tag">MWAA</span><span class="tag">LLM</span></div></div>
-    <div class="pcard" style="background:var(--green)"><h3>Legacy → Modern DataLake</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>Migrated legacy ETL to DBT, Spark, and Airflow — terabyte refreshes, 60% faster.</p><div class="tags"><span class="tag">DBT</span><span class="tag">Spark</span><span class="tag">Snowflake</span></div></div>
-    <div class="pcard" style="background:var(--yellow);color:#3c4043"><h3>Real-Time Streaming Analytics</h3><div class="ctx">Cognizant · 2022–2023</div><p>Low-latency Kafka + Spark streaming on high-volume event data feeding client reporting.</p><div class="tags" style="color:#3c4043"><span class="tag" style="background:rgba(0,0,0,.12)">Kafka</span><span class="tag" style="background:rgba(0,0,0,.12)">Spark</span></div></div>
-    <div class="pcard" style="background:var(--red)"><h3>Telecom Churn Prediction</h3><div class="ctx">Wipro · 2018–2020</div><p>Random Forest churn model with association rules powering targeted retention.</p><div class="tags"><span class="tag">Python</span><span class="tag">ML</span></div></div>
+    <div class="pcard" style="background:var(--blue)"><h3>Production GenAI on Bedrock</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>Shipped production LLM, RAG, and anomaly-detection systems on AWS Bedrock — grounding datasets, chunking, embeddings, and vector retrieval — integrated with Airflow DAGs to surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.</p><div class="tags"><span class="tag">AWS Bedrock</span><span class="tag">RAG</span><span class="tag">Airflow</span><span class="tag">LLM</span></div></div>
+    <div class="pcard" style="background:var(--green)"><h3>Lakehouse &amp; Warehouse Architecture</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>Architected and owned lakehouse and warehouse infrastructure end-to-end on Databricks (Delta Lake, Unity Catalog) and Snowflake, migrating legacy ETL and AWS DMS loads onto a medallion architecture — cutting pipeline runtimes 60% at TB-to-petabyte scale.</p><div class="tags"><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">Snowflake</span><span class="tag">dbt</span></div></div>
+    <div class="pcard" style="background:var(--yellow);color:#3c4043"><h3>Real-Time Streaming Analytics</h3><div class="ctx">Cognizant · 2022–2023</div><p>Built streaming and big-data pipelines combining Kafka real-time processing with Hadoop/Hive batch workloads, feeding client-facing reporting and analytics for a banking client.</p><div class="tags" style="color:#3c4043"><span class="tag" style="background:rgba(0,0,0,.12)">Kafka</span><span class="tag" style="background:rgba(0,0,0,.12)">Hadoop</span><span class="tag" style="background:rgba(0,0,0,.12)">Hive</span><span class="tag" style="background:rgba(0,0,0,.12)">AWS</span></div></div>
+    <div class="pcard" style="background:var(--red)"><h3>Telecom Churn Prediction</h3><div class="ctx">Wipro · 2018–2020</div><p>Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.</p><div class="tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">ML</span></div></div>
+    <div class="pcard" style="background:var(--ink)"><h3>AI-Powered Digital Twin</h3><div class="ctx">Personal Project · 2026</div><p>Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.</p><div class="tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">Prompt Engineering</span><span class="tag">Hugging Face</span></div></div>
   </div>
 
   <h2 id="certifications"><span class="dot" style="background:var(--green)"></span>Certifications</h2>
-  <div class="sg"><div class="chips"><a class="chip" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank">AWS Certified Solutions Architect — Associate</a><a class="chip" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank">Udemy AWS Certified Solutions Architect — Associate</a><a class="chip" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank">Academy Accreditation - Generative AI Fundamentals</a><a class="chip" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank">Coursera MLOps</a><a class="chip" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank">HackerRank Certification</a></div></div>
+  <div class="sg"><div class="chips"><a class="chip" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank" rel="noopener">AWS Certified Solutions Architect — Associate</a><a class="chip" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank" rel="noopener">Udemy AWS Certified Solutions Architect — Associate</a><a class="chip" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank" rel="noopener">Academy Accreditation - Generative AI Fundamentals</a><a class="chip" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank" rel="noopener">Coursera MLOps</a><a class="chip" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank" rel="noopener">HackerRank Certification</a></div></div>
 
   <h2 id="skills"><span class="dot" style="background:var(--yellow)"></span>Skills</h2>
-  <div class="sg"><div class="gl">Languages &amp; APIs</div><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">PySpark</span><span class="chip">Scala</span><span class="chip">REST</span><span class="chip">GraphQL</span></div></div>
-  <div class="sg"><div class="gl">Big Data &amp; Cloud</div><div class="chips"><span class="chip">Apache Spark</span><span class="chip">Kafka</span><span class="chip">Airflow</span><span class="chip">DBT</span><span class="chip">AWS</span><span class="chip">GCP</span><span class="chip">Azure</span><span class="chip">Snowflake</span></div></div>
-  <div class="sg"><div class="gl">ML &amp; AI</div><div class="chips"><span class="chip">TensorFlow</span><span class="chip">PyTorch</span><span class="chip">Scikit-learn</span><span class="chip">SageMaker</span><span class="chip">Bedrock</span><span class="chip">LLMs</span></div></div>
-  <div class="sg"><div class="gl">DevOps &amp; BI</div><div class="chips"><span class="chip">GitHub Actions</span><span class="chip">Terraform</span><span class="chip">Docker</span><span class="chip">Grafana</span><span class="chip">Tableau</span><span class="chip">Power BI</span></div></div>
+  <div class="sg"><div class="gl">Languages</div><div class="chips"><span class="chip">Python (expert)</span><span class="chip">SQL (expert)</span><span class="chip">PL/SQL</span><span class="chip">T-SQL</span><span class="chip">Java (Spring Boot)</span><span class="chip">PySpark</span><span class="chip">Shell</span><span class="chip">TypeScript / JavaScript (working)</span><span class="chip">Scala (familiar)</span></div></div>
+  <div class="sg"><div class="gl">Data Warehouses &amp; Lakehouses</div><div class="chips"><span class="chip">Snowflake (deep)</span><span class="chip">Databricks (Delta Lake, Unity Catalog, Apps)</span><span class="chip">Redshift</span><span class="chip">PostgreSQL</span><span class="chip">Oracle</span><span class="chip">SQL Server</span><span class="chip">RDS Aurora</span><span class="chip">MongoDB</span><span class="chip">DynamoDB</span><span class="chip">BigQuery (familiar)</span><span class="chip">ClickHouse (familiar)</span><span class="chip">Neo4j (familiar)</span><span class="chip">Spanner (familiar)</span><span class="chip">Elasticsearch (familiar)</span></div></div>
+  <div class="sg"><div class="gl">ETL/ELT &amp; Orchestration</div><div class="chips"><span class="chip">dbt</span><span class="chip">Apache Airflow</span><span class="chip">AWS Glue</span><span class="chip">SSIS (working)</span><span class="chip">Informatica (working)</span><span class="chip">Talend (familiar)</span><span class="chip">Dagster (familiar)</span><span class="chip">Medallion Architecture</span><span class="chip">Kimball Modeling</span><span class="chip">Schema Evolution</span></div></div>
+  <div class="sg"><div class="gl">Streaming &amp; Query Engines</div><div class="chips"><span class="chip">Apache Kafka</span><span class="chip">AWS Kinesis</span><span class="chip">CDC (Debezium)</span><span class="chip">Trino / Starburst (working)</span><span class="chip">Athena</span><span class="chip">Apache Flink (familiar)</span><span class="chip">Apache Beam (familiar)</span><span class="chip">Iceberg (familiar)</span></div></div>
+  <div class="sg"><div class="gl">Big Data</div><div class="chips"><span class="chip">Apache Spark / PySpark (deep)</span><span class="chip">Hadoop</span><span class="chip">Hive</span><span class="chip">TB-to-petabyte scale</span><span class="chip">Parquet</span><span class="chip">Delta formats</span></div></div>
+  <div class="sg"><div class="gl">AWS</div><div class="chips"><span class="chip">S3</span><span class="chip">EC2</span><span class="chip">ECS</span><span class="chip">Lambda</span><span class="chip">Glue</span><span class="chip">EMR</span><span class="chip">Athena</span><span class="chip">Redshift</span><span class="chip">Kinesis</span><span class="chip">Step Functions</span><span class="chip">Bedrock</span><span class="chip">SageMaker</span><span class="chip">CloudWatch</span><span class="chip">RDS Aurora</span><span class="chip">Certified Solutions Architect</span></div></div>
+  <div class="sg"><div class="gl">Azure &amp; GCP</div><div class="chips"><span class="chip">Azure Data Factory (working)</span><span class="chip">Azure Databricks (working)</span><span class="chip">Azure DevOps (working)</span><span class="chip">Entra ID (working)</span><span class="chip">Key Vault (working)</span><span class="chip">GCP BigQuery (familiar)</span><span class="chip">Dataflow (familiar)</span><span class="chip">Pub/Sub (familiar)</span><span class="chip">Cloud Functions (familiar)</span><span class="chip">Vertex AI (familiar)</span></div></div>
+  <div class="sg"><div class="gl">Kubernetes &amp; Infrastructure</div><div class="chips"><span class="chip">Kubernetes / EKS</span><span class="chip">Custom Controllers &amp; Operators</span><span class="chip">Autoscaling</span><span class="chip">Persistent Volumes</span><span class="chip">CSI Drivers</span><span class="chip">Storage Classes</span><span class="chip">Docker</span><span class="chip">Terraform</span><span class="chip">GitHub Actions</span><span class="chip">Jenkins</span><span class="chip">Azure DevOps</span></div></div>
+  <div class="sg"><div class="gl">Observability &amp; Quality</div><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">CloudWatch</span><span class="chip">Datadog (familiar)</span><span class="chip">Automated Data-Quality Testing</span><span class="chip">Drift &amp; Anomaly Detection</span><span class="chip">Alerting</span><span class="chip">SLA Ownership</span><span class="chip">On-Call</span></div></div>
+  <div class="sg"><div class="gl">Governance &amp; Security</div><div class="chips"><span class="chip">RBAC</span><span class="chip">Dynamic Data Masking</span><span class="chip">Row Access Policies</span><span class="chip">Object Tagging</span><span class="chip">Lineage &amp; Traceability (Unity Catalog)</span><span class="chip">PII/PCI</span><span class="chip">CyberArk</span><span class="chip">SailPoint</span><span class="chip">Data Classification</span><span class="chip">Metadata Management</span></div></div>
+  <div class="sg"><div class="gl">Machine Learning</div><div class="chips"><span class="chip">Churn &amp; Propensity Modeling</span><span class="chip">XGBoost</span><span class="chip">Gradient Boosting</span><span class="chip">LightGBM</span><span class="chip">Scikit-learn</span><span class="chip">Random Forest</span><span class="chip">Regression</span><span class="chip">SVM</span><span class="chip">Clustering &amp; Segmentation</span><span class="chip">Forecasting</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">SageMaker</span><span class="chip">TensorFlow (familiar)</span><span class="chip">PyTorch (familiar)</span><span class="chip">MLFlow (familiar)</span><span class="chip">Feature Stores (project)</span></div></div>
+  <div class="sg"><div class="gl">GenAI &amp; LLMs</div><div class="chips"><span class="chip">Production LLM Systems (Bedrock)</span><span class="chip">RAG Engineering</span><span class="chip">Chunking &amp; Embeddings</span><span class="chip">Vector Stores</span><span class="chip">Prompt Engineering</span><span class="chip">Context Management</span><span class="chip">Token / API Cost Management</span><span class="chip">LLM Tool Calling</span><span class="chip">Hugging Face Deployment</span><span class="chip">Agentic / Multi-Agent Workflows</span><span class="chip">LangChain (project)</span><span class="chip">LlamaIndex (project)</span><span class="chip">MCP Servers (new)</span></div></div>
+  <div class="sg"><div class="gl">APIs &amp; Services</div><div class="chips"><span class="chip">REST API Design</span><span class="chip">Java / Spring Boot Microservices</span><span class="chip">Python FastAPI (working)</span><span class="chip">Python Flask (working)</span><span class="chip">API Consumption &amp; Integration</span><span class="chip">Event-Driven Architecture</span></div></div>
+  <div class="sg"><div class="gl">BI &amp; Analytics</div><div class="chips"><span class="chip">Tableau</span><span class="chip">Power BI</span><span class="chip">Alteryx Designer</span><span class="chip">Alteryx Server Admin</span><span class="chip">IBM Cognos</span><span class="chip">Excel (advanced)</span><span class="chip">A/B &amp; Significance Testing</span><span class="chip">Causal Inference</span><span class="chip">Attribution Modeling</span><span class="chip">Campaign ROI</span><span class="chip">FP&amp;A</span></div></div>
+  <div class="sg"><div class="gl">Leadership &amp; Practice</div><div class="chips"><span class="chip">Technical Leadership</span><span class="chip">Architecture Co-Ownership</span><span class="chip">Mentoring</span><span class="chip">Code Review &amp; Pairing</span><span class="chip">Cross-Functional &amp; Executive Communication</span><span class="chip">Project Leadership</span><span class="chip">Agile / Scrum</span><span class="chip">Claude Code</span><span class="chip">Cursor</span><span class="chip">GitHub Copilot</span></div></div>
 </div>
 
 <footer>
   <div class="l">
     <a href="mailto:kunalsharma11stu@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank">LinkedIn</a>
-    <a href="https://github.com/kunal1709" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/kunal1709" target="_blank" rel="noopener">GitHub</a>
   </div>
-  <div style="margin-top:8px;">Based in Dallas · Open to roles wherever the right team is</div>
+  <div style="margin-top:8px;">Based in Dallas, TX and open to relocation or remote — for senior data engineering roles wherever the right team is.</div>
   <div class="fine">A Material-inspired design, built for fun. Not affiliated with Google LLC. © 2026 Kunal Sharma.</div>
 </footer>
 <!-- MODAL -->
@@ -192,43 +209,89 @@
   </div>
 </div>
 
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat with Kunal's AI digital twin" aria-hidden="true">
+    <div class="chat-head">
+      <span>Chat with my AI twin</span>
+      <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-body">
+      <div class="chat-fallback" id="chatFallback">Waking up my AI twin — this can take a few seconds on a cold start.<br /><a href="https://huggingface.co/spaces/skunal2512/Digital-Twin" target="_blank" rel="noopener">Open it directly instead →</a></div>
+      <iframe id="chatFrame" title="Kunal's AI digital twin (Hugging Face)"></iframe>
+    </div>
+  </div>
+  <div class="chat-hint" id="chatHint">
+    <span>Ask my Digital Twin a question →</span>
+    <button type="button" class="chat-hint-close" id="chatHintClose" aria-label="Dismiss">✕</button>
+  </div>
+  <button type="button" class="chat-fab" id="chatFab" aria-haspopup="dialog" aria-expanded="false" aria-controls="chatPanel" aria-label="Chat with my AI digital twin">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+  </button>
+</div>
+
 <script>
   (function(){
     var experiences = [
-      { title:'Senior Software Engineer II', company:'S&P Global', loc:'Dallas, TX', dates:'Jul 2023 — Now', summary:'Lead cloud-native Big Data pipelines across AWS, GCP, and Azure and built AI-assisted observability.',
+      { title:'Senior Software Engineer II', company:'S&P Global', loc:'Dallas, TX', dates:'Jul 2023 — Present', summary:'Architected and owned lakehouse and warehouse infrastructure end-to-end, shipped production GenAI on Bedrock, and led without needing formal authority as one of a few senior engineers.',
         bullets:[
-          'Optimized Spark workloads and built Snowflake warehousing for faster analytics.',
-          'Integrated AWS Bedrock with Airflow to detect and resolve pipeline issues.',
-          'Delivered scalable infrastructure for mission-critical data processing.'
+          'Architected and owned lakehouse and warehouse infrastructure end-to-end — Databricks (Delta Lake, Unity Catalog, Databricks Apps), Snowflake, and AWS — cutting pipeline runtimes 60% at TB-to-petabyte scale, as architecture co-owner and one of a few senior engineers.',
+          'Built ELT/ETL and streaming pipelines — dbt, Spark / PySpark, Python, Kafka, Kinesis, and CDC (Debezium) — with Airflow orchestration, medallion architecture, and dimensional and semantic modeling.',
+          'Shipped production GenAI — LLM, RAG, and anomaly-detection systems on AWS Bedrock (grounding datasets, chunking, embeddings, vector retrieval) plus SageMaker — cutting incident response 40%.',
+          'Went deep on Snowflake-native engineering — Dynamic Tables, Streams and Tasks, Snowpipe Streaming, Snowpark, dynamic data masking, row access policies, and object tagging.',
+          'Operated Kubernetes in production — EKS with custom controllers and operators, autoscaling, and Docker; ran a quarter-plus storage-side Kubernetes proof of concept (Persistent Volumes, CSI drivers, storage classes) for data-layer throughput in a dev environment.',
+          'Ran dual-sided Alteryx — Designer workflow development and Server administration on EC2/ECS with MongoDB and RDS Aurora (operation and performance tuning).',
+          'Owned governance and security — RBAC, PII/PCI controls, lineage and traceability (Unity Catalog), CyberArk secrets management, and SailPoint entitlements in a regulated environment.',
+          'Built observability and data quality as engineering — automated tests, drift and anomaly detection, monitoring and alerting (Prometheus, Grafana, CloudWatch) — not spot checks.',
+          'Automated infrastructure and delivery — Terraform IaC, CI/CD (GitHub Actions), and Trino / Starburst (working) for federated query alongside Athena.',
+          'Worked across Azure — Azure Data Factory, Azure Databricks, Azure DevOps, Entra ID, and Key Vault (working tier) alongside the AWS core.',
+          'Developed APIs and services — REST (Java / Spring Boot microservices; Python with FastAPI / Flask at working tier) for data access and model integration.',
+          'Led without authority — set engineering standards, mentored through code review and pairing, delivered BI (Tableau, Power BI), and drove AI-assisted development adoption (Claude Code, Cursor, Copilot — daily).'
         ]},
-      { title:'Senior Associate — Data Science Engineer', company:'Cognizant', loc:'Dallas, TX', dates:'Aug 2022 — Jul 2023', summary:'Designed AWS + Snowflake warehouse architectures and real-time Kafka/Spark streaming.',
+      { title:'Senior Associate — Data Science Engineer', company:'Cognizant', loc:'Dallas, TX', dates:'Aug 2022 — Jul 2023', summary:'Built churn-prediction models for a banking client and owned the data engineering behind them, cutting report time 35%.',
         bullets:[
-          'Built data warehouse solutions for financial reporting and analytics.',
-          'Developed Kafka and Spark streaming pipelines for low-latency data flows.',
-          'Reduced report generation times by improving data orchestration.'
+          'Built churn-prediction models for credit card customers — XGBoost and scikit-learn on multi-source CRM and transaction data — for banking client Capital One.',
+          'Owned the data engineering behind the models — Databricks / PySpark, Snowflake, and AWS — cutting report time 35%.',
+          'Built streaming and big-data pipelines — Kafka real-time processing and Hadoop / Hive batch workloads.',
+          'Implemented CI/CD — Jenkins pipelines with automated testing and code review.',
+          'Applied security controls — RBAC and sensitive-data handling on financial data warehouses.',
+          'Consulted client-facing — scoped ambiguous business problems, defined success criteria, and translated technical findings into executive-ready narratives.'
         ]},
-      { title:'Data Analyst', company:'Kent State University', loc:'Kent, OH', dates:'Jan 2022 — Aug 2022', summary:'Built Tableau and Power BI dashboards and ML models for real-time ROI insights.',
+      { title:'Data Analyst', company:'Kent State University', loc:'Kent, OH', dates:'Jan 2022 — Aug 2022', summary:'Built and operationalized a churn-risk model driving outreach targeting, and ran marketing analytics, FP&A, and BI end-to-end.',
         bullets:[
-          'Created dashboards to visualize event ROI and team performance.',
-          'Built ML models in Python to predict fundraising outcomes.'
+          'Built and operationalized a churn-risk model — XGBoost predicting churn for DPAE outgoing invitations, with output driving real outreach targeting decisions and improving marketing ROI.',
+          'Ran marketing analytics end-to-end — attribution modeling (multi-touch, last-click), campaign ROI, customer segmentation, and A/B testing on campaigns and messaging with significance testing.',
+          'Delivered FP&A — forecasting, budgeting, variance analysis, headcount and spend planning, and FP&A dashboards for senior stakeholders.',
+          'Built ETL and data models — Python and Informatica (working tier) from diverse sources into IBM Cognos, joining marketing, CRM, and sales data across the lifecycle.',
+          'Wrote advanced SQL — CTEs, window functions, validation, and reconciliation for analysis-ready data.',
+          'Communicated insight — Tableau and Power BI dashboards and presentations for non-technical partners.'
         ]},
-      { title:'Project Data Engineer', company:'Wipro Technologies', loc:'India', dates:'Aug 2018 — Dec 2020', summary:'Built telecom ETL pipelines and churn models to improve customer satisfaction.',
+      { title:'Project Data Engineer', company:'Wipro Technologies', loc:'Bangalore, India', dates:'Aug 2018 — Dec 2020', summary:'Built churn-prediction models for telecom customers and owned production on-prem pipelines end-to-end.',
         bullets:[
-          'Designed ETL pipelines for telecom billing and churn analytics.',
-          'Developed Random Forest models for customer retention strategies.',
-          'Increased customer satisfaction and improved SLA compliance.'
+          'Built churn-prediction models for telecom customers — Random Forest and gradient boosting in Python — that marketing acted on for retention campaigns.',
+          'Owned production on-prem pipelines end-to-end — Unix environment (Oracle SQL / PL/SQL, Python, Java, Shell, SSIS) with POSIX/filesystem-level data handling.',
+          'Segmented customers and joined CRM data — behavioral and operational data for campaign targeting.',
+          'Improved SLA/OLA compliance 50% and customer satisfaction 32% — through reliable, automated, monitored operations with on-call ownership.',
+          'Tuned complex SQL and stored procedures — query and pipeline performance for high-volume workloads.',
+          'Practiced disciplined engineering — Git versioning, code reviews, Agile delivery, and documentation; early-career Angular / TypeScript web development during academic training.'
         ]}
     ];
 
     var projects = [
-      { title:'AI-Augmented Pipeline Observability', ctx:'S&P Global · 2023–present', summary:'AWS Bedrock + Airflow DAGs detecting anomalies and surfacing AI-generated fixes.',
-        bullets:[ 'Built intelligent pipeline observability using AWS Bedrock.', 'Reduced incident response time with automated analysis and alerts.' ] },
-      { title:'Legacy → Modern DataLake', ctx:'S&P Global · 2023–present', summary:'Migrated legacy ETL to DBT, Spark, and Airflow for faster terabyte processing.',
-        bullets:[ 'Modernized legacy ETL into a DBT + Spark architecture.', 'Improved refresh speed and reliability across huge datasets.' ] },
-      { title:'Real-Time Streaming Analytics', ctx:'Cognizant · 2022–2023', summary:'Built low-latency Kafka + Spark streaming for high-volume reporting.',
-        bullets:[ 'Created real-time analytics pipelines with Kafka and Spark.', 'Delivered high-volume reporting to business users.' ] },
-      { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020', summary:'Built Random Forest churn models for targeted retention campaigns.',
-        bullets:[ 'Created predictive churn models using Python and ML.', 'Enabled targeted retention through data-driven scoring.' ] }
+      { title:'Production GenAI on Bedrock', ctx:'S&P Global · 2023–present', summary:'Shipped production LLM, RAG, and anomaly-detection systems on AWS Bedrock — grounding datasets, chunking, embeddings, and vector retrieval — integrated with Airflow DAGs to surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.',
+        tags:['AWS Bedrock','RAG','Airflow','LLM'],
+        bullets:[ 'Built production LLM, RAG, and anomaly-detection systems on AWS Bedrock — grounding datasets, chunking, embeddings, and vector retrieval.', 'Integrated with Airflow DAGs to surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.' ] },
+      { title:'Lakehouse & Warehouse Architecture', ctx:'S&P Global · 2023–present', summary:'Architected and owned lakehouse and warehouse infrastructure end-to-end on Databricks (Delta Lake, Unity Catalog) and Snowflake, migrating legacy ETL and AWS DMS loads onto a medallion architecture — cutting pipeline runtimes 60% at TB-to-petabyte scale.',
+        tags:['Databricks','Delta Lake','Snowflake','dbt'],
+        bullets:[ 'Architected and owned lakehouse and warehouse infrastructure end-to-end on Databricks (Delta Lake, Unity Catalog) and Snowflake.', 'Migrated legacy ETL and AWS DMS loads onto a medallion architecture — cutting pipeline runtimes 60% at TB-to-petabyte scale.' ] },
+      { title:'Real-Time Streaming Analytics', ctx:'Cognizant · 2022–2023', summary:'Built streaming and big-data pipelines combining Kafka real-time processing with Hadoop/Hive batch workloads, feeding client-facing reporting and analytics for a banking client.',
+        tags:['Kafka','Hadoop','Hive','AWS'],
+        bullets:[ 'Built streaming and big-data pipelines combining Kafka real-time processing with Hadoop/Hive batch workloads.', 'Fed client-facing reporting and analytics for a banking client.' ] },
+      { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020', summary:'Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.',
+        tags:['Python','Random Forest','ML'],
+        bullets:[ 'Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python.', 'Drove targeted retention campaigns that marketing acted on directly.' ] },
+      { title:'AI-Powered Digital Twin', ctx:'Personal Project · 2026', summary:'Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.',
+        tags:['LLM','RAG','Prompt Engineering','Hugging Face'], link:'https://huggingface.co/spaces/skunal2512/Digital-Twin',
+        bullets:[ 'Built a conversational AI digital twin grounded in my own background and writing, with a full RAG pipeline — chunking, embeddings, vector retrieval.', 'Implemented parallel/sequential tool-calling workflows with careful prompt, context, and cost management, deployed live on Hugging Face.' ] }
     ];
 
     var modal = document.getElementById('modal');
@@ -242,8 +305,25 @@
       if(item.bullets && item.bullets.length){
         html += '<ul>' + item.bullets.map(function(b){ return '<li>'+b+'</li>'; }).join('') + '</ul>';
       }
+      if(item.tags && item.tags.length){
+        html += '<div class="tags" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;">' +
+          item.tags.map(function(t){ return '<span class="tag" style="font-size:12px;border:1px solid var(--line);border-radius:980px;padding:4px 10px;color:#3c4043;display:inline-block;">'+t+'</span>'; }).join('') +
+          '</div>';
+      }
+      if(item.link){
+        html += '<div style="margin-top:16px;"><a href="'+item.link+'" target="_blank" rel="noopener" class="gbtn primary" style="display:inline-block;">View live ↗</a></div>';
+      }
       return html;
     }
+
+    window.openAbout = function(){
+      document.getElementById('m-title').textContent = 'About Kunal';
+      document.getElementById('m-meta').innerHTML = '<div class="co">Senior Data Engineer · Dallas, TX</div>';
+      document.getElementById('m-body').innerHTML =
+        '<p class="desc">I\'m a senior data engineer with nearly seven years designing, building, and operating large-scale data platforms, pipelines, and production AI systems — across financial services, banking, higher education, and telecom. I work deep in Python, Spark, Snowflake, Databricks, dbt, Airflow, and Kafka, with production LLM/RAG systems on AWS Bedrock and an AWS Certified Solutions Architect credential.</p>' +
+        '<p class="desc" style="margin-top:12px;">Recent focus has been architecture at scale — co-owning lakehouse, warehouse, and pipeline infrastructure from terabytes to petabytes while cutting runtimes 60% — plus shipping production GenAI: LLM, RAG, and anomaly-detection systems on Bedrock that cut incident response 40%. I\'ve built churn models across three different industries (higher ed, credit card, and telecom), treat governance and security as defaults rather than afterthoughts, and lead without needing formal authority — setting engineering standards, mentoring, and driving AI-assisted development adoption with Claude Code, Cursor, and Copilot.</p>';
+      showModal();
+    };
 
     document.querySelectorAll('.mcard').forEach(function(card, i){
       card.style.cursor = 'pointer';
@@ -266,6 +346,66 @@
         showModal();
       });
     });
+  })();
+
+  (function(){
+    var chatWidget = document.getElementById('chatWidget');
+    var chatFab = document.getElementById('chatFab');
+    var chatPanel = document.getElementById('chatPanel');
+    var chatClose = document.getElementById('chatClose');
+    var chatFrame = document.getElementById('chatFrame');
+    var chatFallback = document.getElementById('chatFallback');
+    var chatHint = document.getElementById('chatHint');
+    var chatHintClose = document.getElementById('chatHintClose');
+    var chatLoaded = false;
+    var chatHintStop = false;
+    var prefersReducedChat = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function hideHint(){ if(chatHint) chatHint.classList.remove('show'); }
+    function showHintPulse(){
+      if(chatHintStop || !chatHint || !chatPanel) return;
+      if(chatPanel.classList.contains('open')) return;
+      chatHint.classList.add('show');
+    }
+    function openChat(){
+      chatPanel.classList.add('open');
+      chatPanel.setAttribute('aria-hidden', 'false');
+      chatFab.classList.add('open');
+      chatFab.setAttribute('aria-expanded', 'true');
+      chatHintStop = true;
+      hideHint();
+      if(!chatLoaded){
+        if(chatFallback){
+          chatFrame.addEventListener('load', function(){ chatFallback.classList.add('hide'); });
+        }
+        chatFrame.setAttribute('src', 'https://skunal2512-digital-twin.hf.space');
+        chatLoaded = true;
+      }
+    }
+    function closeChat(){
+      chatPanel.classList.remove('open');
+      chatPanel.setAttribute('aria-hidden', 'true');
+      chatFab.classList.remove('open');
+      chatFab.setAttribute('aria-expanded', 'false');
+    }
+    if(chatFab && chatPanel){
+      chatFab.addEventListener('click', function(){
+        if(chatPanel.classList.contains('open')) closeChat(); else openChat();
+      });
+      if(chatClose) chatClose.addEventListener('click', closeChat);
+      if(chatHint && !prefersReducedChat){
+        setTimeout(showHintPulse, 1400);
+        setInterval(function(){ hideHint(); setTimeout(showHintPulse, 800); }, 20000);
+      }
+      if(chatHintClose){
+        chatHintClose.addEventListener('click', function(e){ e.stopPropagation(); chatHintStop = true; hideHint(); });
+      }
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && chatPanel.classList.contains('open')) closeChat();
+      });
+      document.addEventListener('click', function(e){
+        if(chatPanel.classList.contains('open') && chatWidget && !chatWidget.contains(e.target)) closeChat();
+      });
+    }
   })();
 </script>
 </body>

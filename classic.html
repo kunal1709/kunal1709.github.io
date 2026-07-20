@@ -3,338 +3,995 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
   <title>Kunal Sharma — Senior Data Engineer</title>
-  <meta name="description" content="Kunal Sharma — Senior Data Engineer & AWS Certified Solutions Architect. 6+ years building cloud-native Big Data platforms on AWS, GCP, and Azure with Spark, Airflow, and Snowflake." />
+  <meta name="description" content="Kunal Sharma — Senior Data Engineer & AWS Certified Solutions Architect. Nearly 7 years building large-scale data platforms and production AI systems with Spark, Snowflake, Databricks, dbt, Airflow, Kafka, and AWS Bedrock." />
+  <link rel="canonical" href="https://kunal1709.github.io/classic.html" />
+  <meta name="theme-color" content="#060812" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238B5CF6'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23060812'/%3E%3Ctext x='32' y='43' font-family='Arial, sans-serif' font-weight='700' font-size='24' fill='url(%23g)' text-anchor='middle'%3EKS%3C/text%3E%3C/svg%3E" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kunal Sharma" />
+  <meta property="og:title" content="Kunal Sharma — Senior Data Engineer" />
+  <meta property="og:description" content="Senior Data Engineer & AWS Certified Solutions Architect. Nearly 7 years building large-scale data platforms and production AI systems with Spark, Snowflake, Databricks, dbt, Airflow, Kafka, and AWS Bedrock." />
+  <meta property="og:url" content="https://kunal1709.github.io/classic.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Kunal Sharma — Senior Data Engineer" />
+  <meta name="twitter:description" content="Senior Data Engineer & AWS Certified Solutions Architect. Nearly 7 years building large-scale data platforms and production AI systems with Spark, Snowflake, Databricks, dbt, Airflow, Kafka, and AWS Bedrock." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      --paper:  #F4F3EE;
-      --ink:    #1B1B1B;
-      --line:   #E6E4DF;
-      --muted:  #6F6F6F;
-      --accent: #0E6E5C;
-      --deep:   #0B1220;
-      --card:   #FFFFFF;
-      --display: 'Space Grotesk', Inter, system-ui, sans-serif;
-      --mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    :root{
+      --bg:#060812; --violet:#8B5CF6; --blue:#3B82F6; --cyan:#22D3EE; --pink:#EC4899;
+      --grad:linear-gradient(135deg,var(--violet),var(--blue) 55%,var(--cyan));
+      --ink:#F5F6FA; --muted:#9AA1B4; --muted-2:#6b7288;
+      --glass:rgba(255,255,255,.06); --glass-strong:rgba(20,22,36,.92); --glass-border:rgba(255,255,255,.14);
+      --display:'Space Grotesk',Inter,system-ui,sans-serif;
+      --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+      --ease:cubic-bezier(.16,.8,.24,1);
+      --radius:18px;
     }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+    ul{list-style:none;}
+    button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+    img{max-width:100%;display:block;}
+    a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:8px;}
+    ::selection{background:var(--violet);color:#fff;}
 
-    .rail { position: sticky; top: 0; height: 100vh; width: 220px; flex: 0 0 220px; border-right: 1px solid var(--line); padding: 40px 28px; display: flex; flex-direction: column; justify-content: space-between; z-index: 12; }
-    .rail .mark { font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--deep); letter-spacing: -0.5px; }
-    .rail nav { display: flex; flex-direction: column; gap: 14px; }
-    .rail nav a { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
-    .rail nav a .n { color: var(--accent); }
-    .rail nav a:hover { color: var(--deep); text-decoration: none; }
-    .rail nav a:focus, .rail nav a:active { color: var(--accent); outline: none; }
-    .rail .foot { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
 
-    .theme-menu{position:fixed;top:20px;right:20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:0 18px 40px rgba(19,41,61,.12);z-index:20;}
-    .theme-menu .label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);white-space:nowrap;}
-    .theme-menu a{font-family:var(--mono);color:var(--ink);padding:8px 12px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s;white-space:nowrap;}
-    .theme-menu a:hover{background:rgba(14,110,92,.08);border-color:rgba(14,110,92,.14);}
-    .theme-menu a.current{background:var(--accent);color:#fff;border-color:var(--accent);}
+    /* Background FX */
+    .bg-fx{position:fixed;inset:0;z-index:-2;overflow:hidden;background:var(--bg);}
+    .bg-fx .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.45;will-change:transform;}
+    .bg-fx .b1{width:640px;height:640px;background:var(--violet);top:-180px;left:-140px;animation:float1 26s ease-in-out infinite;}
+    .bg-fx .b2{width:560px;height:560px;background:var(--cyan);bottom:-160px;right:-120px;animation:float2 32s ease-in-out infinite;}
+    .bg-fx .b3{width:460px;height:460px;background:var(--pink);top:42%;left:52%;animation:float3 38s ease-in-out infinite;opacity:.3;}
+    .bg-fx .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(ellipse at center,#000 0%,transparent 78%);mask-image:radial-gradient(ellipse at center,#000 0%,transparent 78%);}
+    @keyframes float1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(70px,90px) scale(1.15);}}
+    @keyframes float2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-80px,-60px) scale(1.1);}}
+    @keyframes float3{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-46%,-56%) scale(1.25);}}
 
-    .shell { display: flex; align-items: flex-start; width: 100%; }
-    .content { flex: 1; max-width: 820px; padding: 0 48px; min-width: 0; }
-    section { padding: 96px 0; border-bottom: 1px solid var(--line); }
-    section:last-of-type { border-bottom: none; }
+    .progress{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--grad);z-index:100;}
 
-    .eyebrow { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
-    .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    /* Navbar */
+    .navbar{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:4px;padding:8px 10px;border-radius:999px;background:var(--glass-strong);border:1px solid var(--glass-border);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:0 10px 40px rgba(0,0,0,.35);transition:padding .25s var(--ease),top .25s var(--ease);max-width:calc(100vw - 24px);}
+    .navbar.scrolled{top:10px;padding:6px 8px;}
+    .navbar .brand{font-family:var(--display);font-weight:700;font-size:15px;padding:8px 14px;}
+    .nav-collapsible{display:flex;align-items:center;gap:4px;}
+    .nav-links{display:flex;gap:2px;}
+    .nav-links a{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding:9px 14px;border-radius:999px;transition:color .15s,background .15s;white-space:nowrap;}
+    .nav-links a:hover{color:var(--ink);}
+    .nav-links a.active{color:#fff;background:rgba(255,255,255,.09);}
+    .theme-drop{position:relative;font-family:var(--mono);font-size:12px;}
+    .theme-drop summary{list-style:none;cursor:pointer;padding:9px 14px;border-radius:999px;color:var(--muted);transition:color .15s,background .15s;}
+    .theme-drop summary::-webkit-details-marker{display:none;}
+    .theme-drop summary::marker{content:"";}
+    .theme-drop summary:hover{color:var(--ink);background:rgba(255,255,255,.06);}
+    .theme-drop[open] summary{color:#fff;}
+    .theme-list{position:absolute;top:calc(100% + 10px);right:0;display:flex;flex-direction:column;gap:2px;min-width:150px;padding:8px;background:var(--glass-strong);border:1px solid var(--glass-border);border-radius:14px;backdrop-filter:blur(20px);box-shadow:0 20px 50px rgba(0,0,0,.45);}
+    .theme-list a{padding:9px 12px;border-radius:8px;color:var(--muted);font-size:12.5px;}
+    .theme-list a:hover{color:#fff;background:rgba(255,255,255,.08);}
+    .theme-list a.current{color:#fff;background:var(--grad);}
+    .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:38px;height:38px;border-radius:50%;}
+    .nav-toggle span{display:block;width:16px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s var(--ease),opacity .2s;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-    h1 { font-family: var(--display); font-weight: 700; color: var(--deep); font-size: clamp(40px, 7vw, 72px); line-height: 1.02; letter-spacing: -2px; margin-bottom: 18px; }
-    h2 { font-family: var(--display); font-weight: 600; color: var(--deep); font-size: clamp(26px, 4vw, 36px); letter-spacing: -1px; margin-bottom: 24px; }
-    h3 { font-family: var(--display); font-weight: 600; color: var(--deep); font-size: 19px; }
+    /* Layout / sections */
+    .section{padding:110px 24px;max-width:960px;margin:0 auto;position:relative;}
+    h1{font-family:var(--display);font-weight:700;font-size:clamp(44px,8vw,84px);line-height:1.02;letter-spacing:-2px;margin-bottom:6px;}
+    h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,40px);letter-spacing:-1px;margin-bottom:30px;color:#fff;}
+    h3{font-family:var(--display);font-weight:600;font-size:19px;color:#fff;}
+    .lead{font-size:18px;line-height:1.6;color:var(--muted);max-width:62ch;}
+    p + p{margin-top:14px;}
 
-    .lead { font-size: 19px; color: var(--ink); max-width: 62ch; }
-    p + p { margin-top: 16px; }
+    .eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;}
+    .eyebrow .num{font-family:var(--display);font-weight:700;}
+    .eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--glass-border),transparent);}
 
-    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-    .hero .role { font-family: var(--mono); color: var(--muted); font-size: 15px; margin-bottom: 28px; }
-    .hero .cta { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn { font-family: var(--mono); font-size: 14px; padding: 13px 22px; border: 1px solid var(--deep); color: var(--deep); border-radius: 2px; transition: background .15s, color .15s; }
-    .btn:hover { background: var(--deep); color: var(--paper); text-decoration: none; }
-    .btn.solid { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .btn.solid:hover { background: var(--deep); border-color: var(--deep); }
-    .badge { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--accent); border: 1px solid var(--accent); padding: 5px 12px; border-radius: 999px; margin-top: 6px; }
+    .glass{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);}
+    .panel{padding:36px 38px;}
 
-    .item { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 26px 0; border-top: 1px solid var(--line); }
-    .item:first-of-type { border-top: none; }
-    .item .when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
-    .item .where { color: var(--muted); font-size: 15px; margin: 4px 0 12px; }
-    .item ul { margin: 0; padding-left: 18px; }
-    .item li { font-size: 15px; margin-bottom: 6px; }
+    /* Reveal on scroll */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+    .reveal.in{opacity:1;transform:none;}
 
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .proj { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 26px; transition: transform .15s, box-shadow .15s; }
-    .proj:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(19,41,61,.08); }
-    .proj h3 { margin-bottom: 6px; }
-    .proj .ctx { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-    .proj p { font-size: 15px; color: var(--ink); }
-    .proj .tags { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .tag { font-family: var(--mono); font-size: 11px; color: var(--accent); border: 1px solid var(--line); padding: 3px 9px; border-radius: 2px; }
+    /* Hero */
+    .hero{min-height:100vh;display:flex;align-items:center;padding:150px 24px 60px;max-width:960px;margin:0 auto;position:relative;}
+    .spotlight{position:absolute;inset:0;pointer-events:none;background:radial-gradient(320px circle at var(--mx,50%) var(--my,20%),rgba(139,92,246,.16),transparent 70%);}
+    .hero-inner{position:relative;z-index:1;}
+    .hero-meta{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--glass-border);padding:8px 14px;border-radius:999px;margin-bottom:28px;}
+    .dot-live{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 3px rgba(52,211,153,.2);animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+    .typewriter{font-family:var(--mono);font-size:clamp(16px,2.4vw,20px);color:var(--cyan);margin:14px 0 24px;min-height:28px;}
+    .cursor-blink{display:inline-block;width:2px;height:1em;background:var(--cyan);margin-left:2px;vertical-align:-3px;animation:blink 1s step-end infinite;}
+    @keyframes blink{50%{opacity:0;}}
+    .stats{display:flex;flex-wrap:wrap;gap:36px;margin:42px 0 10px;}
+    .stat{display:flex;flex-direction:column;gap:4px;}
+    .stat .num{font-family:var(--display);font-weight:700;font-size:clamp(28px,4vw,38px);}
+    .stat .lbl{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+    .cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:38px;}
+    .btn{font-family:var(--mono);font-size:14px;padding:14px 26px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--glass-border);color:var(--ink);background:rgba(255,255,255,.04);transition:all .2s var(--ease);}
+    .btn::after{content:"→";transition:transform .15s;}
+    .btn:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.08);}
+    .btn:hover::after{transform:translateX(3px);}
+    .btn.solid{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 8px 30px rgba(139,92,246,.35);}
+    .btn.solid:hover{box-shadow:0 12px 40px rgba(139,92,246,.5);transform:translateY(-2px);}
+    .btn.big{padding:16px 30px;font-size:15px;}
+    .scroll-cue{margin-top:60px;color:var(--muted-2);animation:bob 2s ease-in-out infinite;}
+    @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
 
-    .skillgroup { margin-bottom: 26px; }
-    .skillgroup .glabel { font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill { font-family: var(--mono); font-size: 13px; background: var(--card); border: 1px solid var(--line); padding: 7px 13px; border-radius: 2px; }
+    /* Experience timeline */
+    .timeline{position:relative;padding-left:28px;}
+    .timeline::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--violet),var(--cyan));border-radius:2px;}
+    .tl-item{position:relative;margin-bottom:18px;overflow:visible;}
+    .tl-item::before{content:"";position:absolute;left:-28px;top:26px;width:12px;height:12px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(139,92,246,.18);}
+    .tl-item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 26px;}
+    .tl-item summary::-webkit-details-marker{display:none;}
+    .tl-item summary::marker{content:"";}
+    .tl-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;}
+    .tl-item .when{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap;}
+    .tl-item .where{color:var(--muted);font-size:14.5px;margin-top:5px;}
+    .chevron{color:var(--muted);flex:0 0 auto;margin-top:4px;transition:transform .25s var(--ease),color .2s;}
+    .tl-item[open] .chevron{transform:rotate(180deg);color:var(--cyan);}
+    .tl-item ul{padding:0 26px 24px 26px;margin-top:-4px;}
+    .tl-item li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.6;color:var(--muted);margin-bottom:9px;}
+    .tl-item li::before{content:"—";position:absolute;left:0;color:var(--cyan);font-family:var(--mono);}
+    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    .edu-card{padding:26px;}
+    .edu-card .when{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-bottom:10px;display:block;}
+    .edu-card .where{color:var(--muted);font-size:14.5px;margin-top:6px;}
 
-    .contact-links { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; font-family: var(--mono); font-size: 16px; }
+    /* Projects */
+    .filters{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 30px;}
+    .filter-btn{font-family:var(--mono);font-size:12.5px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--glass-border);color:var(--muted);transition:all .15s;}
+    .filter-btn:hover{color:var(--ink);border-color:rgba(255,255,255,.28);}
+    .filter-btn.active{color:#fff;background:var(--grad);border-color:transparent;}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+    .proj{position:relative;overflow:hidden;padding:28px;transition:opacity .22s var(--ease),transform .22s var(--ease),border-color .2s;}
+    .proj.hide{opacity:0;transform:scale(.94);}
+    .proj::after{content:"";position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity .25s;z-index:-1;filter:blur(30px);}
+    .proj:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.26);}
+    .proj:hover::after{opacity:.3;}
+    .proj h3{margin-bottom:6px;}
+    .proj .ctx{font-family:var(--mono);font-size:12px;color:var(--muted-2);margin-bottom:12px;}
+    .proj p{font-size:14.5px;color:var(--muted);}
+    .proj .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+    .tag{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid var(--glass-border);padding:4px 11px;border-radius:999px;}
+    .proj-link{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--cyan);transition:color .15s;}
+    .proj-link:hover{color:#fff;}
 
-    @media (max-width: 760px) {
-      .shell { flex-direction: column; }
-      .rail { position: static; height: auto; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; padding: 18px 22px; border-right: none; border-bottom: 1px solid var(--line); }
-      .rail nav { flex-direction: row; gap: 16px; flex-wrap: wrap; }
-      .rail nav a .label { display: none; }
-      .rail .foot { display: none; }
-      .content { padding: 0 22px; max-width: 100%; }
-      .hero { min-height: 80vh; }
-      .item { grid-template-columns: 1fr; gap: 6px; }
-      .grid { grid-template-columns: 1fr; }
+    /* Certifications */
+    .cred-list{display:flex;flex-wrap:wrap;gap:12px;}
+    .cred{cursor:pointer;white-space:nowrap;padding:13px 22px;border-radius:999px;font-family:var(--mono);font-size:13px;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid var(--glass-border);transition:border-color .15s,transform .15s;}
+    .cred:hover{border-color:var(--cyan);transform:translateY(-2px);}
+
+    /* Skills */
+    .skill-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 26px;}
+    .stab{font-family:var(--mono);font-size:12.5px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--glass-border);color:var(--muted);transition:all .15s;}
+    .stab:hover{color:var(--ink);border-color:rgba(255,255,255,.28);}
+    .stab.active{color:#fff;background:var(--grad);border-color:transparent;}
+    .skills-group{display:none;flex-wrap:wrap;gap:10px;animation:fadeIn .35s var(--ease);}
+    .skills-group.active{display:flex;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+    .skill{font-family:var(--mono);font-size:13px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--glass-border);color:var(--ink);}
+
+    /* Contact */
+    .contact-links{display:flex;flex-direction:column;gap:10px;margin:24px 0 30px;}
+    .clink{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:14.5px;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid var(--glass-border);padding:15px 18px;border-radius:14px;transition:background .15s,border-color .15s,transform .15s;text-align:left;width:100%;}
+    .clink:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.26);transform:translateX(4px);}
+    .clink .ic{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;font-size:11px;font-weight:700;flex:0 0 auto;}
+    .copy-hint{margin-left:auto;font-size:11px;color:var(--muted-2);opacity:0;transition:opacity .15s;white-space:nowrap;}
+    .clink:hover .copy-hint,.clink:focus-visible .copy-hint{opacity:1;}
+    .copy-hint.copied{opacity:1;color:var(--cyan);}
+
+    /* Back to top */
+    .to-top{position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .2s var(--ease),transform .2s var(--ease);z-index:60;}
+    .to-top.show{opacity:1;pointer-events:auto;transform:none;}
+
+    /* Chat widget (AI digital twin) */
+    .chat-widget{position:fixed;bottom:102px;right:24px;left:auto;z-index:65;display:flex;flex-direction:column;align-items:flex-end;}
+    .chat-fab{position:relative;width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--grad);color:#fff;box-shadow:0 12px 34px rgba(139,92,246,.55);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s;animation:chat-hover 2.4s ease-in-out infinite;}
+    .chat-fab:hover{transform:translateY(-4px) scale(1.06);box-shadow:0 16px 44px rgba(139,92,246,.7);animation-play-state:paused;}
+    .chat-fab.open{background:rgba(255,255,255,.1);border:1px solid var(--glass-border);}
+    .chat-fab::before,.chat-fab::after{content:"";position:absolute;border-radius:50%;opacity:0;animation:chat-ping 2.2s ease-out infinite;}
+    .chat-fab::before{inset:-8px;border:2px solid var(--violet);}
+    .chat-fab::after{inset:-16px;border:2px solid var(--cyan);animation-delay:.6s;}
+    .chat-fab.open::before,.chat-fab.open::after{display:none;}
+    @keyframes chat-hover{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+    @keyframes chat-ping{0%{transform:scale(.82);opacity:.75;}80%{transform:scale(1.45);opacity:0;}100%{opacity:0;}}
+
+    .chat-hint{position:absolute;bottom:82px;right:2px;left:auto;display:flex;align-items:center;gap:10px;max-width:230px;padding:13px 14px;border-radius:16px 16px 4px 16px;background:var(--glass-strong);border:1px solid var(--glass-border);backdrop-filter:blur(20px);font-family:var(--mono);font-size:12.5px;color:var(--ink);line-height:1.5;box-shadow:0 16px 44px rgba(0,0,0,.45);opacity:0;transform:translateY(10px) scale(.95);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none;}
+    .chat-hint.show{opacity:1;transform:none;pointer-events:auto;}
+    .chat-hint-close{flex:0 0 auto;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);color:var(--muted);font-size:10px;transition:color .15s,background .15s;}
+    .chat-hint-close:hover{color:#fff;background:rgba(255,255,255,.16);}
+    .chat-panel{position:absolute;bottom:82px;right:0;left:auto;width:min(380px,90vw);height:min(560px,70vh);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(16px) scale(.97);transition:opacity .22s var(--ease),transform .22s var(--ease);background:var(--glass-strong);border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:0 30px 80px rgba(0,0,0,.5);}
+    .chat-panel.open{opacity:1;pointer-events:auto;transform:none;}
+    .chat-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;font-family:var(--mono);font-size:13px;color:var(--ink);border-bottom:1px solid var(--glass-border);flex:0 0 auto;}
+    .chat-close{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);color:var(--muted);font-size:13px;transition:color .15s,background .15s;}
+    .chat-close:hover{color:#fff;background:rgba(255,255,255,.14);}
+    .chat-body{position:relative;flex:1;background:#0b0d16;}
+    .chat-body iframe{width:100%;height:100%;border:0;position:relative;z-index:1;}
+    .chat-fallback{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;padding:26px;text-align:center;font-family:var(--mono);font-size:12.5px;color:var(--muted);line-height:1.7;background:#0b0d16;transition:opacity .3s;}
+    .chat-fallback a{color:var(--cyan);}
+    .chat-fallback.hide{opacity:0;pointer-events:none;}
+    body.theme-external .chat-widget{display:none;}
+    @media (max-width:520px){ .chat-panel{width:calc(100vw - 32px);} }
+
+    .footer{text-align:center;padding:40px 24px 60px;font-family:var(--mono);font-size:12px;color:var(--muted-2);}
+
+    .theme-frame{position:fixed;inset:0;width:100%;height:100%;border:0;z-index:5;background:#fff;display:none;}
+    body.theme-external .bg-fx,
+    body.theme-external .progress,
+    body.theme-external #classicView,
+    body.theme-external #toTop{display:none;}
+    body.theme-external .theme-frame{display:block;}
+
+    /* Compact, draggable navbar while viewing an embedded theme */
+    body.theme-external .navbar{left:auto;right:18px;transform:none;cursor:grab;touch-action:none;}
+    body.theme-external .navbar.scrolled{top:18px;}
+    .navbar.dragging{cursor:grabbing;transition:none;}
+    body.theme-external .nav-toggle{display:flex;}
+    body.theme-external .nav-collapsible{position:absolute;top:calc(100% + 10px);right:0;left:auto;transform:translateY(-8px);width:min(300px,88vw);max-height:70vh;overflow:auto;flex-direction:column;align-items:stretch;background:var(--glass-strong);border:1px solid var(--glass-border);border-radius:18px;padding:10px;backdrop-filter:blur(20px);opacity:0;pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);}
+    body.theme-external .nav-collapsible.open{opacity:1;pointer-events:auto;transform:translateY(0);}
+    body.theme-external .nav-links{flex-direction:column;gap:2px;}
+    body.theme-external .nav-links a{padding:13px 14px;}
+    body.theme-external .theme-drop{width:100%;}
+    body.theme-external .theme-drop summary{padding:13px 14px;}
+    body.theme-external .theme-list{position:static;margin-top:4px;box-shadow:none;border:none;background:transparent;padding:0 0 0 4px;}
+    body.theme-external .nav-links a,
+    body.theme-external .theme-list a{cursor:pointer;}
+
+    @media (max-width:880px){
+      .nav-collapsible{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-12px);width:min(320px,90vw);flex-direction:column;align-items:stretch;background:var(--glass-strong);border:1px solid var(--glass-border);border-radius:18px;padding:10px;backdrop-filter:blur(20px);opacity:0;pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);}
+      .nav-collapsible.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+      .nav-links{flex-direction:column;gap:2px;}
+      .nav-links a{padding:13px 14px;}
+      .theme-drop{width:100%;}
+      .theme-drop summary{padding:13px 14px;}
+      .theme-list{position:static;margin-top:4px;box-shadow:none;border:none;background:transparent;padding:0 0 0 4px;}
+      .nav-toggle{display:flex;}
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (max-width:760px){
+      .section{padding:76px 20px;}
+      .hero{padding:130px 20px 50px;}
+      .grid,.edu-grid{grid-template-columns:1fr;}
+      .stats{gap:26px;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto;}
+      *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+    }
   </style>
 </head>
 
 <body>
-  <div class="theme-menu"><span class="label">Themes</span><a href="classic.html" class="current">Classic</a><a href="netflix.html">Netflix</a><a href="apple.html">Apple</a><a href="google.html">Google</a><a href="microsoft.html">Microsoft</a><a href="aws.html">AWS</a></div>
-  <div class="shell">
-    <aside class="rail">
-      <div class="mark">KS</div>
-      <nav>
-        <a href="#home"><span class="n">00</span><span class="label">Home</span></a>
-        <a href="#about"><span class="n">01</span><span class="label">About</span></a>
-        <a href="#experience"><span class="n">02</span><span class="label">Experience</span></a>
-        <a href="#education"><span class="n">03</span><span class="label">Education</span></a>
-        <a href="#projects"><span class="n">04</span><span class="label">Projects</span></a>
-        <a href="#certifications"><span class="n">05</span><span class="label">Certifications</span></a>
-        <a href="#skills"><span class="n">06</span><span class="label">Skills</span></a>
-        <a href="#contact"><span class="n">07</span><span class="label">Contact</span></a>
-      </nav>
-      <div class="foot">© 2026 Kunal Sharma</div>
-    </aside>
+  <div class="bg-fx"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grid"></div></div>
+  <div class="progress" id="progress"></div>
 
-    <main class="content">
+  <nav class="navbar" id="navbar">
+    <span class="brand grad-text">KS</span>
+    <div class="nav-collapsible" id="navCollapsible">
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certs</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <details class="theme-drop" id="themeDrop">
+        <summary>Themes</summary>
+        <div class="theme-list">
+          <a href="classic.html" data-theme="classic" class="current">Classic</a>
+          <a href="netflix.html" data-theme="netflix">Netflix</a>
+          <a href="apple.html" data-theme="apple">Apple</a>
+          <a href="google.html" data-theme="google">Google</a>
+          <a href="microsoft.html" data-theme="microsoft">Microsoft</a>
+          <a href="aws.html" data-theme="aws">AWS</a>
+        </div>
+      </details>
+    </div>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navCollapsible">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-      <section id="home" class="hero">
-        <div class="role">Senior Data Engineer · Dallas, TX</div>
-        <h1>Kunal Sharma</h1>
-        <p class="lead">Senior data engineer with 6+ years building cloud-native Big Data platforms, pipelines, and analytics at enterprise scale across AWS, GCP, and Azure. I specialize in Apache Spark, Airflow, and Snowflake, with a track record of migrating legacy systems to modern, reliable architectures.</p>
-        <div class="badge-wrap">
-          <a class="badge" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank">AWS Certified Solutions Architect — Associate</a>
-          <a class="badge" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank">Udemy AWS Certified Solutions Architect — Associate</a>
-          <a class="badge" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank">Academy Accreditation - Generative AI Fundamentals</a>
-          <a class="badge" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank">Coursera MLOps</a>
-          <a class="badge" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank">HackerRank Certification</a>
+  <div id="classicView">
+  <main>
+
+    <section id="home" class="hero">
+      <div class="spotlight" id="spotlight"></div>
+      <div class="hero-inner">
+        <div class="hero-meta"><span class="dot-live"></span><span id="clock">Dallas, TX — --:--:--</span></div>
+        <h1 class="grad-text">Kunal Sharma</h1>
+        <div class="typewriter"><span id="typewriter"></span><span class="cursor-blink"></span></div>
+        <p class="lead">Senior Data Engineer with nearly 7 years designing, building, and operating large-scale data platforms and production AI systems — across financial services, banking, higher education, and telecom. Deep in Python, Spark, Snowflake, Databricks, dbt, Airflow, Kafka, Kubernetes, and AWS, with production LLM/RAG systems on Bedrock and technical leadership as one of a few senior engineers.</p>
+        <div class="stats">
+          <div class="stat"><span class="num grad-text" data-target="7" data-prefix="~">0</span><span class="lbl">Years experience</span></div>
+          <div class="stat"><span class="num grad-text" data-target="60" data-suffix="%">0</span><span class="lbl">Faster pipelines</span></div>
+          <div class="stat"><span class="num grad-text" data-target="40" data-suffix="%">0</span><span class="lbl">Faster incident response</span></div>
+          <div class="stat"><span class="num grad-text" data-target="5" data-suffix="">0</span><span class="lbl">Certifications</span></div>
         </div>
         <div class="cta">
           <a class="btn solid" href="#projects">View work</a>
-          <!-- To enable this button: upload your resume PDF to the repo, named resume.pdf -->
-          <a class="btn" href="resume.pdf" target="_blank">Download résumé</a>
+          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download résumé</a>
         </div>
-      </section>
-
-      <section id="about">
-        <div class="eyebrow">01 — About</div>
-        <h2>Who I am</h2>
-        <p class="lead">I'm a senior data engineer based in Dallas with deep expertise in the modern cloud data stack — Apache Spark, Airflow, Snowflake, and DBT across AWS, GCP, and Azure.</p>
-        <p>I work across global, cross-functional teams to deliver commercial impact through real-time analytics and scalable data infrastructure. Lately I've been bringing AI into the pipeline itself — integrating AWS Bedrock with Airflow to surface anomalies and AI-generated fixes, and deploying GitHub Copilot agents for automated code validation. My focus is always the same: pipelines that are fast, reliable, and built to scale.</p>
-      </section>
-
-      <section id="experience">
-        <div class="eyebrow">02 — Experience</div>
-        <h2>Where I've worked</h2>
-
-        <div class="item">
-          <div class="when">Jul 2023 — Now</div>
-          <div>
-            <h3>Senior Software Engineer II — Data Engineering</h3>
-            <div class="where">S&amp;P Global · Dallas, TX</div>
-            <ul>
-              <li>Led the design and delivery of cloud-native Big Data pipelines across AWS, GCP, and Azure, processing terabytes of financial and ownership data for Sales, Marketing, and BI.</li>
-              <li>Architected and optimized Apache Spark workloads (DataFrames, Spark SQL, Structured Streaming), cutting pipeline runtimes by 60% and enabling near-real-time data access.</li>
-              <li>Built end-to-end Snowflake warehousing — schema design, Tasks, Streams, RBAC, and micro-partitioning — to reduce cost and improve P99 query latency.</li>
-              <li>Migrated legacy ETL from traditional warehouses and AWS DMS to a modern DataLake on DBT, Spark, and Airflow (MWAA).</li>
-              <li>Integrated MWAA with AWS Bedrock to build intelligent DAGs that surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.</li>
-              <li>Built REST APIs exposing analytical datasets to Sales and Marketing tools, reducing ad hoc requests by 50%.</li>
-            </ul>
-          </div>
+        <div class="scroll-cue" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </div>
+      </div>
+    </section>
 
-        <div class="item">
-          <div class="when">Aug 2022 — Jul 2023</div>
-          <div>
-            <h3>Senior Associate — Data Science Engineer</h3>
-            <div class="where">Cognizant · Dallas, TX</div>
-            <ul>
-              <li>Designed cloud data warehouse architectures on AWS (S3, DynamoDB, EC2, Glue) and Snowflake for financial clients, reducing report generation time by 35%.</li>
-              <li>Built Apache Spark applications in Python for large-scale transformation and validation; developed ingestion pipelines with Hadoop, Hive, Sqoop, and MapReduce.</li>
-              <li>Implemented real-time streaming with Apache Kafka and Spark for low-latency analytics on high-volume event data.</li>
-              <li>Automated infrastructure with Jenkins CI/CD and GitHub, and delivered Tableau reporting for stakeholders.</li>
-            </ul>
-          </div>
+    <section id="about" class="section">
+      <div class="eyebrow"><span class="num grad-text">01</span>About</div>
+      <h2 class="reveal">Who I am</h2>
+      <div class="glass panel reveal">
+        <p class="lead">I'm a senior data engineer with nearly seven years designing, building, and operating large-scale data platforms, pipelines, and production AI systems — across financial services, banking, higher education, and telecom. I work deep in <span class="grad-text">Python, Spark, Snowflake, Databricks, dbt, Airflow, and Kafka</span>, with production LLM/RAG systems on AWS Bedrock and an AWS Certified Solutions Architect credential.</p>
+        <p class="lead">Recent focus has been architecture at scale — co-owning lakehouse, warehouse, and pipeline infrastructure from terabytes to petabytes while cutting runtimes 60% — plus shipping production GenAI: LLM, RAG, and anomaly-detection systems on Bedrock that cut incident response 40%. I've built churn models across three different industries (higher ed, credit card, and telecom), treat governance and security as defaults rather than afterthoughts, and lead without needing formal authority — setting engineering standards, mentoring, and driving AI-assisted development adoption with Claude Code, Cursor, and Copilot.</p>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="eyebrow"><span class="num grad-text">02</span>Experience</div>
+      <h2 class="reveal">Where I've worked</h2>
+
+      <div class="timeline">
+        <details class="tl-item glass reveal" open>
+          <summary>
+            <div class="tl-top">
+              <h3>Senior Software Engineer II</h3>
+              <span class="when">Jul 2023 — Present</span>
+            </div>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="where" style="padding:0 26px 6px;">S&amp;P Global · Dallas, TX</div>
+          <ul>
+            <li>Architected and owned lakehouse and warehouse infrastructure end-to-end — Databricks (Delta Lake, Unity Catalog, Databricks Apps), Snowflake, and AWS — cutting pipeline runtimes 60% at TB-to-petabyte scale, as architecture co-owner and one of a few senior engineers.</li>
+            <li>Built ELT/ETL and streaming pipelines — dbt, Spark / PySpark, Python, Kafka, Kinesis, and CDC (Debezium) — with Airflow orchestration, medallion architecture, and dimensional and semantic modeling.</li>
+            <li>Shipped production GenAI — LLM, RAG, and anomaly-detection systems on AWS Bedrock (grounding datasets, chunking, embeddings, vector retrieval) plus SageMaker — cutting incident response 40%.</li>
+            <li>Went deep on Snowflake-native engineering — Dynamic Tables, Streams and Tasks, Snowpipe Streaming, Snowpark, dynamic data masking, row access policies, and object tagging.</li>
+            <li>Operated Kubernetes in production — EKS with custom controllers and operators, autoscaling, and Docker; ran a quarter-plus storage-side Kubernetes proof of concept (Persistent Volumes, CSI drivers, storage classes) for data-layer throughput in a dev environment.</li>
+            <li>Ran dual-sided Alteryx — Designer workflow development and Server administration on EC2/ECS with MongoDB and RDS Aurora (operation and performance tuning).</li>
+            <li>Owned governance and security — RBAC, PII/PCI controls, lineage and traceability (Unity Catalog), CyberArk secrets management, and SailPoint entitlements in a regulated environment.</li>
+            <li>Built observability and data quality as engineering — automated tests, drift and anomaly detection, monitoring and alerting (Prometheus, Grafana, CloudWatch) — not spot checks.</li>
+            <li>Automated infrastructure and delivery — Terraform IaC, CI/CD (GitHub Actions), and Trino / Starburst (working) for federated query alongside Athena.</li>
+            <li>Worked across Azure — Azure Data Factory, Azure Databricks, Azure DevOps, Entra ID, and Key Vault (working tier) alongside the AWS core.</li>
+            <li>Developed APIs and services — REST (Java / Spring Boot microservices; Python with FastAPI / Flask at working tier) for data access and model integration.</li>
+            <li>Led without authority — set engineering standards, mentored through code review and pairing, delivered BI (Tableau, Power BI), and drove AI-assisted development adoption (Claude Code, Cursor, Copilot — daily).</li>
+          </ul>
+        </details>
+
+        <details class="tl-item glass reveal">
+          <summary>
+            <div class="tl-top">
+              <h3>Senior Associate, Data Science Engineer</h3>
+              <span class="when">Aug 2022 — Jul 2023</span>
+            </div>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="where" style="padding:0 26px 6px;">Cognizant · Dallas, TX</div>
+          <ul>
+            <li>Built churn-prediction models for credit card customers — XGBoost and scikit-learn on multi-source CRM and transaction data — for banking client Capital One.</li>
+            <li>Owned the data engineering behind the models — Databricks / PySpark, Snowflake, and AWS — cutting report time 35%.</li>
+            <li>Built streaming and big-data pipelines — Kafka real-time processing and Hadoop / Hive batch workloads.</li>
+            <li>Implemented CI/CD — Jenkins pipelines with automated testing and code review.</li>
+            <li>Applied security controls — RBAC and sensitive-data handling on financial data warehouses.</li>
+            <li>Consulted client-facing — scoped ambiguous business problems, defined success criteria, and translated technical findings into executive-ready narratives.</li>
+          </ul>
+        </details>
+
+        <details class="tl-item glass reveal">
+          <summary>
+            <div class="tl-top">
+              <h3>Data Analyst</h3>
+              <span class="when">Jan 2022 — Aug 2022</span>
+            </div>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="where" style="padding:0 26px 6px;">Kent State University · Kent, OH</div>
+          <ul>
+            <li>Built and operationalized a churn-risk model — XGBoost predicting churn for DPAE outgoing invitations, with output driving real outreach targeting decisions and improving marketing ROI.</li>
+            <li>Ran marketing analytics end-to-end — attribution modeling (multi-touch, last-click), campaign ROI, customer segmentation, and A/B testing on campaigns and messaging with significance testing.</li>
+            <li>Delivered FP&amp;A — forecasting, budgeting, variance analysis, headcount and spend planning, and FP&amp;A dashboards for senior stakeholders.</li>
+            <li>Built ETL and data models — Python and Informatica (working tier) from diverse sources into IBM Cognos, joining marketing, CRM, and sales data across the lifecycle.</li>
+            <li>Wrote advanced SQL — CTEs, window functions, validation, and reconciliation for analysis-ready data.</li>
+            <li>Communicated insight — Tableau and Power BI dashboards and presentations for non-technical partners.</li>
+          </ul>
+        </details>
+
+        <details class="tl-item glass reveal">
+          <summary>
+            <div class="tl-top">
+              <h3>Project Data Engineer</h3>
+              <span class="when">Aug 2018 — Dec 2020</span>
+            </div>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="where" style="padding:0 26px 6px;">Wipro Technologies · Bangalore, India</div>
+          <ul>
+            <li>Built churn-prediction models for telecom customers — Random Forest and gradient boosting in Python — that marketing acted on for retention campaigns.</li>
+            <li>Owned production on-prem pipelines end-to-end — Unix environment (Oracle SQL / PL/SQL, Python, Java, Shell, SSIS) with POSIX/filesystem-level data handling.</li>
+            <li>Segmented customers and joined CRM data — behavioral and operational data for campaign targeting.</li>
+            <li>Improved SLA/OLA compliance 50% and customer satisfaction 32% — through reliable, automated, monitored operations with on-call ownership.</li>
+            <li>Tuned complex SQL and stored procedures — query and pipeline performance for high-volume workloads.</li>
+            <li>Practiced disciplined engineering — Git versioning, code reviews, Agile delivery, and documentation; early-career Angular / TypeScript web development during academic training.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="eyebrow"><span class="num grad-text">03</span>Education</div>
+      <h2 class="reveal">Education</h2>
+      <div class="edu-grid">
+        <div class="edu-card glass reveal">
+          <span class="when">May 2022</span>
+          <h3>M.S. in Business Analytics</h3>
+          <div class="where">Kent State University</div>
         </div>
-
-        <div class="item">
-          <div class="when">Jan 2022 — Aug 2022</div>
-          <div>
-            <h3>Data Analyst</h3>
-            <div class="where">Kent State University · Kent, OH</div>
-            <ul>
-              <li>Designed financial dashboards in Tableau and Power BI giving real-time ROI visibility across fundraising events.</li>
-              <li>Built ML classification and regression models (SVM, Random Forest, Decision Tree) in Python to predict event ROI.</li>
-            </ul>
-          </div>
+        <div class="edu-card glass reveal">
+          <span class="when">May 2018</span>
+          <h3>B.Tech in Computer Science &amp; Engineering</h3>
+          <div class="where">APJ Abdul Kalam Technical University</div>
         </div>
+      </div>
+    </section>
 
-        <div class="item">
-          <div class="when">Aug 2018 — Dec 2020</div>
-          <div>
-            <h3>Project Data Engineer</h3>
-            <div class="where">Wipro Technologies · India</div>
-            <ul>
-              <li>Built and maintained ETL pipelines (SQL/PLSQL, Python, Shell) for a large telecom client, supporting billing, MNP processing, and churn analytics at scale.</li>
-              <li>Developed a Random Forest churn prediction model with association rules, enabling targeted retention campaigns.</li>
-              <li>Increased customer satisfaction by 32% and improved SLA/OLA compliance by 50% within two quarters.</li>
-            </ul>
-          </div>
+    <section id="projects" class="section">
+      <div class="eyebrow"><span class="num grad-text">04</span>Projects</div>
+      <h2 class="reveal">Selected work</h2>
+      <div class="filters reveal" role="tablist" aria-label="Filter projects by category">
+        <button class="filter-btn active" type="button" data-filter="all">All</button>
+        <button class="filter-btn" type="button" data-filter="data">Data Engineering</button>
+        <button class="filter-btn" type="button" data-filter="ai">AI &amp; ML</button>
+        <button class="filter-btn" type="button" data-filter="streaming">Streaming</button>
+      </div>
+      <div class="grid" id="projectGrid">
+
+        <article class="proj glass reveal" data-category="ai">
+          <h3>Production GenAI on Bedrock</h3>
+          <div class="ctx">S&amp;P Global · 2023–present</div>
+          <p>Shipped production LLM, RAG, and anomaly-detection systems on AWS Bedrock — grounding datasets, chunking, embeddings, and vector retrieval — integrated with Airflow DAGs to surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.</p>
+          <div class="tags"><span class="tag">AWS Bedrock</span><span class="tag">RAG</span><span class="tag">Airflow</span><span class="tag">LLM</span></div>
+        </article>
+
+        <article class="proj glass reveal" data-category="data">
+          <h3>Lakehouse &amp; Warehouse Architecture</h3>
+          <div class="ctx">S&amp;P Global · 2023–present</div>
+          <p>Architected and owned lakehouse and warehouse infrastructure end-to-end on Databricks (Delta Lake, Unity Catalog) and Snowflake, migrating legacy ETL and AWS DMS loads onto a medallion architecture — cutting pipeline runtimes 60% at TB-to-petabyte scale.</p>
+          <div class="tags"><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">Snowflake</span><span class="tag">dbt</span></div>
+        </article>
+
+        <article class="proj glass reveal" data-category="streaming">
+          <h3>Real-Time Streaming Analytics</h3>
+          <div class="ctx">Cognizant · 2022–2023</div>
+          <p>Built streaming and big-data pipelines combining Kafka real-time processing with Hadoop/Hive batch workloads, feeding client-facing reporting and analytics for a banking client.</p>
+          <div class="tags"><span class="tag">Kafka</span><span class="tag">Hadoop</span><span class="tag">Hive</span><span class="tag">AWS</span></div>
+        </article>
+
+        <article class="proj glass reveal" data-category="ai">
+          <h3>Telecom Churn Prediction</h3>
+          <div class="ctx">Wipro · 2018–2020</div>
+          <p>Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">ML</span></div>
+        </article>
+
+        <article class="proj glass reveal" data-category="ai">
+          <h3>AI-Powered Digital Twin</h3>
+          <div class="ctx">Personal Project · 2026</div>
+          <p>Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.</p>
+          <div class="tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">Prompt Engineering</span><span class="tag">Hugging Face</span></div>
+          <a class="proj-link" href="https://huggingface.co/spaces/skunal2512/Digital-Twin" target="_blank" rel="noopener">View live →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <div class="eyebrow"><span class="num grad-text">05</span>Certifications</div>
+      <h2 class="reveal">Verified credentials</h2>
+      <div class="cred-list reveal">
+        <a class="cred" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank" rel="noopener">AWS Certified Solutions Architect — Associate</a>
+        <a class="cred" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank" rel="noopener">Udemy AWS Certified Solutions Architect — Associate</a>
+        <a class="cred" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank" rel="noopener">Academy Accreditation - Generative AI Fundamentals</a>
+        <a class="cred" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank" rel="noopener">Coursera MLOps</a>
+        <a class="cred" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank" rel="noopener">HackerRank Certification</a>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="eyebrow"><span class="num grad-text">06</span>Skills</div>
+      <h2 class="reveal">What I work with</h2>
+      <div class="skill-tabs reveal" role="tablist" aria-label="Skill categories">
+        <button class="stab active" type="button" data-group="lang">Languages</button>
+        <button class="stab" type="button" data-group="warehouses">Warehouses &amp; Lakehouses</button>
+        <button class="stab" type="button" data-group="etl">ETL/ELT &amp; Orchestration</button>
+        <button class="stab" type="button" data-group="streaming">Streaming &amp; Query Engines</button>
+        <button class="stab" type="button" data-group="bigdata">Big Data</button>
+        <button class="stab" type="button" data-group="aws">AWS</button>
+        <button class="stab" type="button" data-group="azuregcp">Azure &amp; GCP</button>
+        <button class="stab" type="button" data-group="k8s">Kubernetes &amp; Infrastructure</button>
+        <button class="stab" type="button" data-group="observability">Observability &amp; Quality</button>
+        <button class="stab" type="button" data-group="governance">Governance &amp; Security</button>
+        <button class="stab" type="button" data-group="ml">Machine Learning</button>
+        <button class="stab" type="button" data-group="genai">GenAI &amp; LLMs</button>
+        <button class="stab" type="button" data-group="apis">APIs &amp; Services</button>
+        <button class="stab" type="button" data-group="bi">BI &amp; Analytics</button>
+        <button class="stab" type="button" data-group="leadership">Leadership &amp; Practice</button>
+      </div>
+      <div class="glass panel reveal">
+        <div class="skills-group active" data-group="lang">
+          <span class="skill">Python (expert)</span><span class="skill">SQL (expert)</span><span class="skill">PL/SQL</span><span class="skill">T-SQL</span><span class="skill">Java (Spring Boot)</span><span class="skill">PySpark</span><span class="skill">Shell</span><span class="skill">TypeScript / JavaScript (working)</span><span class="skill">Scala (familiar)</span>
         </div>
-      </section>
-
-      <section id="education">
-        <div class="eyebrow">03 — Education</div>
-        <h2>Education</h2>
-        <div class="item">
-          <div class="when">May 2022</div>
-          <div>
-            <h3>M.S. in Business Analytics</h3>
-            <div class="where">Kent State University</div>
-          </div>
+        <div class="skills-group" data-group="warehouses">
+          <span class="skill">Snowflake (deep)</span><span class="skill">Databricks (Delta Lake, Unity Catalog, Apps)</span><span class="skill">Redshift</span><span class="skill">PostgreSQL</span><span class="skill">Oracle</span><span class="skill">SQL Server</span><span class="skill">RDS Aurora</span><span class="skill">MongoDB</span><span class="skill">DynamoDB</span><span class="skill">BigQuery (familiar)</span><span class="skill">ClickHouse (familiar)</span><span class="skill">Neo4j (familiar)</span><span class="skill">Spanner (familiar)</span><span class="skill">Elasticsearch (familiar)</span>
         </div>
-        <div class="item">
-          <div class="when">May 2018</div>
-          <div>
-            <h3>B.Tech in Computer Science &amp; Engineering</h3>
-            <div class="where">APJ Abdul Kalam Technical University</div>
-          </div>
+        <div class="skills-group" data-group="etl">
+          <span class="skill">dbt</span><span class="skill">Apache Airflow</span><span class="skill">AWS Glue</span><span class="skill">SSIS (working)</span><span class="skill">Informatica (working)</span><span class="skill">Talend (familiar)</span><span class="skill">Dagster (familiar)</span><span class="skill">Medallion Architecture</span><span class="skill">Kimball Modeling</span><span class="skill">Schema Evolution</span>
         </div>
-      </section>
-
-      <section id="projects">
-        <div class="eyebrow">04 — Projects</div>
-        <h2>Selected work</h2>
-        <!-- Drawn from your roles. Swap any for personal GitHub projects and add
-             "Code" links if you have public repos at github.com/kunal1709 -->
-        <div class="grid">
-
-          <div class="proj">
-            <h3>AI-Augmented Pipeline Observability</h3>
-            <div class="ctx">S&amp;P Global · 2023–present</div>
-            <p>Integrated AWS Bedrock with Airflow (MWAA) to build DAGs that detect pipeline anomalies and surface AI-generated resolutions to engineers — cutting incident response time by 40%.</p>
-            <div class="tags"><span class="tag">AWS Bedrock</span><span class="tag">MWAA</span><span class="tag">Airflow</span><span class="tag">LLM</span></div>
-          </div>
-
-          <div class="proj">
-            <h3>Legacy → Modern DataLake Migration</h3>
-            <div class="ctx">S&amp;P Global · 2023–present</div>
-            <p>Migrated legacy ETL and AWS DMS loads to a DBT, Spark, and Airflow DataLake architecture, refreshing terabytes of data and cutting runtimes by 60%.</p>
-            <div class="tags"><span class="tag">DBT</span><span class="tag">Spark</span><span class="tag">Snowflake</span><span class="tag">Terraform</span></div>
-          </div>
-
-          <div class="proj">
-            <h3>Real-Time Streaming Analytics</h3>
-            <div class="ctx">Cognizant · 2022–2023</div>
-            <p>Built low-latency streaming on Apache Kafka and Spark for high-volume event data, with ingestion across Hadoop, Hive, and Sqoop feeding client-facing reporting.</p>
-            <div class="tags"><span class="tag">Kafka</span><span class="tag">Spark</span><span class="tag">Hadoop</span><span class="tag">AWS</span></div>
-          </div>
-
-          <div class="proj">
-            <h3>Telecom Churn Prediction</h3>
-            <div class="ctx">Wipro · 2018–2020</div>
-            <p>Developed a Random Forest churn model in Python with association rules explaining why customers left, powering targeted retention campaigns.</p>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">ML</span></div>
-          </div>
-
+        <div class="skills-group" data-group="streaming">
+          <span class="skill">Apache Kafka</span><span class="skill">AWS Kinesis</span><span class="skill">CDC (Debezium)</span><span class="skill">Trino / Starburst (working)</span><span class="skill">Athena</span><span class="skill">Apache Flink (familiar)</span><span class="skill">Apache Beam (familiar)</span><span class="skill">Iceberg (familiar)</span>
         </div>
-      </section>
-
-      <section id="certifications">
-        <div class="eyebrow">05 — Certifications</div>
-        <h2>Verified credentials</h2>
-        <div class="skillgroup">
-          <div class="skills">
-            <a class="skill" href="https://www.credly.com/badges/a34bb953-e3be-4fc3-adab-243db0245690/linked_in_profile" target="_blank">AWS Certified Solutions Architect — Associate</a>
-            <a class="skill" href="https://www.udemy.com/certificate/UC-5e38f39e-e9a5-4d9e-a6ed-8c58c8eeb493/" target="_blank">Udemy AWS Certified Solutions Architect — Associate</a>
-            <a class="skill" href="https://credentials.databricks.com/ed8207be-1b7e-4096-a898-fe912073928a#acc.aVtFyLZ2" target="_blank">Academy Accreditation - Generative AI Fundamentals</a>
-            <a class="skill" href="https://www.coursera.org/account/accomplishments/certificate/MPVEML69LXE4" target="_blank">Coursera MLOps</a>
-            <a class="skill" href="https://www.hackerrank.com/certificates/dfa47abb84de" target="_blank">HackerRank Certification</a>
-          </div>
+        <div class="skills-group" data-group="bigdata">
+          <span class="skill">Apache Spark / PySpark (deep)</span><span class="skill">Hadoop</span><span class="skill">Hive</span><span class="skill">TB-to-petabyte scale</span><span class="skill">Parquet</span><span class="skill">Delta formats</span>
         </div>
-      </section>
-
-      <section id="skills">
-        <div class="eyebrow">06 — Skills</div>
-        <h2>What I work with</h2>
-
-        <div class="skillgroup">
-          <div class="glabel">Languages &amp; APIs</div>
-          <div class="skills">
-            <span class="skill">Python</span><span class="skill">SQL</span><span class="skill">PySpark</span><span class="skill">Scala</span><span class="skill">REST APIs</span><span class="skill">GraphQL</span><span class="skill">Shell</span>
-          </div>
+        <div class="skills-group" data-group="aws">
+          <span class="skill">S3</span><span class="skill">EC2</span><span class="skill">ECS</span><span class="skill">Lambda</span><span class="skill">Glue</span><span class="skill">EMR</span><span class="skill">Athena</span><span class="skill">Redshift</span><span class="skill">Kinesis</span><span class="skill">Step Functions</span><span class="skill">Bedrock</span><span class="skill">SageMaker</span><span class="skill">CloudWatch</span><span class="skill">RDS Aurora</span><span class="skill">Certified Solutions Architect</span>
         </div>
-
-        <div class="skillgroup">
-          <div class="glabel">Big Data &amp; Processing</div>
-          <div class="skills">
-            <span class="skill">Apache Spark (Spark SQL, Structured Streaming)</span><span class="skill">Kafka</span><span class="skill">Hadoop</span><span class="skill">Hive</span><span class="skill">Airflow (MWAA)</span><span class="skill">AWS Glue</span><span class="skill">DBT</span><span class="skill">Flink</span>
-          </div>
+        <div class="skills-group" data-group="azuregcp">
+          <span class="skill">Azure Data Factory (working)</span><span class="skill">Azure Databricks (working)</span><span class="skill">Azure DevOps (working)</span><span class="skill">Entra ID (working)</span><span class="skill">Key Vault (working)</span><span class="skill">GCP BigQuery (familiar)</span><span class="skill">Dataflow (familiar)</span><span class="skill">Pub/Sub (familiar)</span><span class="skill">Cloud Functions (familiar)</span><span class="skill">Vertex AI (familiar)</span>
         </div>
-
-        <div class="skillgroup">
-          <div class="glabel">Cloud &amp; Infrastructure</div>
-          <div class="skills">
-            <span class="skill">AWS (EC2, S3, Lambda, ECS/EKS, EMR, Step Functions, Bedrock, SageMaker)</span><span class="skill">GCP (BigQuery, Dataproc, Dataflow)</span><span class="skill">Azure (DevOps, Data Factory)</span><span class="skill">Terraform</span><span class="skill">Docker</span>
-          </div>
+        <div class="skills-group" data-group="k8s">
+          <span class="skill">Kubernetes / EKS</span><span class="skill">Custom Controllers &amp; Operators</span><span class="skill">Autoscaling</span><span class="skill">Persistent Volumes</span><span class="skill">CSI Drivers</span><span class="skill">Storage Classes</span><span class="skill">Docker</span><span class="skill">Terraform</span><span class="skill">GitHub Actions</span><span class="skill">Jenkins</span><span class="skill">Azure DevOps</span>
         </div>
-
-        <div class="skillgroup">
-          <div class="glabel">Databases</div>
-          <div class="skills">
-            <span class="skill">Snowflake</span><span class="skill">PostgreSQL</span><span class="skill">SQL Server</span><span class="skill">Oracle DB2</span><span class="skill">MongoDB</span><span class="skill">DynamoDB</span><span class="skill">Redshift</span><span class="skill">Athena</span><span class="skill">Neo4j</span>
-          </div>
+        <div class="skills-group" data-group="observability">
+          <span class="skill">Prometheus</span><span class="skill">Grafana</span><span class="skill">CloudWatch</span><span class="skill">Datadog (familiar)</span><span class="skill">Automated Data-Quality Testing</span><span class="skill">Drift &amp; Anomaly Detection</span><span class="skill">Alerting</span><span class="skill">SLA Ownership</span><span class="skill">On-Call</span>
         </div>
-
-        <div class="skillgroup">
-          <div class="glabel">ML &amp; AI</div>
-          <div class="skills">
-            <span class="skill">Scikit-learn</span><span class="skill">TensorFlow</span><span class="skill">PyTorch</span><span class="skill">Keras</span><span class="skill">NLP</span><span class="skill">CNN</span><span class="skill">LLMs</span><span class="skill">SageMaker</span><span class="skill">Bedrock</span><span class="skill">GitHub Copilot</span>
-          </div>
+        <div class="skills-group" data-group="governance">
+          <span class="skill">RBAC</span><span class="skill">Dynamic Data Masking</span><span class="skill">Row Access Policies</span><span class="skill">Object Tagging</span><span class="skill">Lineage &amp; Traceability (Unity Catalog)</span><span class="skill">PII/PCI</span><span class="skill">CyberArk</span><span class="skill">SailPoint</span><span class="skill">Data Classification</span><span class="skill">Metadata Management</span>
         </div>
-
-        <div class="skillgroup">
-          <div class="glabel">DevOps &amp; Observability</div>
-          <div class="skills">
-            <span class="skill">GitHub Actions</span><span class="skill">GitLab CI/CD</span><span class="skill">Jenkins</span><span class="skill">Grafana</span><span class="skill">Prometheus</span><span class="skill">OpenTelemetry</span><span class="skill">Liquibase</span><span class="skill">Tableau</span><span class="skill">Power BI</span>
-          </div>
+        <div class="skills-group" data-group="ml">
+          <span class="skill">Churn &amp; Propensity Modeling</span><span class="skill">XGBoost</span><span class="skill">Gradient Boosting</span><span class="skill">LightGBM</span><span class="skill">Scikit-learn</span><span class="skill">Random Forest</span><span class="skill">Regression</span><span class="skill">SVM</span><span class="skill">Clustering &amp; Segmentation</span><span class="skill">Forecasting</span><span class="skill">Pandas</span><span class="skill">NumPy</span><span class="skill">SageMaker</span><span class="skill">TensorFlow (familiar)</span><span class="skill">PyTorch (familiar)</span><span class="skill">MLFlow (familiar)</span><span class="skill">Feature Stores (project)</span>
         </div>
-      </section>
+        <div class="skills-group" data-group="genai">
+          <span class="skill">Production LLM Systems (Bedrock)</span><span class="skill">RAG Engineering</span><span class="skill">Chunking &amp; Embeddings</span><span class="skill">Vector Stores</span><span class="skill">Prompt Engineering</span><span class="skill">Context Management</span><span class="skill">Token / API Cost Management</span><span class="skill">LLM Tool Calling</span><span class="skill">Hugging Face Deployment</span><span class="skill">Agentic / Multi-Agent Workflows</span><span class="skill">LangChain (project)</span><span class="skill">LlamaIndex (project)</span><span class="skill">MCP Servers (new)</span>
+        </div>
+        <div class="skills-group" data-group="apis">
+          <span class="skill">REST API Design</span><span class="skill">Java / Spring Boot Microservices</span><span class="skill">Python FastAPI (working)</span><span class="skill">Python Flask (working)</span><span class="skill">API Consumption &amp; Integration</span><span class="skill">Event-Driven Architecture</span>
+        </div>
+        <div class="skills-group" data-group="bi">
+          <span class="skill">Tableau</span><span class="skill">Power BI</span><span class="skill">Alteryx Designer</span><span class="skill">Alteryx Server Admin</span><span class="skill">IBM Cognos</span><span class="skill">Excel (advanced)</span><span class="skill">A/B &amp; Significance Testing</span><span class="skill">Causal Inference</span><span class="skill">Attribution Modeling</span><span class="skill">Campaign ROI</span><span class="skill">FP&amp;A</span>
+        </div>
+        <div class="skills-group" data-group="leadership">
+          <span class="skill">Technical Leadership</span><span class="skill">Architecture Co-Ownership</span><span class="skill">Mentoring</span><span class="skill">Code Review &amp; Pairing</span><span class="skill">Cross-Functional &amp; Executive Communication</span><span class="skill">Project Leadership</span><span class="skill">Agile / Scrum</span><span class="skill">Claude Code</span><span class="skill">Cursor</span><span class="skill">GitHub Copilot</span>
+        </div>
+      </div>
+    </section>
 
-      <section id="contact">
-        <div class="eyebrow">07 — Contact</div>
-        <h2>Let's talk</h2>
-        <p class="lead">Based in Dallas and open to senior data engineering roles wherever the right team is. The fastest way to reach me is email — or connect on LinkedIn and GitHub.</p>
+    <section id="contact" class="section">
+      <div class="eyebrow"><span class="num grad-text">07</span>Contact</div>
+      <h2 class="reveal">Let's talk</h2>
+      <div class="glass panel reveal">
+        <p class="lead">Based in Dallas, TX and open to relocation or remote — for senior data engineering roles wherever the right team is. The fastest way to reach me is email — or connect on LinkedIn and GitHub.</p>
         <div class="contact-links">
-          <a href="mailto:kunalsharma11stu@gmail.com">→ kunalsharma11stu@gmail.com</a>
-          <a href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank">→ linkedin.com/in/kunalsharma2512</a>
-          <a href="https://github.com/kunal1709" target="_blank">→ github.com/kunal1709</a>
+          <button class="clink" type="button" id="copyEmail" data-email="kunalsharma11stu@gmail.com">
+            <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg></span>
+            kunalsharma11stu@gmail.com
+            <span class="copy-hint" id="copyHint">Click to copy</span>
+          </button>
+          <a class="clink" href="https://www.linkedin.com/in/kunalsharma2512/" target="_blank" rel="noopener"><span class="ic">in</span> linkedin.com/in/kunalsharma2512</a>
+          <a class="clink" href="https://github.com/kunal1709" target="_blank" rel="noopener"><span class="ic">GH</span> github.com/kunal1709</a>
         </div>
-      </section>
+        <a class="btn solid big" href="mailto:kunalsharma11stu@gmail.com">Say hello</a>
+      </div>
+    </section>
 
-    </main>
+  </main>
+
+  <footer class="footer">© 2026 Kunal Sharma — built with vanilla HTML, CSS &amp; JS.</footer>
   </div>
+
+  <iframe id="themeFrame" class="theme-frame" title="Alternate theme preview"></iframe>
+
+  <button class="to-top glass" id="toTop" type="button" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat with Kunal's AI digital twin" aria-hidden="true">
+      <div class="chat-head">
+        <span>Chat with my AI twin</span>
+        <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+      </div>
+      <div class="chat-body">
+        <div class="chat-fallback" id="chatFallback">Waking up my AI twin — this can take a few seconds on a cold start.<br /><a href="https://huggingface.co/spaces/skunal2512/Digital-Twin" target="_blank" rel="noopener">Open it directly instead →</a></div>
+        <iframe id="chatFrame" title="Kunal's AI digital twin (Hugging Face)"></iframe>
+      </div>
+    </div>
+    <div class="chat-hint" id="chatHint">
+      <span>Ask my Digital Twin a question →</span>
+      <button type="button" class="chat-hint-close" id="chatHintClose" aria-label="Dismiss">✕</button>
+    </div>
+    <button type="button" class="chat-fab" id="chatFab" aria-haspopup="dialog" aria-expanded="false" aria-controls="chatPanel" aria-label="Chat with my AI digital twin">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    </button>
+  </div>
+
+  <script>
+  (function(){
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var navbar = document.getElementById('navbar');
+
+    var THEMES = ['classic','netflix','apple','google','aws','microsoft'];
+    var themeFrame = document.getElementById('themeFrame');
+    var themeDrop = document.getElementById('themeDrop');
+    function resetNavbarPosition(){
+      if(!navbar) return;
+      navbar.style.left = '';
+      navbar.style.top = '';
+      navbar.style.right = '';
+      navbar.style.transform = '';
+      navbar.classList.remove('dragging');
+    }
+    function setTheme(name){
+      if(THEMES.indexOf(name) === -1) name = 'classic';
+      document.body.classList.toggle('theme-external', name !== 'classic');
+      if(name === 'classic'){
+        resetNavbarPosition();
+      }
+      if(name !== 'classic'){
+        var src = name + '.html';
+        if(themeFrame.getAttribute('src') !== src) themeFrame.setAttribute('src', src);
+      }
+      document.querySelectorAll('.theme-list a').forEach(function(a){
+        a.classList.toggle('current', a.getAttribute('data-theme') === name);
+      });
+      try{ localStorage.setItem('ks-theme', name); }catch(e){}
+    }
+    document.querySelectorAll('.theme-list a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        setTheme(a.getAttribute('data-theme'));
+        if(themeDrop) themeDrop.removeAttribute('open');
+        closeNavPanel();
+      });
+    });
+    var savedTheme = null;
+    try{ savedTheme = localStorage.getItem('ks-theme'); }catch(e){}
+    setTheme(savedTheme || 'classic');
+
+    var progress = document.getElementById('progress');
+    function updateProgress(){
+      var h = document.documentElement;
+      var scrolled = h.scrollTop || document.body.scrollTop;
+      var max = h.scrollHeight - h.clientHeight;
+      progress.style.width = max > 0 ? (scrolled / max * 100) + '%' : '0%';
+    }
+    document.addEventListener('scroll', updateProgress, {passive:true});
+    updateProgress();
+
+    function updateNavbar(){ navbar.classList.toggle('scrolled', window.scrollY > 40); }
+    document.addEventListener('scroll', updateNavbar, {passive:true});
+    updateNavbar();
+
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    var navCollapsible = document.getElementById('navCollapsible');
+    function closeNavPanel(){
+      if(navCollapsible) navCollapsible.classList.remove('open');
+      if(navToggle){ navToggle.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
+    }
+    if(navToggle && navCollapsible){
+      navToggle.addEventListener('click', function(){
+        var open = navCollapsible.classList.toggle('open');
+        navToggle.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      if(navLinks){
+        navLinks.querySelectorAll('a').forEach(function(a){
+          a.addEventListener('click', closeNavPanel);
+        });
+      }
+      document.addEventListener('click', function(e){
+        if(navCollapsible.classList.contains('open') && !navbar.contains(e.target)) closeNavPanel();
+      });
+    }
+
+    // Draggable compact navbar (only while viewing an embedded theme)
+    if(navbar && window.PointerEvent){
+      (function(){
+        var drag = null;
+        function clamp(val, min, max){ return Math.min(Math.max(val, min), max); }
+        navbar.addEventListener('pointerdown', function(e){
+          if(!document.body.classList.contains('theme-external')) return;
+          if(e.target.closest('button, a, summary')) return;
+          var rect = navbar.getBoundingClientRect();
+          drag = {startX:e.clientX, startY:e.clientY, startLeft:rect.left, startTop:rect.top, moved:false, id:e.pointerId};
+        });
+        navbar.addEventListener('pointermove', function(e){
+          if(!drag || drag.id !== e.pointerId) return;
+          var dx = e.clientX - drag.startX;
+          var dy = e.clientY - drag.startY;
+          if(!drag.moved && Math.abs(dx) < 4 && Math.abs(dy) < 4) return;
+          if(!drag.moved){
+            drag.moved = true;
+            navbar.classList.add('dragging');
+            try{ navbar.setPointerCapture(drag.id); }catch(err){}
+          }
+          var rect = navbar.getBoundingClientRect();
+          var maxLeft = window.innerWidth - rect.width - 8;
+          var maxTop = window.innerHeight - rect.height - 8;
+          var newLeft = clamp(drag.startLeft + dx, 8, Math.max(8, maxLeft));
+          var newTop = clamp(drag.startTop + dy, 8, Math.max(8, maxTop));
+          navbar.style.left = newLeft + 'px';
+          navbar.style.top = newTop + 'px';
+          navbar.style.right = 'auto';
+          navbar.style.transform = 'none';
+        });
+        function endDrag(e){
+          if(!drag) return;
+          if(drag.moved){
+            try{ navbar.releasePointerCapture(drag.id); }catch(err){}
+            navbar.classList.remove('dragging');
+          }
+          drag = null;
+        }
+        navbar.addEventListener('pointerup', endDrag);
+        navbar.addEventListener('pointercancel', endDrag);
+        window.addEventListener('resize', function(){
+          if(!document.body.classList.contains('theme-external') || !navbar.style.left) return;
+          var rect = navbar.getBoundingClientRect();
+          var maxLeft = window.innerWidth - rect.width - 8;
+          var maxTop = window.innerHeight - rect.height - 8;
+          navbar.style.left = clamp(rect.left, 8, Math.max(8, maxLeft)) + 'px';
+          navbar.style.top = clamp(rect.top, 8, Math.max(8, maxTop)) + 'px';
+        });
+      })();
+    }
+
+    document.addEventListener('click', function(e){
+      document.querySelectorAll('details.theme-drop[open]').forEach(function(d){
+        if(!d.contains(e.target)) d.removeAttribute('open');
+      });
+    });
+
+    var sections = document.querySelectorAll('main section[id]');
+    var navA = document.querySelectorAll('.nav-links a');
+    var navObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          navA.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id); });
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){ navObserver.observe(s); });
+
+    var reveals = document.querySelectorAll('.reveal');
+    if(prefersReduced){
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var i = 0;
+      var revealObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.style.transitionDelay = (i % 4) * 70 + 'ms';
+            i++;
+            entry.target.classList.add('in');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {threshold:.12});
+      reveals.forEach(function(el){ revealObserver.observe(el); });
+    }
+
+    var roles = ['Senior Data Engineer','Lakehouse Architect','GenAI & RAG Engineer','AWS Certified Solutions Architect'];
+    var twEl = document.getElementById('typewriter');
+    if(twEl){
+      if(prefersReduced){
+        twEl.textContent = roles[0];
+      } else {
+        var ri = 0, ci = 0, deleting = false;
+        (function tick(){
+          var word = roles[ri];
+          if(!deleting){
+            ci++;
+            twEl.textContent = word.slice(0, ci);
+            if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+          } else {
+            ci--;
+            twEl.textContent = word.slice(0, ci);
+            if(ci === 0){ deleting = false; ri = (ri + 1) % roles.length; }
+          }
+          setTimeout(tick, deleting ? 40 : 75);
+        })();
+      }
+    }
+
+    var clockEl = document.getElementById('clock');
+    function updateClock(){
+      if(!clockEl) return;
+      try{
+        var fmt = new Intl.DateTimeFormat('en-US', {timeZone:'America/Chicago', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true, timeZoneName:'short'});
+        clockEl.textContent = 'Dallas, TX — ' + fmt.format(new Date());
+      } catch(e){
+        clockEl.textContent = 'Dallas, TX';
+      }
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    var nums = document.querySelectorAll('.stat .num');
+    var countObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        var el = entry.target;
+        var target = parseFloat(el.getAttribute('data-target'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var prefix = el.getAttribute('data-prefix') || '';
+        countObserver.unobserve(el);
+        if(prefersReduced){ el.textContent = prefix + target + suffix; return; }
+        var dur = 1100;
+        var start = performance.now();
+        function frame(now){
+          var p = Math.min((now - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased) + suffix;
+          if(p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      });
+    }, {threshold:.5});
+    nums.forEach(function(el){ countObserver.observe(el); });
+
+    var hero = document.getElementById('home');
+    var spotlight = document.getElementById('spotlight');
+    if(hero && spotlight && !prefersReduced && window.matchMedia('(pointer:fine)').matches){
+      hero.addEventListener('mousemove', function(e){
+        var r = hero.getBoundingClientRect();
+        spotlight.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        spotlight.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    }
+
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var projCards = document.querySelectorAll('#projectGrid .proj');
+    filterBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        filterBtns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cat = btn.getAttribute('data-filter');
+        projCards.forEach(function(card){
+          var match = cat === 'all' || card.getAttribute('data-category') === cat;
+          if(match){
+            card.style.display = '';
+            requestAnimationFrame(function(){ card.classList.remove('hide'); });
+          } else {
+            card.classList.add('hide');
+            setTimeout(function(){ if(card.classList.contains('hide')) card.style.display = 'none'; }, 220);
+          }
+        });
+      });
+    });
+
+    var stabs = document.querySelectorAll('.stab');
+    var skillGroups = document.querySelectorAll('.skills-group');
+    stabs.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        stabs.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var g = btn.getAttribute('data-group');
+        skillGroups.forEach(function(grp){ grp.classList.toggle('active', grp.getAttribute('data-group') === g); });
+      });
+    });
+
+    var copyBtn = document.getElementById('copyEmail');
+    var copyHint = document.getElementById('copyHint');
+    if(copyBtn){
+      copyBtn.addEventListener('click', function(){
+        var email = copyBtn.getAttribute('data-email');
+        function done(){
+          if(copyHint){
+            copyHint.textContent = 'Copied!';
+            copyHint.classList.add('copied');
+            setTimeout(function(){ copyHint.textContent = 'Click to copy'; copyHint.classList.remove('copied'); }, 1800);
+          }
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(email).then(done).catch(function(){ fallbackCopy(email); done(); });
+        } else {
+          fallbackCopy(email); done();
+        }
+        function fallbackCopy(text){
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try{ document.execCommand('copy'); } catch(e){}
+          document.body.removeChild(ta);
+        }
+      });
+    }
+
+    var toTop = document.getElementById('toTop');
+    function updateToTop(){ if(toTop) toTop.classList.toggle('show', window.scrollY > 500); }
+    document.addEventListener('scroll', updateToTop, {passive:true});
+    updateToTop();
+    if(toTop){
+      toTop.addEventListener('click', function(){
+        window.scrollTo({top:0, behavior: prefersReduced ? 'auto' : 'smooth'});
+      });
+    }
+
+    // Chat widget — AI digital twin (Hugging Face embed)
+    var chatWidget = document.getElementById('chatWidget');
+    var chatFab = document.getElementById('chatFab');
+    var chatPanel = document.getElementById('chatPanel');
+    var chatClose = document.getElementById('chatClose');
+    var chatFrame = document.getElementById('chatFrame');
+    var chatFallback = document.getElementById('chatFallback');
+    var chatHint = document.getElementById('chatHint');
+    var chatHintClose = document.getElementById('chatHintClose');
+    var chatLoaded = false;
+    var chatHintStop = false;
+    function hideHint(){ if(chatHint) chatHint.classList.remove('show'); }
+    function showHintPulse(){
+      if(chatHintStop || !chatHint || !chatPanel) return;
+      if(chatPanel.classList.contains('open')) return;
+      chatHint.classList.add('show');
+    }
+    function openChat(){
+      chatPanel.classList.add('open');
+      chatPanel.setAttribute('aria-hidden', 'false');
+      chatFab.classList.add('open');
+      chatFab.setAttribute('aria-expanded', 'true');
+      chatHintStop = true;
+      hideHint();
+      if(!chatLoaded){
+        if(chatFallback){
+          chatFrame.addEventListener('load', function(){ chatFallback.classList.add('hide'); });
+        }
+        chatFrame.setAttribute('src', 'https://skunal2512-digital-twin.hf.space');
+        chatLoaded = true;
+      }
+    }
+    function closeChat(){
+      chatPanel.classList.remove('open');
+      chatPanel.setAttribute('aria-hidden', 'true');
+      chatFab.classList.remove('open');
+      chatFab.setAttribute('aria-expanded', 'false');
+    }
+    if(chatFab && chatPanel){
+      chatFab.addEventListener('click', function(){
+        if(chatPanel.classList.contains('open')) closeChat(); else openChat();
+      });
+      if(chatClose) chatClose.addEventListener('click', closeChat);
+      if(chatHint){
+        setTimeout(showHintPulse, 1400);
+        setInterval(function(){ hideHint(); setTimeout(showHintPulse, 800); }, 20000);
+      }
+      if(chatHintClose){
+        chatHintClose.addEventListener('click', function(e){ e.stopPropagation(); chatHintStop = true; hideHint(); });
+      }
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && chatPanel.classList.contains('open')) closeChat();
+      });
+      document.addEventListener('click', function(e){
+        if(chatPanel.classList.contains('open') && chatWidget && !chatWidget.contains(e.target)) closeChat();
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
