@@ -195,6 +195,9 @@
         bullets:[ 'Implemented Kafka real-time and Hadoop/Hive batch pipelines for a banking client.', 'Delivered streaming reports to improve operational visibility.' ] },
       { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020', summary:'Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.',
         bullets:[ 'Developed churn prediction models using Random Forest and gradient boosting in Python.', 'Enabled data-driven retention actions through analytical scoring.' ] },
+      { title:'Quantum-Safe Data Lake Architecture', ctx:'Personal Project · 2026', summary:'Prototyped a quantum-safe data pipeline with a cryptography inventory scanner, hybrid X25519 + ML-KEM-768 encryption for Parquet data, and ML-DSA-signed manifests for integrity verification.',
+        github:'https://github.com/kunal1709/PQC-Safe-Data-Lake-Architecture', learning:'https://htmlpreview.github.io/?https://raw.githubusercontent.com/kunal1709/PQC-Safe-Data-Lake-Architecture/main/QuantumSafe%20Lake%20Walkthrough.html',
+        bullets:[ 'Scans infrastructure configurations for quantum-vulnerable cryptographic algorithms.', 'Demonstrates hybrid encryption and signed-manifest verification in a data pipeline.' ] },
       { title:'AI-Powered Digital Twin', ctx:'Personal Project · 2026', summary:'Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.',
         link:'https://huggingface.co/spaces/skunal2512/Digital-Twin',
         bullets:[ 'Built a full RAG pipeline — chunking, embeddings, vector retrieval — grounded in my own background and writing.', 'Implemented parallel/sequential tool-calling workflows with careful prompt, context, and cost management.', 'Deployed live on Hugging Face.' ] }
@@ -213,6 +216,9 @@
       }
       if(item.link){
         html += '<p style="margin-top:14px;"><a class="link" href="'+item.link+'" target="_blank" rel="noopener">View live</a></p>';
+      }
+      if(item.github || item.learning){
+        html += '<p style="margin-top:14px;">'+(item.github ? '<a class="link" href="'+item.github+'" target="_blank" rel="noopener">View project</a>' : '')+(item.github && item.learning ? ' · ' : '')+(item.learning ? '<a class="link" href="'+item.learning+'" target="_blank" rel="noopener">Learning walkthrough</a>' : '')+'</p>';
       }
       return html;
     }
@@ -382,6 +388,12 @@
         <div class="ctx">Wipro · 2018–2020</div>
         <p style="color:#a1a1a6">Random Forest and gradient boosting churn models driving targeted retention campaigns that marketing acted on directly.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">ML</span></div>
+      </div>
+      <div class="pcard" style="background:#1d1d1f;">
+        <h3 style="color:#f5f5f7">Quantum-Safe Data Lake Architecture</h3>
+        <div class="ctx">Personal Project · 2026</div>
+        <p style="color:#a1a1a6">A prototype crypto-inventory scanner and quantum-safe data pipeline using hybrid encryption and signed manifests.</p>
+        <div class="tags"><span class="tag">Post-Quantum Cryptography</span><span class="tag">AWS</span><span class="tag">ML-KEM</span><span class="tag">ML-DSA</span></div>
       </div>
       <div class="pcard" style="background:#1d1d1f;">
         <h3 style="color:#f5f5f7">AI-Powered Digital Twin</h3>

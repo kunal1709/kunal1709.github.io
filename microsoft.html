@@ -191,6 +191,11 @@
         <div class="td">Random Forest + gradient boosting driving retention campaigns.</div>
         <div class="corner">Python · ML</div>
       </div>
+      <div class="tile b-blue">
+        <div class="tt">Quantum-Safe Data Lake Architecture</div>
+        <div class="td">Prototype pipeline with hybrid post-quantum encryption and signed manifests.</div>
+        <div class="corner">AWS · ML-KEM · ML-DSA</div>
+      </div>
       <div class="tile b-p">
         <div class="tt">AI-Powered Digital Twin</div>
         <div class="td">Conversational AI digital twin with a full RAG pipeline — live on Hugging Face.</div>
@@ -345,6 +350,10 @@
       { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020',
         summary:'Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.',
         bullets:[ 'Python', 'Random Forest', 'ML' ] },
+      { title:'Quantum-Safe Data Lake Architecture', ctx:'Personal Project · 2026',
+        summary:'Prototyped a quantum-safe data pipeline with a cryptography inventory scanner, hybrid X25519 + ML-KEM-768 encryption for Parquet data, and ML-DSA-signed manifests for integrity verification.',
+        bullets:[ 'Scans infrastructure configurations for quantum-vulnerable cryptographic algorithms.', 'Demonstrates hybrid encryption and signed-manifest verification in a data pipeline.' ],
+        github:'https://github.com/kunal1709/PQC-Safe-Data-Lake-Architecture', learning:'https://htmlpreview.github.io/?https://raw.githubusercontent.com/kunal1709/PQC-Safe-Data-Lake-Architecture/main/QuantumSafe%20Lake%20Walkthrough.html' },
       { title:'AI-Powered Digital Twin', ctx:'Personal Project · 2026',
         summary:'Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.',
         bullets:[ 'LLM', 'RAG', 'Prompt Engineering', 'Hugging Face' ],
@@ -360,6 +369,7 @@
     function renderBody(item){
       var html = '<p class="desc">'+item.summary+'</p>';
       if(item.bullets && item.bullets.length){ html += '<ul>' + item.bullets.map(function(b){ return '<li>'+b+'</li>'; }).join('') + '</ul>'; }
+      if(item.github || item.learning){ html += '<p style="margin-top:14px;">'+(item.github ? '<a class="btn" href="'+item.github+'" target="_blank" rel="noopener">View project</a> ' : '')+(item.learning ? '<a class="btn" href="'+item.learning+'" target="_blank" rel="noopener">Learning walkthrough</a>' : '')+'</p>'; }
       return html;
     }
 

@@ -193,12 +193,13 @@
     </div>
   </div>
 
-  <div class="sec-h" id="proj"><h2>Projects</h2><span class="pill">5 deployed</span></div>
+  <div class="sec-h" id="proj"><h2>Projects</h2><span class="pill">6 projects</span></div>
   <div class="svc">
     <div class="scard"><div class="ic">AI</div><h3>Production GenAI on Bedrock</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>Shipped production LLM, RAG, and anomaly-detection systems on AWS Bedrock — grounding datasets, chunking, embeddings, and vector retrieval — integrated with Airflow DAGs to surface pipeline anomalies and AI-generated resolutions, cutting incident response time by 40%.</p><div class="tags"><span class="tag">AWS Bedrock</span><span class="tag">RAG</span><span class="tag">Airflow</span><span class="tag">LLM</span></div></div>
     <div class="scard"><div class="ic">LH</div><h3>Lakehouse &amp; Warehouse Architecture</h3><div class="ctx">S&amp;P Global · 2023–present</div><p>Architected and owned lakehouse and warehouse infrastructure end-to-end on Databricks (Delta Lake, Unity Catalog) and Snowflake, migrating legacy ETL and AWS DMS loads onto a medallion architecture — cutting pipeline runtimes 60% at TB-to-petabyte scale.</p><div class="tags"><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">Snowflake</span><span class="tag">dbt</span></div></div>
     <div class="scard"><div class="ic">RT</div><h3>Real-Time Streaming Analytics</h3><div class="ctx">Cognizant · 2022–2023</div><p>Built streaming and big-data pipelines combining Kafka real-time processing with Hadoop/Hive batch workloads, feeding client-facing reporting and analytics for a banking client.</p><div class="tags"><span class="tag">Kafka</span><span class="tag">Hadoop</span><span class="tag">Hive</span><span class="tag">AWS</span></div></div>
     <div class="scard"><div class="ic">ML</div><h3>Telecom Churn Prediction</h3><div class="ctx">Wipro · 2018–2020</div><p>Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.</p><div class="tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">ML</span></div></div>
+    <div class="scard"><div class="ic">PQ</div><h3>Quantum-Safe Data Lake Architecture</h3><div class="ctx">Personal Project · 2026</div><p>Prototyped a quantum-safe data pipeline with a cryptography inventory scanner, hybrid X25519 + ML-KEM-768 encryption for Parquet data, and ML-DSA-signed manifests for integrity verification.</p><div class="tags"><span class="tag">Post-Quantum Cryptography</span><span class="tag">AWS</span><span class="tag">ML-KEM</span><span class="tag">ML-DSA</span></div></div>
     <div class="scard"><div class="ic">DT</div><h3>AI-Powered Digital Twin</h3><div class="ctx">Personal Project · 2026</div><p>Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.</p><div class="tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">Prompt Engineering</span><span class="tag">Hugging Face</span></div></div>
   </div>
 
@@ -328,6 +329,9 @@
         bullets:[ 'Combined Kafka real-time processing with Hadoop/Hive batch workloads.', 'Fed client-facing reporting and analytics for a banking client.' ] },
       { title:'Telecom Churn Prediction', ctx:'Wipro · 2018–2020', summary:'Built churn-prediction models for telecom customers using Random Forest and gradient boosting in Python, driving targeted retention campaigns that marketing acted on directly.',
         bullets:[ 'Built predictive churn models using Random Forest and gradient boosting in Python.', 'Enabled targeted retention campaigns that marketing acted on directly.' ] },
+      { title:'Quantum-Safe Data Lake Architecture', ctx:'Personal Project · 2026', summary:'Prototyped a quantum-safe data pipeline with a cryptography inventory scanner, hybrid X25519 + ML-KEM-768 encryption for Parquet data, and ML-DSA-signed manifests for integrity verification.',
+        bullets:[ 'Scans infrastructure configurations for quantum-vulnerable cryptographic algorithms.', 'Demonstrates hybrid encryption and signed-manifest verification in a data pipeline.' ],
+        github:'https://github.com/kunal1709/PQC-Safe-Data-Lake-Architecture', learning:'https://htmlpreview.github.io/?https://raw.githubusercontent.com/kunal1709/PQC-Safe-Data-Lake-Architecture/main/QuantumSafe%20Lake%20Walkthrough.html' },
       { title:'AI-Powered Digital Twin', ctx:'Personal Project · 2026', summary:'Built a conversational AI digital twin of myself — an LLM app grounded in my own background and writing, with a full RAG pipeline (chunking, embeddings, vector retrieval), parallel/sequential tool-calling workflows, and careful prompt, context, and cost management — deployed live on Hugging Face.',
         bullets:[ 'Built a full RAG pipeline — chunking, embeddings, and vector retrieval — grounded in my own background and writing.', 'Implemented parallel and sequential tool-calling workflows with careful prompt, context, and cost management.' ],
         link:'https://huggingface.co/spaces/skunal2512/Digital-Twin' }
@@ -343,6 +347,7 @@
       var html = '<p class="desc">'+item.summary+'</p>';
       if(item.bullets && item.bullets.length){ html += '<ul>' + item.bullets.map(function(b){ return '<li>'+b+'</li>'; }).join('') + '</ul>'; }
       if(item.link){ html += '<p style="margin-top:14px;"><a class="btn primary" href="'+item.link+'" target="_blank" rel="noopener">View Live ↗</a></p>'; }
+      if(item.github || item.learning){ html += '<p style="margin-top:14px;">'+(item.github ? '<a class="btn primary" href="'+item.github+'" target="_blank" rel="noopener">View Project ↗</a> ' : '')+(item.learning ? '<a class="btn primary" href="'+item.learning+'" target="_blank" rel="noopener">Learning Walkthrough ↗</a>' : '')+'</p>'; }
       return html;
     }
 
